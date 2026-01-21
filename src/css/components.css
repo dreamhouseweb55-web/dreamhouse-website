@@ -279,7 +279,9 @@
     .cart-sidebar,
     [dir='rtl'] .cart-sidebar {
         width: 100%;
-        /* Full width on mobile */
+        /* Full viewport width */
+        max-width: 100vw;
+        /* Ensure it doesn't overflow */
         left: -100%;
     }
 
