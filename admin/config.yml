@@ -133,7 +133,7 @@ collections:
             widget: "list"
             fields:
               - {label: "اسم الفرع", name: "name", widget: "string"}
-              - {label: "العنوان", name: "location", widget: "string"}
+              - {label: "الموقع", name: "location", widget: "string"}
               - {label: "ساعات العمل", name: "hours", widget: "text"}
               - {label: "رقم الهاتف", name: "phone", widget: "string", required: false}
               - {label: "أيقونة", name: "icon", widget: "string", default: "fas fa-map-marker-alt"}
