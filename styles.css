@@ -846,4 +846,24 @@ a:hover {
 /* ===== View Transitions ===== */
 @view-transition { navigation: auto; }
 
-html { view-transition-name: root; }
+/* ===== Utilities for Card Interactivity ===== */
+.product-card {
+  position: relative; /* Context for stretched-link */
+}
+
+.stretched-link::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  content: "";
+}
+
+/* Ensure buttons are above the link */
+.product-card .btn,
+.product-card button {
+  position: relative;
+  z-index: 2;
+}
