@@ -22,7 +22,7 @@ title: "{{ product.name }}"
     <!-- Product Image -->
     <div class="col-lg-6 mb-4 mb-lg-0">
       <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
-        <img src="/{{ product.image }}" class="img-fluid w-100 object-fit-cover" alt="{{ product.image_alt or product.name }}" style="aspect-ratio: 4/3;">
+        <img src="{{ product.image }}" class="img-fluid w-100 object-fit-cover" alt="{{ product.image_alt or product.name }}" style="aspect-ratio: 4/3;">
       </div>
     </div>
 
