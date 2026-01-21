@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: dreamhouseweb55-web/dreamhouse-website # اسم المستودع الخاص بك
   branch: main # اسم الفرع الرئيسي في GitHub
 
 media_folder: "images" # المجلد الذي سيبحث فيه عن الصور
