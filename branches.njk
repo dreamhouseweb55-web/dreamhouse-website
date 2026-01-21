@@ -2,95 +2,91 @@
 layout: base.njk
 title: فروعنا
 ---
-  <section class="hero" style="height: 400px;">
-    <div class="hero-content">
-      <h1 class="hero-title">فروعنا</h1>
-      <p class="hero-subtitle">في خدمتك في أفضل المواقع</p>
+  <section class="d-flex align-items-center justify-content-center text-center text-white" style="height: 400px; background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%);">
+    <div class="container">
+      <h1 class="display-3 fw-bold mb-3">فروعنا</h1>
+      <p class="lead fs-3">في خدمتك في أفضل المواقع</p>
     </div>
   </section>
 
-  <section class="section">
+  <section class="py-5">
     <div class="container">
-      <h2 class="section-title">فروع دريم هاوس</h2>
-      <p class="section-subtitle">زرنا في أي من فروعنا وتمتع بتجربة تسوق فريدة</p>
+      <div class="text-center mb-5">
+        <h2 class="fw-bold section-title">فروع دريم هاوس</h2>
+        <p class="text-muted">زرنا في أي من فروعنا وتمتع بتجربة تسوق فريدة</p>
+      </div>
 
-      <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); margin-top: var(--spacing-xl);">
+      <div class="row g-4 justify-content-center">
         {% for branch in branches.branches %}
-            <div class="feature-card" {% if branch.isNew %}style="border: 3px solid var(--gold-accent);"{% endif %}>
-                <div style="background: linear-gradient(135deg, {% if branch.isNew %}var(--gold-accent) 0%, #F4D03F{% else %}var(--primary-wood) 0%, var(--primary-wood-light){% endif %} 100%); padding: var(--spacing-lg); border-radius: var(--radius-md) var(--radius-md) 0 0; color: {% if branch.isNew %}var(--primary-wood){% else %}white{% endif %}; text-align: center;">
-                    <i class="{{ branch.icon }}" style="font-size: 3rem; color: {% if branch.isNew %}var(--primary-wood){% else %}var(--gold-accent){% endif %}; margin-bottom: var(--spacing-sm);"></i>
-                    <h3 style="font-size: 1.75rem; color: {% if branch.isNew %}var(--primary-wood){% else %}white{% endif %}; margin: 0;">{{ branch.name }}</h3>
-                    {% if branch.isNew %}
-                    <p style="margin-top: var(--spacing-xs); font-weight: 600;">الافتتاح الكبير!</p>
-                    {% endif %}
-                </div>
-
-                <div style="padding: var(--spacing-lg);">
-                    <div style="margin-bottom: var(--spacing-md);">
-                        <h4 style="color: var(--primary-wood); margin-bottom: var(--spacing-sm);">
-                            <i class="fas fa-location-arrow" style="color: var(--gold-accent);"></i> {% if branch.isNew %}الموقع{% else %}العنوان{% endif %}
-                        </h4>
-                        <p style="color: var(--dark-text); font-size: 1.1rem;">
-                            {{ branch.location }}
-                        </p>
-                    </div>
-
-                    <div style="margin-bottom: var(--spacing-md);">
-                        <h4 style="color: var(--primary-wood); margin-bottom: var(--spacing-sm);">
-                            <i class="fas fa-{% if branch.isNew %}building{% else %}clock{% endif %}" style="color: var(--gold-accent);"></i> {% if branch.isNew %}مساحة العرض{% else %}ساعات العمل{% endif %}
-                        </h4>
-                        <p style="color: var(--dark-text); {% if branch.isNew %}font-size: 1.3rem; font-weight: 700;{% endif %}">
-                             {{ branch.hours | nl2br | safe }}
-                        </p>
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm overflow-hidden {% if branch.isNew %}border border-3 border-warning{% endif %}">
+                    <div class="card-header border-0 text-center py-4 text-white" style="background: linear-gradient(135deg, {% if branch.isNew %}var(--gold-accent) 0%, #F4D03F{% else %}var(--primary-wood) 0%, var(--primary-wood-light){% endif %} 100%);">
+                        <i class="{{ branch.icon }} display-3 mb-2" style="color: {% if branch.isNew %}var(--primary-wood){% else %}var(--gold-accent){% endif %};"></i>
+                        <h3 class="h4 fw-bold {% if branch.isNew %}text-dark{% else %}text-white{% endif %} m-0">{{ branch.name }}</h3>
                         {% if branch.isNew %}
-                        <p style="color: var(--light-text);">مساحة عرض ضخمة غير مسبوقة</p>
+                        <span class="badge bg-danger mt-2">الافتتاح الكبير!</span>
                         {% endif %}
                     </div>
 
-                    {% if branch.isNew %}
-                    <div style="margin-bottom: var(--spacing-md);">
-                        <h4 style="color: var(--primary-wood); margin-bottom: var(--spacing-sm);">
-                            <i class="fas fa-magic" style="color: var(--gold-accent);"></i> المميزات الخاصة
-                        </h4>
-                        <ul style="list-style: none; padding: 0; color: var(--dark-text);">
-                            <li style="margin-bottom: var(--spacing-xs);">
-                                <i class="fas fa-check" style="color: green;"></i> تجربة تسوق فريدة ومتنوعة
-                            </li>
-                            <li style="margin-bottom: var(--spacing-xs);">
-                                <i class="fas fa-check" style="color: green;"></i> قسم خاص للمطابخ
-                            </li>
-                            <li style="margin-bottom: var(--spacing-xs);">
-                                <i class="fas fa-check" style="color: green;"></i> خدمة مصمم داخلي مجانية
-                            </li>
-                            <li>
-                                <i class="fas fa-check" style="color: green;"></i> عرض ثلاثي الأبعاد للمطبخ
-                            </li>
-                        </ul>
-                    </div>
-                    <div style="background: var(--gold-accent); color: var(--primary-wood); padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center; font-weight: 700; font-size: 1.2rem;">
-                        الافتتاح قريباً جداً!
-                    </div>
-                    {% else %}
-                    <div style="margin-bottom: var(--spacing-md);">
-                        <h4 style="color: var(--primary-wood); margin-bottom: var(--spacing-sm);">
-                            <i class="fas fa-phone" style="color: var(--gold-accent);"></i> التواصل
-                        </h4>
-                        <p style="color: var(--dark-text);">
-                            <a href="tel:{{ branch.phone }}" style="color: var(--primary-wood); font-weight: 600;">
-                                {{ branch.phone }}
-                            </a>
-                        </p>
-                    </div>
+                    <div class="card-body p-4">
+                        <div class="mb-4">
+                            <h4 class="h6 fw-bold text-primary mb-2">
+                                <i class="fas fa-location-arrow text-warning me-2"></i> {% if branch.isNew %}الموقع{% else %}العنوان{% endif %}
+                            </h4>
+                            <p class="text-muted fs-5">
+                                {{ branch.location }}
+                            </p>
+                        </div>
 
-                    <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
-                        <a href="tel:{{ branch.phone }}" class="btn btn-primary" style="flex: 1;">
-                            <i class="fas fa-phone"></i> اتصل بالفرع
-                        </a>
-                        <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-gold" style="flex: 1;" target="_blank">
-                            <i class="fab fa-whatsapp"></i> واتساب
-                        </a>
+                        <div class="mb-4">
+                            <h4 class="h6 fw-bold text-primary mb-2">
+                                <i class="fas fa-{% if branch.isNew %}building{% else %}clock{% endif %} text-warning me-2"></i> {% if branch.isNew %}مساحة العرض{% else %}ساعات العمل{% endif %}
+                            </h4>
+                            <p class="text-muted {% if branch.isNew %}fs-4 fw-bold text-dark{% endif %}">
+                                 {{ branch.hours | nl2br | safe }}
+                            </p>
+                            {% if branch.isNew %}
+                            <small class="text-muted">مساحة عرض ضخمة غير مسبوقة</small>
+                            {% endif %}
+                        </div>
+
+                        {% if branch.isNew %}
+                        <div class="mb-4">
+                            <h4 class="h6 fw-bold text-primary mb-2">
+                                <i class="fas fa-magic text-warning me-2"></i> المميزات الخاصة
+                            </h4>
+                            <ul class="list-unstyled text-muted">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> تجربة تسوق فريدة ومتنوعة</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> قسم خاص للمطابخ</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> خدمة مصمم داخلي مجانية</li>
+                                <li><i class="fas fa-check text-success me-2"></i> عرض ثلاثي الأبعاد للمطبخ</li>
+                            </ul>
+                        </div>
+                        <div class="alert alert-warning text-center fw-bold mb-0">
+                            الافتتاح قريباً جداً!
+                        </div>
+                        {% else %}
+                        <div class="mb-4">
+                            <h4 class="h6 fw-bold text-primary mb-2">
+                                <i class="fas fa-phone text-warning me-2"></i> التواصل
+                            </h4>
+                            <p class="mb-0">
+                                <a href="tel:{{ branch.phone }}" class="text-decoration-none text-dark fw-bold fs-5 font-monospace">
+                                    {{ branch.phone }}
+                                </a>
+                            </p>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex">
+                            <a href="tel:{{ branch.phone }}" class="btn btn-primary flex-grow-1">
+                                <i class="fas fa-phone me-2"></i> اتصل بالفرع
+                            </a>
+                            <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-outline-warning text-dark flex-grow-1" target="_blank">
+                                <i class="fab fa-whatsapp me-2"></i> واتساب
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
             </div>
         {% endfor %}
@@ -98,107 +94,118 @@ title: فروعنا
     </div>
   </section>
 
-  <section class="section" style="background: var(--beige-bg);">
+  <section class="py-5 bg-light">
     <div class="container">
-      <h2 class="section-title">لماذا تزورنا؟</h2>
+      <h2 class="text-center mb-5 fw-bold section-title">لماذا تزورنا؟</h2>
 
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-eye"></i>
+      <div class="row g-4">
+        <div class="col-md-4 col-sm-6">
+          <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+              <div class="display-5 text-warning mb-3"><i class="fas fa-eye"></i></div>
+              <h3 class="h5 fw-bold mb-2">شاهد المنتجات مباشرة</h3>
+              <p class="text-muted small">لمس وفحص المنتجات قبل الشراء لضمان رضاك التام</p>
           </div>
-          <h3 class="feature-title">شاهد المنتجات مباشرة</h3>
-          <p class="feature-description">لمس وفحص المنتجات قبل الشراء لضمان رضاك التام</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-users"></i>
+        <div class="col-md-4 col-sm-6">
+          <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+              <div class="display-5 text-warning mb-3"><i class="fas fa-users"></i></div>
+              <h3 class="h5 fw-bold mb-2">استشارة مجانية</h3>
+              <p class="text-muted small">فريقنا المتخصص سيساعدك في اختيار الأنسب لمنزلك</p>
           </div>
-          <h3 class="feature-title">استشارة مجانية</h3>
-          <p class="feature-description">فريقنا المتخصص سيساعدك في اختيار الأنسب لمنزلك</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-tape"></i>
+        <div class="col-md-4 col-sm-6">
+          <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+              <div class="display-5 text-warning mb-3"><i class="fas fa-tape"></i></div>
+              <h3 class="h5 fw-bold mb-2">قياس المساحات</h3>
+              <p class="text-muted small">خدمة قياس مجانية للتأكد من ملاءمة القطع لمساحتك</p>
           </div>
-          <h3 class="feature-title">قياس المساحات</h3>
-          <p class="feature-description">خدمة قياس مجانية للتأكد من ملاءمة القطع لمساحتك</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-palette"></i>
+        <div class="col-md-4 col-sm-6">
+          <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+              <div class="display-5 text-warning mb-3"><i class="fas fa-palette"></i></div>
+              <h3 class="h5 fw-bold mb-2">تنسيق الألوان</h3>
+              <p class="text-muted small">نساعدك في تنسيق الألوان والتصاميم بشكل متناسق</p>
           </div>
-          <h3 class="feature-title">تنسيق الألوان</h3>
-          <p class="feature-description">نساعدك في تنسيق الألوان والتصاميم بشكل متناسق</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-percent"></i>
+        <div class="col-md-4 col-sm-6">
+          <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+              <div class="display-5 text-warning mb-3"><i class="fas fa-percent"></i></div>
+              <h3 class="h5 fw-bold mb-2">عروض خاصة</h3>
+              <p class="text-muted small">عروض حصرية للزوار في المعرض</p>
           </div>
-          <h3 class="feature-title">عروض خاصة</h3>
-          <p class="feature-description">عروض حصرية للزوار في المعرض</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-coffee"></i>
+        <div class="col-md-4 col-sm-6">
+          <div class="card h-100 border-0 shadow-sm p-4 text-center hover-lift">
+              <div class="display-5 text-warning mb-3"><i class="fas fa-coffee"></i></div>
+              <h3 class="h5 fw-bold mb-2">أجواء مريحة</h3>
+              <p class="text-muted small">بيئة مريحة تجعل زيارتك تجربة ممتعة</p>
           </div>
-          <h3 class="feature-title">أجواء مريحة</h3>
-          <p class="feature-description">بيئة مريحة تجعل زيارتك تجربة ممتعة</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <!-- Static Transportation Info -->
+  <section class="py-5">
     <div class="container">
-        <h2 class="section-title">كيف تصل إلينا؟</h2>
-        <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-            <div class="feature-card">
-                <h3 class="feature-title"><i class="fas fa-car"></i> بالسيارة</h3>
-                <p class="feature-description">يمكنك الوصول بسهولة إلى جميع فروعنا بالسيارة. فروعنا في مواقع استراتيجية سهلة الوصول.</p>
-                <div style="background: var(--beige-bg); padding: var(--spacing-sm); border-radius: var(--radius-md); margin-top: var(--spacing-md);">
-                    <i class="fas fa-info-circle" style="color: var(--gold-accent);"></i> <strong>متوفر مواقف سيارات واسعة</strong>
+        <h2 class="text-center mb-5 fw-bold section-title">كيف تصل إلينا؟</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="h5 fw-bold mb-3 d-flex align-items-center"><i class="fas fa-car text-primary me-2"></i> بالسيارة</h3>
+                        <p class="text-muted mb-3">يمكنك الوصول بسهولة إلى جميع فروعنا بالسيارة. فروعنا في مواقع استراتيجية سهلة الوصول.</p>
+                        <div class="alert alert-secondary d-flex align-items-center mb-0 py-2">
+                             <i class="fas fa-info-circle text-warning me-2"></i> <strong>متوفر مواقف سيارات واسعة</strong>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="feature-card">
-                <h3 class="feature-title"><i class="fas fa-subway"></i> بالمواصلات العامة</h3>
-                <p class="feature-description">فروعنا قريبة من محطات المترو والمواصلات العامة لسهولة الوصول.</p>
-                <div style="background: var(--beige-bg); padding: var(--spacing-sm); border-radius: var(--radius-md); margin-top: var(--spacing-md);">
-                    <i class="fas fa-info-circle" style="color: var(--gold-accent);"></i> <strong>موقع متميز ومعروف</strong>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="h5 fw-bold mb-3 d-flex align-items-center"><i class="fas fa-subway text-primary me-2"></i> بالمواصلات العامة</h3>
+                        <p class="text-muted mb-3">فروعنا قريبة من محطات المترو والمواصلات العامة لسهولة الوصول.</p>
+                        <div class="alert alert-secondary d-flex align-items-center mb-0 py-2">
+                             <i class="fas fa-info-circle text-warning me-2"></i> <strong>موقع متميز ومعروف</strong>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="feature-card">
-                <h3 class="feature-title"><i class="fas fa-taxi"></i> بالتاكسي / أوبر</h3>
-                <p class="feature-description">يمكنك طلب تاكسي أو أوبر بسهولة إلى أي من فروعنا.</p>
-                <div style="background: var(--beige-bg); padding: var(--spacing-sm); border-radius: var(--radius-md); margin-top: var(--spacing-md);">
-                    <i class="fas fa-info-circle" style="color: var(--gold-accent);"></i> <strong>موقع معروف لدى السائقين</strong>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="h5 fw-bold mb-3 d-flex align-items-center"><i class="fas fa-taxi text-primary me-2"></i> بالتاكسي / أوبر</h3>
+                        <p class="text-muted mb-3">يمكنك طلب تاكسي أو أوبر بسهولة إلى أي من فروعنا.</p>
+                        <div class="alert alert-secondary d-flex align-items-center mb-0 py-2">
+                             <i class="fas fa-info-circle text-warning me-2"></i> <strong>موقع معروف لدى السائقين</strong>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
   </section>
 
-  <section class="section" style="background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%); color: white;">
-    <div class="container text-center">
-      <h2 class="section-title" style="color: white;">احجز زيارتك الآن</h2>
-       <p style="font-size: 1.2rem; margin-bottom: var(--spacing-xl); color: var(--secondary-silver-light);">
+  <section class="py-5 text-white text-center" style="background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%);">
+    <div class="container">
+      <h2 class="fw-bold mb-3">احجز زيارتك الآن</h2>
+       <p class="lead text-white-50 mb-4">
         يمكنك الزيارة مباشرة أو حجز موعد لضمان خدمة أفضل
       </p>
-      <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
-        <a href="/contact.html" class="btn btn-gold">
-          <i class="fas fa-calendar-check"></i> احجز موعد
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="/contact.html" class="btn btn-warning btn-lg text-dark fw-bold">
+          <i class="fas fa-calendar-check me-2"></i> احجز موعد
         </a>
-        <a href="tel:{{ settings.contact.phone }}" class="btn btn-secondary">
-          <i class="fas fa-phone"></i> اتصل بنا
+        <a href="tel:{{ settings.contact.phone }}" class="btn btn-outline-light btn-lg">
+          <i class="fas fa-phone me-2"></i> اتصل بنا
         </a>
-        <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-secondary" target="_blank">
-          <i class="fab fa-whatsapp"></i> واتساب
+        <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-outline-light btn-lg" target="_blank">
+          <i class="fab fa-whatsapp me-2"></i> واتساب
         </a>
       </div>
     </div>

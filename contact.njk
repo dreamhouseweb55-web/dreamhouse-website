@@ -2,48 +2,40 @@
 layout: base.njk
 title: اتصل بنا
 ---
-  <section class="hero" style="height: 350px;">
-    <div class="hero-content">
-      <h1 class="hero-title">تواصل معنا</h1>
-      <p class="hero-subtitle">نحن هنا لمساعدتك في كل خطوة</p>
+  <section class="d-flex align-items-center justify-content-center text-center text-white" style="height: 350px; background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%);">
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-3">تواصل معنا</h1>
+      <p class="lead">نحن هنا لمساعدتك في كل خطوة</p>
     </div>
   </section>
 
-  <section class="section">
+  <section class="py-5">
     <div class="container">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--spacing-xl);">
-
+      <div class="row g-5">
+        
         <!-- نموذج الاتصال -->
-        <div style="grid-column: span 1;">
-          <h2 class="section-title" style="text-align: right;">أرسل لنا رسالة</h2>
+        <div class="col-lg-7">
+          <h2 class="mb-4 fw-bold text-primary border-bottom pb-2 d-inline-block">أرسل لنا رسالة</h2>
 
-          <form id="contactForm" style="background: var(--secondary-white); padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
-            <div style="margin-bottom: var(--spacing-md);">
-              <label for="name" style="display: block; margin-bottom: var(--spacing-xs); font-weight: 600; color: var(--primary-wood);">
-                الاسم الكامل <span style="color: red;">*</span>
-              </label>
-              <input type="text" id="name" name="name" required style="width: 100%; padding: var(--spacing-sm); border: 2px solid var(--secondary-silver); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 1rem;" placeholder="أدخل اسمك">
+          <form id="contactForm" class="p-4 shadow rounded-3 bg-white border">
+            <div class="mb-3">
+              <label for="name" class="form-label fw-bold">الاسم الكامل <span class="text-danger">*</span></label>
+              <input type="text" id="name" name="name" class="form-control form-control-lg" required placeholder="أدخل اسمك">
             </div>
 
-            <div style="margin-bottom: var(--spacing-md);">
-              <label for="phone" style="display: block; margin-bottom: var(--spacing-xs); font-weight: 600; color: var(--primary-wood);">
-                رقم الهاتف <span style="color: red;">*</span>
-              </label>
-              <input type="tel" id="phone" name="phone" required style="width: 100%; padding: var(--spacing-sm); border: 2px solid var(--secondary-silver); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 1rem;" placeholder="مثال: 01012345678">
+            <div class="mb-3">
+              <label for="phone" class="form-label fw-bold">رقم الهاتف <span class="text-danger">*</span></label>
+              <input type="tel" id="phone" name="phone" class="form-control form-control-lg" required placeholder="مثال: 01012345678">
             </div>
 
-            <div style="margin-bottom: var(--spacing-md);">
-              <label for="email" style="display: block; margin-bottom: var(--spacing-xs); font-weight: 600; color: var(--primary-wood);">
-                البريد الإلكتروني (اختياري)
-              </label>
-              <input type="email" id="email" name="email" style="width: 100%; padding: var(--spacing-sm); border: 2px solid var(--secondary-silver); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 1rem;" placeholder="example@email.com">
+            <div class="mb-3">
+              <label for="email" class="form-label fw-bold">البريد الإلكتروني (اختياري)</label>
+              <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="example@email.com">
             </div>
 
-            <div style="margin-bottom: var(--spacing-md);">
-              <label for="interest" style="display: block; margin-bottom: var(--spacing-xs); font-weight: 600; color: var(--primary-wood);">
-                مهتم بـ
-              </label>
-              <select id="interest" name="interest" style="width: 100%; padding: var(--spacing-sm); border: 2px solid var(--secondary-silver); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 1rem;">
+            <div class="mb-3">
+              <label for="interest" class="form-label fw-bold">مهتم بـ</label>
+              <select id="interest" name="interest" class="form-select form-select-lg">
                 <option value="">اختر المنتج</option>
                 <option value="bedrooms">غرف نوم رئيسية</option>
                 <option value="kids-bedrooms">غرف نوم أطفال</option>
@@ -57,106 +49,113 @@ title: اتصل بنا
               </select>
             </div>
 
-            <div style="margin-bottom: var(--spacing-md);">
-              <label for="message" style="display: block; margin-bottom: var(--spacing-xs); font-weight: 600; color: var(--primary-wood);">
-                رسالتك <span style="color: red;">*</span>
-              </label>
-              <textarea id="message" name="message" rows="5" required style="width: 100%; padding: var(--spacing-sm); border: 2px solid var(--secondary-silver); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 1rem; resize: vertical;" placeholder="اكتب رسالتك أو استفسارك هنا..."></textarea>
+            <div class="mb-4">
+              <label for="message" class="form-label fw-bold">رسالتك <span class="text-danger">*</span></label>
+              <textarea id="message" name="message" rows="5" class="form-control form-control-lg" required placeholder="اكتب رسالتك أو استفسارك هنا..."></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%;">
-              <i class="fas fa-paper-plane"></i> إرسال الرسالة
+            <button type="submit" class="btn btn-primary btn-lg w-100">
+              <i class="fas fa-paper-plane me-2"></i> إرسال الرسالة
             </button>
           </form>
         </div>
 
         <!-- معلومات التواصل -->
-        <div>
-          <h2 class="section-title" style="text-align: right;">معلومات التواصل</h2>
+        <div class="col-lg-5">
+          <h2 class="mb-4 fw-bold text-primary border-bottom pb-2 d-inline-block">معلومات التواصل</h2>
 
-          <div class="feature-card" style="margin-bottom: var(--spacing-md);">
-            <h3 class="feature-title">
-              <i class="fas fa-phone" style="color: var(--gold-accent); margin-left: 10px;"></i>
-              اتصل بنا
-            </h3>
-            <p class="feature-description">
-              <a href="tel:{{ settings.contact.phone }}" style="color: var(--primary-wood); font-size: 1.2rem; font-weight: 600;">
-                {{ settings.contact.phone }}
-              </a>
-            </p>
-            <p class="feature-description" style="margin-top: var(--spacing-xs);">
-              متاح من السبت إلى الخميس<br>
-              من 10 صباحاً حتى 10 مساءً
-            </p>
-          </div>
-
-          <div class="feature-card" style="margin-bottom: var(--spacing-md);">
-            <h3 class="feature-title">
-              <i class="fab fa-whatsapp" style="color: var(--gold-accent); margin-left: 10px;"></i>
-              واتساب
-            </h3>
-            <a href="https://wa.me/{{ settings.contact.whatsapp }}" target="_blank" class="btn btn-gold" style="width: 100%;">
-              <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
-            </a>
-          </div>
-
-          <div class="feature-card" style="margin-bottom: var(--spacing-md);">
-            <h3 class="feature-title">
-              <i class="fas fa-envelope" style="color: var(--gold-accent); margin-left: 10px;"></i>
-              البريد الإلكتروني
-            </h3>
-            <p class="feature-description">
-              <a href="mailto:{{ settings.contact.email }}" style="color: var(--primary-wood); font-weight: 600;">
-                {{ settings.contact.email }}
-              </a>
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <h3 class="feature-title">
-              <i class="fas fa-share-alt" style="color: var(--gold-accent); margin-left: 10px;"></i>
-              تابعنا على السوشيال ميديا
-            </h3>
-            <div class="social-links" style="justify-content: flex-start;">
-              <a href="{{ settings.social.facebook }}" target="_blank" aria-label="فيسبوك" style="background: #1877F2;">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="{{ settings.social.instagram }}" target="_blank" aria-label="إنستجرام" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="{{ settings.social.tiktok }}" target="_blank" aria-label="تيك توك" style="background: #000000;">
-                <i class="fab fa-tiktok"></i>
-              </a>
+          <div class="card mb-3 border-0 shadow-sm">
+            <div class="card-body d-flex align-items-center">
+              <div class="flex-shrink-0 bg-light p-3 rounded-circle text-warning fs-3">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h5 class="fw-bold mb-1">اتصل بنا</h5>
+                 <a href="tel:{{ settings.contact.phone }}" class="text-decoration-none text-dark fs-5 fw-bold font-monospace">
+                   {{ settings.contact.phone }}
+                 </a>
+                 <div class="text-muted small mt-1">
+                   متاح من السبت إلى الخميس<br>من 10 صباحاً حتى 10 مساءً
+                 </div>
+              </div>
             </div>
           </div>
+
+          <div class="card mb-3 border-0 shadow-sm">
+            <div class="card-body d-flex align-items-center">
+              <div class="flex-shrink-0 bg-light p-3 rounded-circle text-success fs-3">
+                <i class="fab fa-whatsapp"></i>
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h5 class="fw-bold mb-1">واتساب</h5>
+                <a href="https://wa.me/{{ settings.contact.whatsapp }}" target="_blank" class="btn btn-success btn-sm mt-1">
+                   تواصل فوراً
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-4 border-0 shadow-sm">
+            <div class="card-body d-flex align-items-center">
+              <div class="flex-shrink-0 bg-light p-3 rounded-circle text-primary fs-3">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h5 class="fw-bold mb-1">البريد الإلكتروني</h5>
+                 <a href="mailto:{{ settings.contact.email }}" class="text-decoration-none text-muted">
+                    {{ settings.contact.email }}
+                 </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card border-0 shadow-sm text-center p-4">
+             <h5 class="fw-bold mb-3">تابعنا على السوشيال ميديا</h5>
+             <div class="d-flex justify-content-center gap-3">
+               <a href="{{ settings.social.facebook }}" target="_blank" class="btn btn-primary rounded-circle" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
+                 <i class="fab fa-facebook-f"></i>
+               </a>
+               <a href="{{ settings.social.instagram }}" target="_blank" class="btn text-white rounded-circle" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);">
+                 <i class="fab fa-instagram"></i>
+               </a>
+               <a href="{{ settings.social.tiktok }}" target="_blank" class="btn btn-dark rounded-circle" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;">
+                 <i class="fab fa-tiktok"></i>
+               </a>
+             </div>
+          </div>
+
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" style="background: var(--beige-bg);">
+  <section class="py-5 bg-light">
     <div class="container">
-      <h2 class="section-title">فروعنا</h2>
+      <h2 class="text-center mb-5 fw-bold section-title">فروعنا</h2>
 
-      <div class="features-grid">
+      <div class="row g-4 justify-content-center">
       {% for branch in branches.branches | slice(0, 2) %}
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-map-marker-alt"></i>
-          </div>
-          <h3 class="feature-title">{{ branch.name }}</h3>
-          <p class="feature-description">
-            <strong>العنوان:</strong> {{ branch.location }}<br>
-            <strong>ساعات العمل:</strong><br>
-            {{ branch.hours | nl2br | safe }}
-          </p>
-          <div style="margin-top: var(--spacing-md);">
-            <a href="tel:{{ branch.phone }}" class="btn btn-secondary" style="width: 100%; margin-bottom: var(--spacing-xs);">
-              <i class="fas fa-phone"></i> اتصل بالفرع
-            </a>
-            <a href="/branches/" class="btn btn-primary" style="width: 100%;">
-              <i class="fas fa-map"></i> عرض الموقع
-            </a>
+        <div class="col-md-6">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body p-4 text-center">
+              <div class="text-warning display-4 mb-3">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <h3 class="h4 fw-bold mb-3">{{ branch.name }}</h3>
+              <p class="text-muted mb-4">
+                <strong>العنوان:</strong> {{ branch.location }}<br>
+                <strong>ساعات العمل:</strong><br>
+                {{ branch.hours | nl2br | safe }}
+              </p>
+              <div class="d-grid gap-2">
+                <a href="tel:{{ branch.phone }}" class="btn btn-outline-dark">
+                  <i class="fas fa-phone me-2"></i> اتصل بالفرع
+                </a>
+                <a href="/branches/" class="btn btn-primary">
+                  <i class="fas fa-map me-2"></i> عرض الموقع
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       {% endfor %}
@@ -164,44 +163,67 @@ title: اتصل بنا
     </div>
   </section>
 
-  <section class="section">
+  <section class="py-5">
     <div class="container">
-      <h2 class="section-title">الأسئلة الشائعة</h2>
+      <h2 class="text-center mb-5 fw-bold section-title">الأسئلة الشائعة</h2>
 
-      <div style="max-width: 800px; margin: 0 auto;">
-        <div class="feature-card" style="margin-bottom: var(--spacing-md);">
-          <h3 class="feature-title">ما هي مدة التسليم؟</h3>
-          <p class="feature-description">
-            نقوم بتسليم وتركيب المنتجات خلال 48 ساعة فقط من التعاقد.
-          </p>
-        </div>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="accordion shadow-sm" id="faqAccordion">
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true">
+                            ما هي مدة التسليم؟
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            نقوم بتسليم وتركيب المنتجات خلال 48 ساعة فقط من التعاقد.
+                        </div>
+                    </div>
+                </div>
 
-        <div class="feature-card" style="margin-bottom: var(--spacing-md);">
-          <h3 class="feature-title">هل التوصيل والتركيب مجاني؟</h3>
-          <p class="feature-description">
-            نعم، نقدم خدمة التوصيل والتركيب مجاناً داخل القاهرة الكبرى.
-          </p>
-        </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            هل التوصيل والتركيب مجاني؟
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                             نعم، نقدم خدمة التوصيل والتركيب مجاناً داخل القاهرة الكبرى.
+                        </div>
+                    </div>
+                </div>
 
-        <div class="feature-card" style="margin-bottom: var(--spacing-md);">
-          <h3 class="feature-title">ما هي مدة الضمان؟</h3>
-          <p class="feature-description">
-            نقدم ضمان 5 سنوات على الأخشاب وكثافة الإسفنج، مما يعكس ثقتنا المطلقة في جودة منتجاتنا.
-          </p>
-        </div>
+                 <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                           ما هي مدة الضمان؟
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                             نقدم ضمان 5 سنوات على الأخشاب وكثافة الإسفنج، مما يعكس ثقتنا المطلقة في جودة منتجاتنا.
+                        </div>
+                    </div>
+                </div>
 
-        <div class="feature-card" style="margin-bottom: var(--spacing-md);">
-          <h3 class="feature-title">هل يمكن الدفع بالتقسيط؟</h3>
-          <p class="feature-description">
-            للاستفسار عن خيارات الدفع والتقسيط، يرجى التواصل معنا مباشرة عبر الهاتف أو واتساب.
-          </p>
-        </div>
+                 <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                           هل يمكن الدفع بالتقسيط؟
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            للاستفسار عن خيارات الدفع والتقسيط، يرجى التواصل معنا مباشرة عبر الهاتف أو واتساب.
+                        </div>
+                    </div>
+                </div>
 
-        <div class="feature-card">
-          <h3 class="feature-title">هل يمكن زيارة المعرض قبل الشراء؟</h3>
-          <p class="feature-description">
-            بالتأكيد! نرحب بزيارتك لأي من فروعنا لمشاهدة المنتجات والاستفسار عن أي تفاصيل.
-          </p>
+            </div>
         </div>
       </div>
     </div>
