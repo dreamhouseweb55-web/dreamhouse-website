@@ -95,6 +95,18 @@ collections:
                   - {label: "العنوان", name: "title", widget: "string"}
                   - {label: "الوصف", name: "description", widget: "text"}
           
+          - label: "قسم الجودة (الفيل)"
+            name: "quality"
+            widget: "object"
+            fields:
+              - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
+              - {label: "الشارة (Badge)", name: "badge", widget: "string"}
+              - {label: "الوصف", name: "description", widget: "text"}
+              - {label: "صورة القسم", name: "image", widget: "image"}
+              - {label: "نص الزر", name: "buttonText", widget: "string"}
+              - {label: "رابط الزر", name: "buttonLink", widget: "string"}
+          
           - label: "قسم الإحصائيات"
             name: "stats"
             widget: "object"
