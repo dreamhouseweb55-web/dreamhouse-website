@@ -3,6 +3,8 @@ backend:
   repo: dreamhouseweb55-web/dreamhouse-website # اسم المستودع الخاص بك
   branch: main # اسم الفرع الرئيسي في GitHub
 
+local_backend: true # تفعيل التعديل المحلي (بدون سيرفر)
+
 media_folder: "images" # المجلد الذي سيبحث فيه عن الصور
 public_folder: "/images" # المسار العام للصور
 

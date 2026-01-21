@@ -7,7 +7,8 @@
     "build": "eleventy && npm run build:js",
     "build:js": "npx esbuild src/ts/main.ts --bundle --outfile=_site/script.js --target=es2016",
     "watch:js": "npx esbuild src/ts/main.ts --bundle --outfile=_site/script.js --target=es2016 --watch",
-    "dev": "concurrently \"npm run start\" \"npm run watch:js\""
+    "dev": "concurrently \"npm run start\" \"npm run watch:js\"",
+    "cms": "npx decap-server"
   },
   "keywords": [
     "furniture",
