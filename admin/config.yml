@@ -62,6 +62,7 @@ collections:
             widget: "object"
             fields:
               - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "صورة الخلفية", name: "image", widget: "image"}
               - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
               - label: "الأزرار"
                 name: "cta"
