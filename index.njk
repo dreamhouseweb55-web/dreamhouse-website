@@ -152,7 +152,7 @@ title: الرئيسية
     <p class="section-subtitle">قم بزيارة أقرب فرع إليك للتمتع بتجربة تسوق فريدة</p>
     
     <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-    {% for branch in branches.branches | slice(0, 3) %}
+    {% for branch in branches.branches %}
       <div class="feature-card" {% if branch.isNew %}style="border: 3px solid var(--gold-accent);"{% endif %}>
         <div class="feature-icon" {% if branch.isNew %}style="color: var(--gold-accent);"{% endif %}>
           <i class="{{ branch.icon }}"></i>
