@@ -17,7 +17,7 @@ title: {{ contact_page.hero.title }}
         <div class="col-lg-7">
           <h2 class="mb-4 fw-bold text-primary border-bottom pb-2 d-inline-block">{{ contact_page.formSection.title }}</h2>
 
-          <form id="contactForm" class="p-4 shadow rounded-3 bg-white border">
+          <form id="contactForm" data-whatsapp="{{ settings.contact.whatsapp }}" class="p-4 shadow rounded-3 bg-white border">
             <div class="mb-3">
               <label for="name" class="form-label fw-bold">الاسم الكامل <span class="text-danger">*</span></label>
               <input type="text" id="name" name="name" class="form-control form-control-lg" required placeholder="أدخل اسمك">

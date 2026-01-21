@@ -43,15 +43,37 @@ export function initContactForm(): void {
             e.preventDefault();
             const btn = this.querySelector('button[type="submit"]') as HTMLButtonElement;
             const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+
+            // Get form values
+            const name = (document.getElementById('name') as HTMLInputElement).value;
+            const phone = (document.getElementById('phone') as HTMLInputElement).value;
+            const email = (document.getElementById('email') as HTMLInputElement).value;
+            const interestSelect = document.getElementById('interest') as HTMLSelectElement;
+            const interest = interestSelect.options[interestSelect.selectedIndex].text;
+            const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+            const whatsappNumber = contactForm.dataset.whatsapp || '201125601241'; // Fallback
+
+            // Format WhatsApp Message
+            let text = `*استفسار جديد من الموقع الإلكتروني* 🏠\n\n`;
+            text += `*الاسم:* ${name}\n`;
+            text += `*رقم الهاتف:* ${phone}\n`;
+            if (email) text += `*البريد:* ${email}\n`;
+            if (interest && interest !== 'اختر المنتج') text += `*مهتم بـ:* ${interest}\n`;
+            text += `\n*الرسالة:* \n${message}`;
+
+            // Show loading state
+            btn.innerHTML = '<i class="fab fa-whatsapp"></i> جاري التحويل لواتساب...';
             btn.disabled = true;
 
+            // Redirect to WhatsApp
+            const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+
             setTimeout(() => {
-                showNotification('تم استلام رسالتك بنجاح! سنتواصل معك قريباً.', 'success');
-                this.reset();
+                window.open(url, '_blank');
                 btn.innerHTML = originalText;
                 btn.disabled = false;
-            }, 1500);
+                this.reset();
+            }, 1000);
         });
     }
 }
