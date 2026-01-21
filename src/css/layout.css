@@ -200,6 +200,40 @@
 }
 
 /* ===== التصميم المتجاوب ===== */
+
+/* ===== Product Details Layout ===== */
+.product-details-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: start;
+}
+
+.product-details-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+}
+
+.product-details-info .actions {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+/* ===== التصميم المتجاوب ===== */
+@media (max-width: 1024px) {
+    .product-details-container {
+        gap: var(--spacing-xl);
+    }
+
+    .hero {
+        height: 500px;
+    }
+}
+
 @media (max-width: 768px) {
     .navbar-menu {
         display: none;
@@ -211,6 +245,8 @@
         background: var(--primary-wood);
         padding: var(--spacing-md);
         box-shadow: var(--shadow-lg);
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .navbar-menu.active {
@@ -221,28 +257,59 @@
         display: block;
     }
 
+    .hero {
+        height: 400px;
+        /* Reduced further for mobile */
+    }
+
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        /* Smaller font */
     }
 
     .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .hero-buttons {
         flex-direction: column;
+        width: 100%;
+        padding: 0 var(--spacing-lg);
     }
 
     h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
         font-size: 1.75rem;
     }
 
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
     .section-title {
-        font-size: 2rem;
+        font-size: 1.75rem;
+    }
+
+    .features-grid>*,
+    .products-grid>* {
+        flex: 1 1 100%;
+        /* Full width cards on mobile */
+        max-width: 100%;
+    }
+
+    /* Product Details stacking */
+    .product-details-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .product-details-info .actions button,
+    .product-details-info .actions a {
+        flex: 1 1 100%;
+        /* Full width buttons */
     }
 }
 

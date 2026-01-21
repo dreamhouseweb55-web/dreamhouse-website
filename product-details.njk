@@ -16,7 +16,7 @@ title: "{{ product.name }}"
     <span style="color: var(--primary-wood);">{{ product.name }}</span>
   </nav>
 
-  <div class="product-details-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-2xl); align-items: start;">
+  <div class="product-details-container">
     
     <!-- Product Image -->
     <div class="product-details-image">
@@ -83,11 +83,4 @@ title: "{{ product.name }}"
 </div>
 
 <!-- Responsive CSS for this page locally -->
-<style>
-  @media (max-width: 768px) {
-    .product-details-container {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-lg);
-    }
-  }
-</style>
+
