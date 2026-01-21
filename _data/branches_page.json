@@ -26,5 +26,22 @@
             "mapLink": "",
             "mapEmbed": "https://maps.google.com/maps?q=Mostafa+El-Nahas+104+Nasr+City&t=&z=15&ie=UTF8&iwloc=&output=embed"
         }
-    ]
+    ],
+    "reach_us": {
+        "title": "كيف تصل إلينا؟",
+        "methods": [
+            {
+                "title": "بالسيارة",
+                "icon": "fas fa-car",
+                "description": "يمكنك الوصول بسهولة إلى جميع فروعنا بالسيارة via المحاور الرئيسية.",
+                "note": "تتوفر أماكن انتظار مجانية أمام الفروع"
+            },
+            {
+                "title": "بالمواصلات العامة",
+                "icon": "fas fa-bus",
+                "description": "فروعنا تقع بالقرب من محطات المواصلات الرئيسية في أكتوبر ومدينة نصر.",
+                "note": "يمكنك استخدام خرائط جوجل للوصول لأقرب محطة"
+            }
+        ]
+    }
 }

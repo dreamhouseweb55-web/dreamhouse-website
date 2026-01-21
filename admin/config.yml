@@ -326,6 +326,30 @@ collections:
               - {label: "العنوان الرئيسي", name: "title", widget: "string"}
               - {label: "صورة الخلفية", name: "image", widget: "image"}
               - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
+          
+          - label: "قائمة الفروع"
+            name: "branches"
+            widget: "list"
+            fields:
+              - {label: "اسم الفرع", name: "name", widget: "string"}
+              - {label: "العنوان", name: "address", widget: "string"}
+              - {label: "رقم الهاتف", name: "phone", widget: "string"}
+              - {label: "رابط الخريطة (زر اللوكيشن)", name: "mapLink", widget: "string"}
+              - {label: "رابط تضمين الخريطة (Embed URL)", name: "mapEmbed", widget: "string"}
+
+          - label: "قسم كيف تصل إلينا"
+            name: "reach_us"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - label: "طرق الوصول"
+                name: "methods"
+                widget: "list"
+                fields:
+                  - {label: "اسم الطريقة (مثال: بالسيارة)", name: "title", widget: "string"}
+                  - {label: "أيقونة (FontAwesome)", name: "icon", widget: "string"}
+                  - {label: "الوصف", name: "description", widget: "text"}
+                  - {label: "نص التنبيه", name: "note", widget: "string"}
 
       - name: "products_page_content"
         label: "صفحة المنتجات (محتوى ثابت)"
