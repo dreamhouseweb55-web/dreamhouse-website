@@ -9,19 +9,22 @@
             "name": "الفرع الأول (أكتوبر)",
             "address": "مدينة 6 اكتوبر، شارع رنا مول، عمارة ٩٧٨، الحي الثالث",
             "phone": "01062927975",
-            "mapLink": "https://maps.app.goo.gl/tq7d2USdjDRMSG4H9"
+            "mapLink": "https://maps.app.goo.gl/tq7d2USdjDRMSG4H9",
+            "mapEmbed": "https://maps.google.com/maps?q=Rana+Mall+6+October+City&t=&z=15&ie=UTF8&iwloc=&output=embed"
         },
         {
             "name": "الفرع الثاني (مدينة نصر - الرئيسي)",
             "address": "مدينه نصر، امتداد شارع مصطفى النحاس، شارع افريقيا، قطعه رقم (٩) بلوك (٣٣) المنطقة التاسعه",
             "phone": "01062927852",
-            "mapLink": "https://maps.app.goo.gl/CA9UzYxb3foTpZht9"
+            "mapLink": "https://maps.app.goo.gl/CA9UzYxb3foTpZht9",
+            "mapEmbed": "https://maps.google.com/maps?q=30.057248,31.369804&t=&z=15&ie=UTF8&iwloc=&output=embed"
         },
         {
             "name": "الفرع الثالث (مدينة نصر)",
             "address": "مدينه نصر، امتداد شارع مصطفى النحاس 104",
             "phone": "01062927852",
-            "mapLink": ""
+            "mapLink": "",
+            "mapEmbed": "https://maps.google.com/maps?q=Mostafa+El-Nahas+104+Nasr+City&t=&z=15&ie=UTF8&iwloc=&output=embed"
         }
     ]
 }
