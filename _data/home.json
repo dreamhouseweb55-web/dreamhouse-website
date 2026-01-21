@@ -1,6 +1,7 @@
 {
     "hero": {
         "title": "دريم هاوس",
+        "image": "/images/bedroom-1.jpg",
         "subtitle": "تجربة تسوق أثاث فريدة مع ضمان 5 سنوات",
         "cta": {
             "primary": {
