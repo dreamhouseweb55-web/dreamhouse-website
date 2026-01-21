@@ -53,7 +53,7 @@
       "name": "غرفة نوم كلاسيك فاخرة",
       "price": 45000,
       "category": "bedrooms",
-      "image": "images/bedroom-1.jpg",
+      "image": "/images/offer-main.webp",
       "description": "غرفة نوم كلاسيكية من الخشب الزان الطبيعي، تشمل سرير 180 سم، دولاب 6 ضلف، 2 كومود، وتسريحة.",
       "features": [
         "خشب زان",
@@ -66,7 +66,7 @@
       "name": "غرفة نوم مودرن",
       "price": 32000,
       "category": "bedrooms",
-      "image": "images/bedroom-2.jpg",
+      "image": "/images/offer-main.webp",
       "description": "تصميم عصري مميز يناسب المساحات المتوسطة، تشمل سرير 160 سم ودولاب جرار.",
       "features": [
         "خشب MDF مستورد",
@@ -79,7 +79,7 @@
       "name": "غرفة أطفال ميكي",
       "price": 18000,
       "category": "kids-bedrooms",
-      "image": "images/kids-1.jpg",
+      "image": "/images/offer-main.webp",
       "description": "ألوان مبهجة وتصميم آمن للأطفال، تشمل 2 سرير ودولاب ومكتب.",
       "features": [
         "ألوان آمنة",
@@ -92,7 +92,7 @@
       "name": "أنتريه أمريكان",
       "price": 22000,
       "category": "sofas",
-      "image": "images/sofa-1.jpg",
+      "image": "/images/hero-elephant.webp",
       "description": "أنتريه مريح جداً من القماش القطيفة المعالج، مكون من كنبة ثلاثية وكنبة ثنائية و 2 فوتيه.",
       "features": [
         "قماش تركي",
@@ -105,7 +105,7 @@
       "name": "ركنة L مودرن",
       "price": 15000,
       "category": "corners",
-      "image": "images/corner-1.jpg",
+      "image": "/images/hero-elephant.webp",
       "description": "ركنة عملية جداً مقاس 3*2 متر، مع ميكانيزم سرير وسحارة تخزين.",
       "features": [
         "متعددة الاستخدام",
@@ -118,7 +118,7 @@
       "name": "مطبخ بولي لاك",
       "price": 4500,
       "category": "kitchens",
-      "image": "images/kitchen-1.jpg",
+      "image": "/images/hero-elephant.webp",
       "description": "مطبخ عصري لامع ضد الخدش والرطوبة والحشرات. السعر للمتر الطولي.",
       "features": [
         "ضد الماء",
