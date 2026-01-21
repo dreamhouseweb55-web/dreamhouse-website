@@ -182,7 +182,7 @@ async function initProductsSystem() {
 async function loadProductsData() {
   try {
     // إضافة cache busting لتجنب مشاكل الكاش عند التحديث
-    const response = await fetch('data/products.json?v=' + new Date().getTime());
+    const response = await fetch('/data/products.json?v=' + new Date().getTime());
     if (!response.ok) throw new Error('Failed to load products');
 
     const data = await response.json();
@@ -243,8 +243,11 @@ function renderProducts(category) {
 
     const featuresHtml = product.features ? product.features.map(f => `<span class="feature-badge">${f}</span>`).join('') : '';
 
-    // التحقق من صحة مسار الصورة
-    let imgPath = product.image || 'images/logo.png';
+    // التحقق من صحة مسار الصورة - التأكد من المسار المطلق
+    let imgPath = product.image || '/images/logo.png';
+    if (!imgPath.startsWith('/') && !imgPath.startsWith('http')) {
+      imgPath = '/' + imgPath;
+    }
 
     productCard.innerHTML = `
             <div class="product-image" style="background-image: url('${imgPath}'); background-size: cover; background-position: center; height: 250px; position: relative;">

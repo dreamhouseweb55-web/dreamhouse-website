@@ -213,4 +213,4 @@ collections:
                 ]}
               - {label: "صورة المنتج", name: "image", widget: "image"}
               - {label: "الوصف", name: "description", widget: "text"}
-              - {label: "المميزات", name: "features", widget: "list", field: {widget: "string"}}
+              - {label: "المميزات", name: "features", widget: "list", field: {label: "الميزة", name: "feature_item", widget: "string"}}
