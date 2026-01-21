@@ -133,6 +133,7 @@ collections:
             widget: "object"
             fields:
               - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "صورة الخلفية", name: "image", widget: "image"}
               - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
           
           - label: "المقدمة"
@@ -200,6 +201,7 @@ collections:
             widget: "object"
             fields:
               - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "صورة الخلفية", name: "image", widget: "image"}
               - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
           - label: "قسم النموذج"
             name: "formSection"
@@ -244,6 +246,7 @@ collections:
             widget: "object"
             fields:
               - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "صورة الخلفية", name: "image", widget: "image"}
               - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
           - label: "تنويه موسمي"
             name: "seasonalNote"
@@ -305,6 +308,7 @@ collections:
             widget: "object"
             fields:
               - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "صورة الخلفية", name: "image", widget: "image"}
               - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
 
       - name: "products_page_content"
@@ -317,6 +321,7 @@ collections:
             widget: "object"
             fields:
               - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "صورة الخلفية", name: "image", widget: "image"}
               - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
           - label: "قسم التصنيفات"
             name: "categories"

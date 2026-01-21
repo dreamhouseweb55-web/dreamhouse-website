@@ -2,7 +2,7 @@
 layout: base.njk
 title: من نحن
 ---
-  <section class="d-flex align-items-center justify-content-center text-center text-white" style="height: 400px; background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%);">
+  <section class="d-flex align-items-center justify-content-center text-center text-white" style="height: 400px; background: {% if about.hero.image %}linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ about.hero.image }}') no-repeat center center/cover{% else %}linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%){% endif %};">
     <div class="container">
       <h1 class="display-3 fw-bold mb-3">{{ about.hero.title }}</h1>
       <p class="lead fs-3">{{ about.hero.subtitle }}</p>
