@@ -64,7 +64,7 @@ title: "{{ product.name }}"
       {% endif %}
 
       <div class="d-flex gap-2 flex-wrap">
-        <button class="btn btn-primary btn-lg flex-grow-1" onclick="addToCart('{{ product.id }}')">
+        <button class="btn btn-primary btn-lg flex-grow-1 js-add-to-cart" data-id="{{ product.id }}">
           <i class="fas fa-cart-plus me-2"></i> أضف للسلة
         </button>
         <a href="https://wa.me/{{ settings.contact.whatsapp }}?text=أستفسر عن منتج: {{ product.name }}" target="_blank" class="btn btn-warning btn-lg flex-grow-1 text-dark fw-bold">

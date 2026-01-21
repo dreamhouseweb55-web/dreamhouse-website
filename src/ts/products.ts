@@ -27,12 +27,13 @@ export async function initProductsSystem(): Promise<void> {
         renderProducts('all');
 
         // تفعيل الفلاتر
-        const filterButtons = document.querySelectorAll('.filter-btn');
+        const filterButtons = document.querySelectorAll('.js-filter-btn');
         filterButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
+                const target = e.currentTarget as HTMLElement;
                 filterButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filter = btn.getAttribute('data-filter');
+                target.classList.add('active');
+                const filter = target.getAttribute('data-filter');
                 if (filter) {
                     renderProducts(filter);
                 }

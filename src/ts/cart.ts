@@ -19,21 +19,18 @@ interface Product {
     description: string;
 }
 
-// Extend Window interface
 declare global {
     interface Window {
-        addToCart: (productId: string) => void;
-        removeFromCart: (productId: string) => void;
-        updateQuantity: (productId: string, change: number) => void;
-        checkoutWhatsApp: () => void;
-        products: Product[]; // Assuming this is set globally
-        bootstrap: any; // For Bootstrap API
+        products: Product[];
+        bootstrap: any;
     }
 }
 
 let cart: CartItem[] = JSON.parse(localStorage.getItem('dreamhouse_cart') || '[]');
 
-window.addToCart = function (productId: string): void {
+// === Public Functions ===
+
+export function addToCart(productId: string): void {
     if (typeof window.products === 'undefined' || window.products.length === 0) return;
 
     const product = window.products.find(p => p.id === productId);
@@ -65,26 +62,26 @@ window.addToCart = function (productId: string): void {
         }
         bsOffcanvas.show();
     }
-};
+}
 
-window.removeFromCart = function (productId: string): void {
+function removeFromCart(productId: string): void {
     cart = cart.filter(item => item.id !== productId);
     updateCartDisplay();
-};
+}
 
-window.updateQuantity = function (productId: string, change: number): void {
+function updateQuantity(productId: string, change: number): void {
     const item = cart.find(item => item.id === productId);
     if (item) {
         item.quantity += change;
         if (item.quantity <= 0) {
-            window.removeFromCart(productId);
+            removeFromCart(productId);
         } else {
             updateCartDisplay();
         }
     }
-};
+}
 
-window.checkoutWhatsApp = function (): void {
+function checkoutWhatsApp(): void {
     if (cart.length === 0) return;
 
     let message = `مرحباً دريم هاوس، أود طلب المنتجات التالية:%0a%0a`;
@@ -101,7 +98,7 @@ window.checkoutWhatsApp = function (): void {
 
     const phoneNumber = "201000000000";
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-};
+}
 
 function updateCartDisplay(): void {
     localStorage.setItem('dreamhouse_cart', JSON.stringify(cart));
@@ -132,18 +129,19 @@ function updateCartDisplay(): void {
 
                 const cartItem = document.createElement('div');
                 cartItem.className = 'd-flex align-items-center mb-3 pb-3 border-bottom';
+                // Note: Using data attributes and classes for event listeners
                 cartItem.innerHTML = `
                     <div class="flex-grow-1">
                         <h6 class="mb-1 text-dark fw-bold">${item.name}</h6>
                         <div class="text-warning fw-bold small">${item.price.toLocaleString()} ج.م</div>
                         <div class="d-flex align-items-center mt-2 gap-2">
-                            <button class="btn btn-sm btn-light border px-2" onclick="updateQuantity('${item.id}', -1)">-</button>
+                            <button class="btn btn-sm btn-light border px-2 js-update-qty" data-id="${item.id}" data-change="-1">-</button>
                             <span>${item.quantity}</span>
-                            <button class="btn btn-sm btn-light border px-2" onclick="updateQuantity('${item.id}', 1)">+</button>
+                            <button class="btn btn-sm btn-light border px-2 js-update-qty" data-id="${item.id}" data-change="1">+</button>
                         </div>
                     </div>
-                    <button class="btn btn-link text-danger p-0" onclick="removeFromCart('${item.id}')">
-                        <i class="fas fa-trash-alt"></i>
+                    <button class="btn btn-link text-danger p-0 js-remove-item" data-id="${item.id}">
+                        <i class="fas fa-trash-alt pe-none"></i>
                     </button>
                 `;
                 cartItemsContainer.appendChild(cartItem);
@@ -153,5 +151,52 @@ function updateCartDisplay(): void {
         }
     }
 }
-// Initial display update
-updateCartDisplay();
+
+// === Initialization ===
+
+export function initCartSystem(): void {
+    updateCartDisplay();
+
+    // Event Delegation for Cart Items
+    const cartItemsContainer = document.getElementById('cartItems');
+    if (cartItemsContainer) {
+        cartItemsContainer.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+
+            // Handle Update Quantity
+            const updateBtn = target.closest('.js-update-qty');
+            if (updateBtn) {
+                const id = updateBtn.getAttribute('data-id');
+                const change = parseInt(updateBtn.getAttribute('data-change') || '0');
+                if (id) updateQuantity(id, change);
+                return;
+            }
+
+            // Handle Remove Item
+            const removeBtn = target.closest('.js-remove-item');
+            if (removeBtn) {
+                const id = removeBtn.getAttribute('data-id');
+                if (id) removeFromCart(id);
+                return;
+            }
+        });
+    }
+
+    // Checkout Button Listener
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', checkoutWhatsApp);
+    }
+
+    // Global Add to Cart Delegation (for static buttons)
+    document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const addToCartBtn = target.closest('.js-add-to-cart');
+        if (addToCartBtn) {
+            e.preventDefault(); // Prevent default if it's a link (though usually button)
+            e.stopPropagation();
+            const id = addToCartBtn.getAttribute('data-id');
+            if (id) addToCart(id);
+        }
+    });
+}

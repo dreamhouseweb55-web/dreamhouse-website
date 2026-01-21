@@ -1,7 +1,7 @@
 // ===== التشغيل الرئيسي =====
 import { initScrollAnimations, initLazyLoading, initContactForm, initCounters } from './ui';
 import { initProductsSystem } from './products';
-import './cart'; // Initialize cart
+import { initCartSystem } from './cart'; // Initialize cart
 
 document.addEventListener('DOMContentLoaded', function () {
     // initNavbar(); // Handled by Bootstrap now
@@ -12,4 +12,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // تهيئة نظام المنتجات
     initProductsSystem();
+    initCartSystem();
 });

@@ -13,13 +13,13 @@ title: {{ products_page.hero.title }}
   <div class="row justify-content-center mb-5">
     <div class="col-md-10">
       <div class="d-flex justify-content-center flex-wrap gap-2" role="group" aria-label="Product Categories">
-          <button type="button" class="btn btn-outline-primary active rounded-pill px-4" onclick="filterProducts('all', this)">الكل</button>
-          <button type="button" class="btn btn-outline-primary rounded-pill px-4" onclick="filterProducts('bedrooms', this)">غرف نوم</button>
-          <button type="button" class="btn btn-outline-primary rounded-pill px-4" onclick="filterProducts('kids-bedrooms', this)">غرف أطفال</button>
-          <button type="button" class="btn btn-outline-primary rounded-pill px-4" onclick="filterProducts('sofas', this)">أنتريهات</button>
-          <button type="button" class="btn btn-outline-primary rounded-pill px-4" onclick="filterProducts('corners', this)">ركنات</button>
-          <button type="button" class="btn btn-outline-primary rounded-pill px-4" onclick="filterProducts('dining', this)">سفرة</button>
-          <button type="button" class="btn btn-outline-primary rounded-pill px-4" onclick="filterProducts('kitchens', this)">مطابخ</button>
+          <button type="button" class="btn btn-outline-primary active rounded-pill px-4 js-filter-btn" data-filter="all">الكل</button>
+          <button type="button" class="btn btn-outline-primary rounded-pill px-4 js-filter-btn" data-filter="bedrooms">غرف نوم</button>
+          <button type="button" class="btn btn-outline-primary rounded-pill px-4 js-filter-btn" data-filter="kids-bedrooms">غرف أطفال</button>
+          <button type="button" class="btn btn-outline-primary rounded-pill px-4 js-filter-btn" data-filter="sofas">أنتريهات</button>
+          <button type="button" class="btn btn-outline-primary rounded-pill px-4 js-filter-btn" data-filter="corners">ركنات</button>
+          <button type="button" class="btn btn-outline-primary rounded-pill px-4 js-filter-btn" data-filter="dining">سفرة</button>
+          <button type="button" class="btn btn-outline-primary rounded-pill px-4 js-filter-btn" data-filter="kitchens">مطابخ</button>
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@ title: {{ products_page.hero.title }}
           <p class="text-muted small mb-3 line-clamp-2">{{ product.description }}</p>
           
           <div class="d-flex align-items-center justify-content-between mt-auto pt-3 border-top border-light">
-             <button class="btn btn-primary btn-sm rounded-pill px-3" onclick="event.stopPropagation(); addToCart('{{ product.id }}')" style="z-index: 2; position: relative;">
+             <button class="btn btn-primary btn-sm rounded-pill px-3 js-add-to-cart" data-id="{{ product.id }}" style="z-index: 2; position: relative;">
                 <i class="fas fa-shopping-cart me-2"></i> أضف للسلة
              </button>
              <small class="text-muted">
