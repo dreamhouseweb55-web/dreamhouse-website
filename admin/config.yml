@@ -22,7 +22,10 @@ collections:
           - {label: "اسم الموقع بالإنجليزي", name: "siteNameEn", widget: "string"}
           - {label: "الشعار", name: "tagline", widget: "string"}
           - {label: "الوصف", name: "description", widget: "text"}
+          - {label: "الوصف", name: "description", widget: "text"}
           - {label: "الكلمات المفتاحية", name: "keywords", widget: "string"}
+          - {label: "اللوجو (أبيض - للخلفيات الغامقة)", name: "logoWhite", widget: "image"}
+          - {label: "اللوجو (أسود - للخلفيات الفاتحة)", name: "logoDark", widget: "image"}
           
           - label: "معلومات التواصل"
             name: "contact"
