@@ -1,11 +1,12 @@
 # Node modules
 node_modules/
 
-# Build output
+# Build outputs
 _site/
-dist/
+*.html.backup
 
-# OS files
+# Dependencies
+node_modules/
 .DS_Store
 Thumbs.db
 

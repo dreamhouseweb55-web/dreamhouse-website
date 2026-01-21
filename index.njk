@@ -101,8 +101,8 @@
   <nav class="navbar">
     <div class="navbar-container">
       <div class="navbar-logo">
-        <img src="images/logo.png" alt="دريم هاوس - Dream House Logo" width="50" height="50">
-        <span class="navbar-brand">دريم هاوس</span>
+        <img src="images/logo.png" alt="{{ settings.siteName}} - {{ settings.siteNameEn }} Logo" width="50" height="50">
+        <span class="navbar-brand">{{ settings.siteName }}</span>
       </div>
       
       <button class="navbar-toggle" aria-label="فتح القائمة">
@@ -123,68 +123,30 @@
   <!-- ===== القسم الرئيسي (Hero) ===== -->
   <section class="hero">
     <div class="hero-content">
-      <h1 class="hero-title">دريم هاوس</h1>
-      <p class="hero-subtitle">تجربة تسوق أثاث فريدة مع ضمان 5 سنوات</p>
+      <h1 class="hero-title">{{ home.hero.title }}</h1>
+      <p class="hero-subtitle">{{ home.hero.subtitle }}</p>
       <div class="hero-buttons">
-        <a href="products.html" class="btn btn-gold">تصفح المنتجات</a>
-        <a href="contact.html" class="btn btn-secondary">اتصل بنا</a>
+        <a href="{{ home.hero.cta.primary.link }}" class="btn btn-gold">{{ home.hero.cta.primary.text }}</a>
+        <a href="{{ home.hero.cta.secondary.link }}" class="btn btn-secondary">{{ home.hero.cta.secondary.text }}</a>
       </div>
     </div>
   </section>
 
   <!-- ===== قسم المميزات ===== -->
   <section class="section" id="features">
-    <h2 class="section-title">لماذا دريم هاوس؟</h2>
-    <p class="section-subtitle">نقدم لك أفضل تجربة شراء أثاث في مصر</p>
+    <h2 class="section-title">{{ home.features.sectionTitle }}</h2>
+    <p class="section-subtitle">{{ home.features.sectionSubtitle }}</p>
     
     <div class="features-grid">
+    {% for feature in home.features.items %}
       <div class="feature-card">
         <div class="feature-icon">
-          <i class="fas fa-award"></i>
+          <i class="{{ feature.icon }}"></i>
         </div>
-        <h3 class="feature-title">خبرة 5 سنوات</h3>
-        <p class="feature-description">خبرة طويلة في مجال الأثاث والمفروشات مع آلاف العملاء الراضين</p>
+        <h3 class="feature-title">{{ feature.title }}</h3>
+        <p class="feature-description">{{ feature.description }}</p>
       </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-        <h3 class="feature-title">ضمان 5 سنوات</h3>
-        <p class="feature-description">ضمان حقيقي على الأخشاب وكثافة الإسفنج يعكس ثقتنا المطلقة في منتجاتنا</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-tags"></i>
-        </div>
-        <h3 class="feature-title">أسعار تنافسية</h3>
-        <p class="feature-description">عروض قوية وحقيقية (3 غرف - 4 غرف) بأفضل الأسعار في السوق</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-truck"></i>
-        </div>
-        <h3 class="feature-title">تسليم سريع</h3>
-        <p class="feature-description">تسليم المنتجات خلال 48 ساعة فقط من التعاقد</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-shipping-fast"></i>
-        </div>
-        <h3 class="feature-title">توصيل مجاني</h3>
-        <p class="feature-description">توصيل وتركيب مجاني داخل القاهرة الكبرى</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">
-          <i class="fas fa-check-circle"></i>
-        </div>
-        <h3 class="feature-title">جودة مضمونة</h3>
-        <p class="feature-description">منتجات عالية الجودة من أفضل المصانع المصرية</p>
-      </div>
+    {% endfor %}
     </div>
   </section>
 

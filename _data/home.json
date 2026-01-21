@@ -1,0 +1,77 @@
+{
+    "hero": {
+        "title": "دريم هاوس",
+        "subtitle": "تجربة تسوق أثاث فريدة مع ضمان 5 سنوات",
+        "cta": {
+            "primary": {
+                "text": "تصفح المنتجات",
+                "link": "products.html"
+            },
+            "secondary": {
+                "text": "اتصل بنا",
+                "link": "contact.html"
+            }
+        }
+    },
+    "features": {
+        "sectionTitle": "لماذا دريم هاوس؟",
+        "sectionSubtitle": "نقدم لك أفضل تجربة شراء أثاث في مصر",
+        "items": [
+            {
+                "icon": "fas fa-award",
+                "title": "خبرة 5 سنوات",
+                "description": "خبرة طويلة في مجال الأثاث والمفروشات مع آلاف العملاء الراضين"
+            },
+            {
+                "icon": "fas fa-shield-alt",
+                "title": "ضمان 5 سنوات",
+                "description": "ضمان حقيقي على الأخشاب وكثافة الإسفنج يعكس ثقتنا المطلقة في منتجاتنا"
+            },
+            {
+                "icon": "fas fa-tags",
+                "title": "أسعار تنافسية",
+                "description": "عروض قوية وحقيقية (3 غرف - 4 غرف) بأفضل الأسعار في السوق"
+            },
+            {
+                "icon": "fas fa-truck",
+                "title": "تسليم سريع",
+                "description": "تسليم المنتجات خلال 48 ساعة فقط من التعاقد"
+            },
+            {
+                "icon": "fas fa-shipping-fast",
+                "title": "توصيل مجاني",
+                "description": "توصيل وتركيب مجاني داخل القاهرة الكبرى"
+            },
+            {
+                "icon": "fas fa-check-circle",
+                "title": "جودة مضمونة",
+                "description": "منتجات عالية الجودة من أفضل المصانع المصرية"
+            }
+        ]
+    },
+    "stats": {
+        "sectionTitle": "إنجازاتنا بالأرقام",
+        "items": [
+            {
+                "icon": "fas fa-users",
+                "number": 5000,
+                "label": "عميل راضٍ"
+            },
+            {
+                "icon": "fas fa-calendar-alt",
+                "number": 5,
+                "label": "سنوات خبرة"
+            },
+            {
+                "icon": "fas fa-store",
+                "number": 3,
+                "label": "فروع في مصر"
+            },
+            {
+                "icon": "fas fa-box",
+                "number": 500,
+                "label": "منتج متنوع"
+            }
+        ]
+    }
+}

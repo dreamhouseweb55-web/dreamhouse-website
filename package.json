@@ -1,0 +1,21 @@
+{
+  "name": "dreamhouse-website",
+  "version": "1.0.0",
+  "description": "Dream House Furniture Store - دريم هاوس معرض أثاث",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "start": "eleventy --serve"
+  },
+  "keywords": [
+    "furniture",
+    "egypt",
+    "ecommerce"
+  ],
+  "author": "Dream House",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  },
+  "dependencies": {}
+}

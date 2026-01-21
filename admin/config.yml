@@ -3,20 +3,135 @@ backend:
   branch: main # اسم الفرع الرئيسي في GitHub
 
 media_folder: "images" # المجلد الذي سيبحث فيه عن الصور
-public_folder: "images" # المسار العام للصور
+public_folder: "/images" # المسار العام للصور
 
 collections:
-  - name: "products" # اسم المجموعة برمجياً
-    label: "المنتجات" # الاسم الظاهر للموظف
+  # ===== الإعدادات العامة =====
+  - name: "settings"
+    label: "الإعدادات العامة"
+    files:
+      - name: "general_settings"
+        label: "الإعدادات الأساسية"
+        file: "_data/settings.json"
+        description: "التحكم في البيانات العامة للموقع"
+        fields:
+          - {label: "اسم الموقع بالعربي", name: "siteName", widget: "string"}
+          - {label: "اسم الموقع بالإنجليزي", name: "siteNameEn", widget: "string"}
+          - {label: "الشعار", name: "tagline", widget: "string"}
+          - {label: "الوصف", name: "description", widget: "text"}
+          - {label: "الكلمات المفتاحية", name: "keywords", widget: "string"}
+          
+          - label: "معلومات التواصل"
+            name: "contact"
+            widget: "object"
+            fields:
+              - {label: "رقم الهاتف", name: "phone", widget: "string"}
+              - {label: "واتساب (أرقام فقط)", name: "whatsapp", widget: "string"}
+              - {label: "البريد الإلكتروني", name: "email", widget: "string"}
+          
+          - label: "روابط السوشيال ميديا"
+            name: "social"
+            widget: "object"
+            fields:
+              - {label: "فيسبوك", name: "facebook", widget: "string"}
+              - {label: "إنستجرام", name: "instagram", widget: "string"}
+              - {label: "تيك توك", name: "tiktok", widget: "string"}
+          
+          - label: "معلومات التذييل"
+            name: "footer"
+            widget: "object"
+            fields:
+              - {label: "نص عن الشركة", name: "aboutText", widget: "text"}
+              - {label: "حقوق النشر", name: "copyright", widget: "string"}
+              - {label: "صمم بواسطة", name: "credits", widget: "string"}
+
+  # ===== صفحات الموقع =====
+  - name: "pages"
+    label: "صفحات الموقع"
+    files:
+      - name: "home_page"
+        label: "الصفحة الرئيسية"
+        file: "_data/home.json"
+        description: "محتوى الصفحة الرئيسية"
+        fields:
+          - label: "قسم Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
+              - label: "الأزرار"
+                name: "cta"
+                widget: "object"
+                fields:
+                  - label: "الزر الأول"
+                    name: "primary"
+                    widget: "object"
+                    fields:
+                      - {label: "النص", name: "text", widget: "string"}
+                      - {label: "الرابط", name: "link", widget: "string"}
+                  - label: "الزر الثاني"
+                    name: "secondary"
+                    widget: "object"
+                    fields:
+                      - {label: "النص", name: "text", widget: "string"}
+                      - {label: "الرابط", name: "link", widget: "string"}
+          
+          - label: "قسم المميزات"
+            name: "features"
+            widget: "object"
+            fields:
+              - {label: "عنوان القسم", name: "sectionTitle", widget: "string"}
+              - {label: "وصف القسم", name: "sectionSubtitle", widget: "string"}
+              - label: "المميزات"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "أيقونة (Font Awesome class)", name: "icon", widget: "string"}
+                  - {label: "العنوان", name: "title", widget: "string"}
+                  - {label: "الوصف", name: "description", widget: "text"}
+          
+          - label: "قسم الإحصائيات"
+            name: "stats"
+            widget: "object"
+            fields:
+              - {label: "عنوان القسم", name: "sectionTitle", widget: "string"}
+              - label: "الإحصائيات"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "أيقونة", name: "icon", widget: "string"}
+                  - {label: "الرقم", name: "number", widget: "number"}
+                  - {label: "الوصف", name: "label", widget: "string"}
+      
+      - name: "branches"
+        label: "الفروع"
+        file: "_data/branches.json"
+        description: "معلومات الفروع"
+        fields:
+          - label: "الفروع"
+            name: "branches"
+            widget: "list"
+            fields:
+              - {label: "اسم الفرع", name: "name", widget: "string"}
+              - {label: "العنوان", name: "location", widget: "string"}
+              - {label: "ساعات العمل", name: "hours", widget: "text"}
+              - {label: "رقم الهاتف", name: "phone", widget: "string", required: false}
+              - {label: "أيقونة", name: "icon", widget: "string", default: "fas fa-map-marker-alt"}
+              - {label: "فرع جديد؟", name: "isNew", widget: "boolean", required: false, default: false}
+
+  # ===== المنتجات =====
+  - name: "products"
+    label: "المنتجات"
     files:
       - name: "all_products"
         label: "كل المنتجات"
-        file: "data/products.json" # الملف الذي سيتم التعديل عليه
+        file: "data/products.json"
         description: "إدارة جميع منتجات المعرض"
         fields:
           - name: "products"
             label: "قائمة المنتجات"
-            widget: "list" # يسمح بإضافة عناصر متعددة
+            widget: "list"
             fields:
               - {label: "كود المنتج (ID)", name: "id", widget: "string", hint: "يجب أن يكون مميزاً بالانجليزية (ex: bed-005)"}
               - {label: "اسم المنتج", name: "name", widget: "string"}
