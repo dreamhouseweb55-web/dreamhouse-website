@@ -2,6 +2,67 @@
 permalink: styles.css
 ---
 {% include "src/css/variables.css" %}
-{% include "src/css/base.css" %}
-{% include "src/css/layout.css" %}
-{% include "src/css/components.css" %}
+
+/* Custom Overrides on top of Bootstrap */
+:root {
+    --primary-wood: #5D4037;
+    --primary-wood-light: #8D6E63;
+    --gold-accent: #D4AF37;
+    font-family: 'Tajawal', 'Cairo', sans-serif;
+}
+
+body {
+    direction: rtl;
+    text-align: right;
+    font-family: var(--font-primary, 'Tajawal', sans-serif);
+    background-color: #f8f9fa; /* Bootstrap light gray */
+}
+
+a { text-decoration: none; }
+
+/* Navbar Overrides */
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,0.9);
+    font-weight: 500;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--gold-accent);
+}
+
+/* Card Hover Effect */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* Group Hover Effect for Products */
+.group-hover-effect:hover .product-image img {
+    transform: scale(1.05);
+}
+.transition-transform {
+    transition: transform 0.5s ease;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-wood);
+    border-color: var(--primary-wood);
+}
+.btn-primary:hover {
+    background-color: #4E342E;
+    border-color: #4E342E;
+}
+.btn-warning {
+    background-color: var(--gold-accent);
+    border-color: var(--gold-accent);
+    color: #fff;
+}
+.btn-warning:hover {
+    background-color: #C49F30;
+    border-color: #C49F30;
+    color: #fff;
+}
+
