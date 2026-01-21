@@ -21,7 +21,7 @@ title: "{{ product.name }}"
     <!-- Product Image -->
     <div class="product-details-image">
       <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 2px solid var(--gold-accent);">
-        <img src="/{{ product.image }}" alt="{{ product.name }}" style="width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 4/3;">
+        <img src="/{{ product.image }}" alt="{{ product.image_alt or product.name }}" style="width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 4/3;">
       </div>
     </div>
 
@@ -40,9 +40,13 @@ title: "{{ product.name }}"
         <span class="feature-badge" style="background: var(--primary-wood); color: white;">متاح الآن</span>
       </div>
 
-      <p style="font-size: 1.1rem; color: var(--light-text); line-height: 1.8; margin-bottom: var(--spacing-lg);">
-        {{ product.description }}
-      </p>
+      <div style="font-size: 1.1rem; color: var(--light-text); line-height: 1.8; margin-bottom: var(--spacing-lg);">
+        {% if product.long_description %}
+            {{ product.long_description | safe }}
+        {% else %}
+            {{ product.description }}
+        {% endif %}
+      </div>
 
       {% if product.features %}
       <div style="margin-bottom: var(--spacing-lg);">

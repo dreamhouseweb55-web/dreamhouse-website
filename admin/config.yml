@@ -212,5 +212,7 @@ collections:
                   {label: "مطابخ", value: "kitchens"}
                 ]}
               - {label: "صورة المنتج", name: "image", widget: "image"}
-              - {label: "الوصف", name: "description", widget: "text"}
+              - {label: "نص بديل للصورة (SEO)", name: "image_alt", widget: "string", required: false, hint: "وصف الصورة لمحركات البحث"}
+              - {label: "الوصف المختصر", name: "description", widget: "text"}
+              - {label: "الوصف التفصيلي (SEO)", name: "long_description", widget: "markdown", required: false, hint: "وصف كامل للمنتج يظهر في صفحة التفاصيل"}
               - {label: "المميزات", name: "features", widget: "list", field: {label: "الميزة", name: "feature_item", widget: "string"}}
