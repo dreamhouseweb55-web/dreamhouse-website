@@ -901,10 +901,9 @@ a:hover {
 
 
 /* ===== View Transitions ===== */
-/* ===== View Transitions (Disabled for stability) ===== */
-/* @view-transition {
+@view-transition {
   navigation: auto;
-} */
+}
 
 /* ===== Utilities for Card Interactivity ===== */
 .product-card {

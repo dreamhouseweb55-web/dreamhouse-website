@@ -204,70 +204,48 @@ async function loadProductsData() {
 }
 
 function renderProducts(category) {
+  // تم التعديل: بدلاً من إعادة بناء العناصر (الذي يحذف الروابط)، نقوم فقط بإخفاء/إظهار العناصر الموجودة
+  const productCards = document.querySelectorAll('.product-card');
+
+  productCards.forEach(card => {
+    const cardCategory = card.getAttribute('data-category');
+
+    if (category === 'all' || cardCategory === category) {
+      card.style.display = 'block';
+      // إعادة تفعيل الأنيميشن
+      card.style.animation = 'none';
+      card.offsetHeight; /* trigger reflow */
+      card.style.animation = 'fadeInUp 0.5s ease forwards';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  // التحقق من وجود منتجات
+  const visibleCards = document.querySelectorAll('.product-card[style*="block"]');
   const container = document.getElementById('products-container');
-  if (!container) return;
+  const noProductsMsg = document.getElementById('no-products-msg');
 
-  container.innerHTML = '';
-
-  // إذا لم يتم تحميل المنتجات بعد
-  if (products.length === 0) {
-    container.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--gold-accent);">
-                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 15px;"></i>
-                <p>جاري تحميل المنتجات...</p>
-            </div>
-        `;
-    return;
-  }
-
-  let filteredProducts = products;
-  if (category !== 'all') {
-    filteredProducts = products.filter(product => product.category === category);
-  }
-
-  if (filteredProducts.length === 0) {
-    container.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #777;">
+  if (visibleCards.length === 0 && category !== 'all') { // check category to avoid showing empty msg on initial load race condition
+    if (!noProductsMsg && container) {
+      const msg = document.createElement('div');
+      msg.id = 'no-products-msg';
+      msg.style.gridColumn = '1/-1';
+      msg.style.textAlign = 'center';
+      msg.style.padding = '50px';
+      msg.innerHTML = `
+            <div style="color: #777;">
                 <i class="fas fa-box-open" style="font-size: 3rem; margin-bottom: 15px;"></i>
                 <p>عذراً، لا توجد منتجات في هذا القسم حالياً.</p>
             </div>
-        `;
-    return;
-  }
-
-  filteredProducts.forEach(product => {
-    const productCard = document.createElement('div');
-    productCard.className = 'product-card';
-    // إضافة أنيميشن الظهور
-    productCard.style.animation = 'fadeInUp 0.5s ease forwards';
-
-    const featuresHtml = product.features ? product.features.map(f => `<span class="feature-badge">${f}</span>`).join('') : '';
-
-    // التحقق من صحة مسار الصورة - التأكد من المسار المطلق
-    let imgPath = product.image || '/images/logo.png';
-    if (!imgPath.startsWith('/') && !imgPath.startsWith('http')) {
-      imgPath = '/' + imgPath;
+         `;
+      container.appendChild(msg);
+    } else if (noProductsMsg) {
+      noProductsMsg.style.display = 'block';
     }
-
-    productCard.innerHTML = `
-            <div class="product-image" style="background-image: url('${imgPath}'); background-size: cover; background-position: center; height: 250px; position: relative;">
-                <div style="position: absolute; top: 10px; right: 10px; background: var(--gold-accent); color: var(--primary-wood); padding: 5px 10px; border-radius: 4px; font-weight: bold;">
-                    ${product.price ? product.price.toLocaleString() + ' ج.م' : 'تواصل للسعر'}
-                </div>
-            </div>
-            <div class="product-content">
-                <h3 class="product-title">${product.name}</h3>
-                <p class="product-description">${product.description}</p>
-                <div class="product-features">
-                    ${featuresHtml}
-                </div>
-                <button class="btn btn-primary" onclick="addToCart('${product.id}')" style="width: 100%; margin-top: 15px;">
-                    <i class="fas fa-cart-plus"></i> أضف للسلة
-                </button>
-            </div>
-        `;
-    container.appendChild(productCard);
-  });
+  } else if (noProductsMsg) {
+    noProductsMsg.style.display = 'none';
+  }
 }
 
 // دوال السلة (تم جعلها Global لتستدعى من HTML)

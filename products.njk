@@ -68,7 +68,8 @@ title: المنتجات
       <!-- حاوية المنتجات الديناميكية -->
       <div class="products-grid" id="products-container">
         {% for product in products.products %}
-        <div class="product-card" data-category="{{ product.category }}">
+        <div class="product-card" data-category="{{ product.category }}" onclick="window.location.href='/product/{{ product.id | slug }}/'" style="cursor: pointer;">
+            <!-- Removed wrapping anchor from image to avoid nesting issues with JS click -->
             <div class="product-image" style="background-image: url('/{{ product.image }}'); background-size: cover; background-position: center; height: 250px; position: relative;">
                 <div style="position: absolute; top: 10px; right: 10px; background: var(--gold-accent); color: var(--primary-wood); padding: 5px 10px; border-radius: 4px; font-weight: bold;">
                     {{ product.price }} ج.م
@@ -76,16 +77,14 @@ title: المنتجات
             </div>
             
             <div class="product-content">
-                <a href="/product/{{ product.id | slug }}/" class="product-title stretched-link" style="text-decoration: none; color: inherit; display: block;">
-                    <h3>{{ product.name }}</h3>
-                </a>
+                <h3 class="product-title">{{ product.name }}</h3>
                 <p class="product-description">{{ product.description }}</p>
                 <div class="product-features">
                     {% for feature in product.features %}
                     <span class="feature-badge">{{ feature }}</span>
                     {% endfor %}
                 </div>
-                <button class="btn btn-primary" onclick="addToCart('{{ product.id }}')" style="width: 100%; margin-top: 15px; position: relative; z-index: 2;">
+                <button class="btn btn-primary" onclick="event.stopPropagation(); addToCart('{{ product.id }}')" style="width: 100%; margin-top: 15px; position: relative; z-index: 2;">
                     <i class="fas fa-cart-plus"></i> أضف للسلة
                 </button>
             </div>
