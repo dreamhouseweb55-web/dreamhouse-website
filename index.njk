@@ -232,6 +232,41 @@ title: الرئيسية
     </div>
   </section>
 
+  <!-- ===== قسم الفروع (النمط القديم) ===== -->
+  <section class="py-5" id="old-branches">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-3">فروعنا</h2>
+      <p class="text-muted mb-5">قم بزيارة أقرب فرع إليك للتمتع بتجربة تسوق فريدة</p>
+      
+      <div class="row g-4 justify-content-center">
+      {% for branch in branches.branches %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm {% if branch.isNew %}border-warning border-3{% else %}border-0{% endif %}">
+            <div class="card-body p-4">
+                <div class="mb-3 display-1 {% if branch.isNew %}text-warning{% else %}text-primary{% endif %}">
+                    <i class="{{ branch.icon }}"></i>
+                </div>
+                <h3 class="h4 fw-bold mb-3">{{ branch.name }}</h3>
+                <p class="text-muted mb-3">{{ branch.location }}</p>
+                <div class="text-muted small mb-3 border-top pt-3">
+                    {{ branch.hours | nl2br | safe }}
+                </div>
+                
+                {% if branch.isNew %}
+                <span class="btn btn-warning fw-bold w-100 disabled">افتتاح قريب</span>
+                {% else %}
+                <a href="tel:{{ branch.phone }}" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-phone me-2"></i> اتصل بنا
+                </a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </section>
+
   <!-- ===== قسم الفروع ===== -->
   <section class="py-5 bg-light" id="branches">
     <div class="container">
