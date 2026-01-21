@@ -96,7 +96,7 @@ function checkoutWhatsApp(): void {
     message += `%0a*الإجمالي الكلي: ${total.toLocaleString()} ج.م*`;
     message += `%0a%0aيرجى التواصل معي لإتمام الطلب وتحديد موعد التسليم.`;
 
-    const phoneNumber = "201000000000";
+    const phoneNumber = "201125601241"; // رقم دريم هاوس الفعلي
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
 }
 
