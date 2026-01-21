@@ -29,25 +29,23 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-logo">
-                <img src="/images/logo.png" alt="{{ settings.siteName }} Logo" width="50" height="50">
-                <span class="navbar-brand">{{ settings.siteName }}</span>
-            </div>
-            
-            <button class="navbar-toggle" aria-label="فتح القائمة">
-                <i class="fas fa-bars"></i>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background: linear-gradient(180deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%); box-shadow: var(--shadow-lg);">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                <img src="/assets/images/logo.png" alt="Logo" height="50">
+                <span style="font-family: 'Playfair Display', serif; font-weight: 700;">دريم هاوس</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            
-            <ul class="navbar-menu">
-                <li><a href="/">الرئيسية</a></li>
-                <li><a href="/about/">من نحن</a></li>
-                <li><a href="/products/">المنتجات</a></li>
-                <li><a href="/offers.html">العروض الخاصة</a></li>
-                <li><a href="/branches/">الفروع</a></li>
-                <li><a href="/contact.html">اتصل بنا</a></li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/products/">المنتجات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#about">من نحن</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#contact">اتصل بنا</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -55,38 +53,40 @@
         {{ content | safe }}
     </main>
 
-    <!-- Global Cart Elements -->
-    <div class="cart-floating-btn" id="cartFloatingBtn">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-count">0</span>
+    <!-- Cart Offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+        <div class="offcanvas-header text-white" style="background-color: var(--primary-wood);">
+            <h5 class="offcanvas-title" id="cartSidebarLabel">سلة المشتريات</h5>
+            <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column p-0">
+            <div id="cartItems" class="flex-grow-1 p-3 overflow-auto">
+                <!-- Cart Items will be injected here -->
+            </div>
+            <div class="border-top p-3 bg-light">
+                <div class="d-flex justify-content-between mb-3 fw-bold text-dark h5">
+                    <span>الإجمالي:</span>
+                    <span class="total-price text-primary">0 ج.م</span>
+                </div>
+                <button class="btn w-100 btn-success d-flex align-items-center justify-content-center gap-2 py-2" onclick="checkoutWhatsApp()">
+                    <i class="fab fa-whatsapp fa-lg"></i>
+                    <span>إتمام الطلب عبر واتساب</span>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="whatsapp-floating-btn" target="_blank" aria-label="تواصل معنا عبر واتساب">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
-            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="cart-items" id="cartItems">
-             <div class="empty-cart-msg">
-                <i class="fas fa-shopping-basket"></i>
-                <p>السلة فارغة حالياً</p>
-                <button class="btn btn-primary" onclick="closeCart()">تصفح المنتجات</button>
-            </div>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>الإجمالي:</span>
-                <span class="total-price">0 ج.م</span>
-            </div>
-            <button class="btn btn-whatsapp-checkout" onclick="checkoutWhatsApp()">
-                <i class="fab fa-whatsapp"></i> إتمام الطلب عبر واتساب
-            </button>
-        </div>
+    <!-- Floating Buttons -->
+    <div class="position-fixed bottom-0 start-0 m-4 d-flex flex-column gap-3" style="z-index: 1050;">
+        <a href="https://wa.me/201000000000" target="_blank" class="btn btn-success rounded-circle d-flex align-items-center justify-content-center shadow-lg" style="width: 60px; height: 60px;">
+            <i class="fab fa-whatsapp fa-2x"></i>
+        </a>
+        <button class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center shadow-lg position-relative" style="width: 60px; height: 60px; background-color: var(--gold-accent); border:none;" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+            <i class="fas fa-shopping-cart fa-lg text-dark"></i>
+            <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                0
+            </span>
+        </button>
     </div>
     <div class="cart-overlay" id="cartOverlay"></div>
 
