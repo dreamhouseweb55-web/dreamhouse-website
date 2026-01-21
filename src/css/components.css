@@ -296,27 +296,29 @@
         right: 0;
     }
 
+    /* Fix Floating Buttons Overlap */
     .cart-floating-btn,
     .whatsapp-floating-btn,
     [dir='rtl'] .cart-floating-btn,
     [dir='rtl'] .whatsapp-floating-btn {
         width: 50px;
         height: 50px;
-        font-size: 1.5rem;
-        right: 20px;
-        left: auto;
+        font-size: 1.4rem;
+        left: 20px;
+        /* Standardize left side for RTL mobile */
+        right: auto;
+        z-index: 9999;
     }
 
-    [dir='rtl'] .cart-floating-btn,
-    [dir='rtl'] .whatsapp-floating-btn {
-        right: auto;
-        left: 20px;
+    .cart-floating-btn,
+    [dir='rtl'] .cart-floating-btn {
         bottom: 20px;
     }
 
     .whatsapp-floating-btn,
     [dir='rtl'] .whatsapp-floating-btn {
-        bottom: 80px;
+        bottom: 85px;
+        /* 20px + 50px + 15px gap */
     }
 
     .navbar-menu li {

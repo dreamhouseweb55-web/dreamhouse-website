@@ -240,17 +240,40 @@
         flex-direction: column;
         position: absolute;
         top: 100%;
-        right: 0;
         left: 0;
+        right: 0;
         background: var(--primary-wood);
-        padding: var(--spacing-md);
-        box-shadow: var(--shadow-lg);
+        padding: 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         width: 100%;
-        box-sizing: border-box;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        z-index: 1000;
     }
 
     .navbar-menu.active {
         display: flex;
+        max-height: 500px;
+        /* Adjust based on content */
+        padding: var(--spacing-sm) 0;
+    }
+
+    .navbar-menu li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    .navbar-menu li a {
+        display: block;
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+    }
+
+    .navbar-menu li:last-child a {
+        border-bottom: none;
     }
 
     .navbar-toggle {
@@ -258,46 +281,28 @@
     }
 
     .hero {
-        height: 400px;
-        /* Reduced further for mobile */
+        height: auto;
+        min-height: 400px;
+        padding: 60px 0;
     }
 
     .hero-title {
         font-size: 2rem;
-        /* Smaller font */
-    }
-
-    .hero-subtitle {
-        font-size: 1.1rem;
     }
 
     .hero-buttons {
         flex-direction: column;
         width: 100%;
-        padding: 0 var(--spacing-lg);
+        max-width: 300px;
+        margin: 0 auto;
     }
 
-    h1 {
-        font-size: 1.75rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    h3 {
-        font-size: 1.25rem;
-    }
-
-    .section-title {
-        font-size: 1.75rem;
-    }
-
+    /* Better Grid for Tablets */
     .features-grid>*,
     .products-grid>* {
-        flex: 1 1 100%;
-        /* Full width cards on mobile */
-        max-width: 100%;
+        flex: 0 1 calc(50% - 20px);
+        /* 2 columns */
+        max-width: none;
     }
 
     /* Product Details stacking */
@@ -305,11 +310,18 @@
         grid-template-columns: 1fr;
         gap: var(--spacing-lg);
     }
+}
 
-    .product-details-info .actions button,
-    .product-details-info .actions a {
+@media (max-width: 480px) {
+
+    .features-grid>*,
+    .products-grid>* {
         flex: 1 1 100%;
-        /* Full width buttons */
+        /* 1 column on small screens */
+    }
+
+    .hero-title {
+        font-size: 1.75rem;
     }
 }
 
