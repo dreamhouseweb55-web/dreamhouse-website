@@ -17,6 +17,7 @@ module.exports = function (eleventyConfig) {
       includes: "_includes",
       data: "_data"
     },
+    pathPrefix: "/dreamhouse-website/",
     templateFormats: ["html", "njk", "md"],
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk"
