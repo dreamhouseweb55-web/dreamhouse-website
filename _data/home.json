@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "دريم هاوس",
-    "image": "/images/offer-main.jpg",
+    "image": "/images/offer-main.webp",
     "subtitle": "تجربة تسوق أثاث فريدة مع ضمان 5 سنوات",
     "cta": {
       "primary": {
@@ -55,7 +55,7 @@
     "subtitle": "خشب زان يتحمل الفيلة!",
     "badge": "جودة لا تضاهى",
     "description": "إحنا مش بس بنبيع شكل حلو، إحنا بنبيع متانة تعيش معاك العمر كله. منتجاتنا مصممة عشان تستحمل أصعب الظروف، لأننا بنستخدم أجود أنواع الأخشاب الطبيعية وكثافة إسفنج عالية جداً. استثمر في أثاث يعيش، مش أثاث يترمي.",
-    "image": "/images/hero-elephant.jpg",
+    "image": "/images/hero-elephant.webp",
     "buttonText": "اقرأ المزيد عن جودتنا",
     "buttonLink": "/about/"
   },
