@@ -1,0 +1,33 @@
+{
+    "hero": {
+        "title": "منتجاتنا",
+        "subtitle": "اكتشف تشكيلة واسعة من الأثاث الفاخر"
+    },
+    "categories": {
+        "title": "تصفح حسب الفئة"
+    },
+    "whyUs": {
+        "title": "لماذا تختار منتجاتنا؟",
+        "items": [
+            {
+                "icon": "fas fa-check-double",
+                "title": "جودة مضمونة",
+                "description": "جميع منتجاتنا مصنوعة من أجود الخامات"
+            },
+            {
+                "icon": "fas fa-palette",
+                "title": "تصاميم متنوعة",
+                "description": "تشكيلة واسعة لتناسب جميع الأذواق"
+            },
+            {
+                "icon": "fas fa-money-bill-wave",
+                "title": "أسعار تنافسية",
+                "description": "أفضل قيمة مقابل المال"
+            }
+        ]
+    },
+    "cta": {
+        "offersButton": "العروض الخاصة",
+        "contactButton": "تواصل معنا"
+    }
+}

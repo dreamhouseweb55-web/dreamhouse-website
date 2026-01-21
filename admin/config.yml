@@ -187,6 +187,158 @@ collections:
                   - {label: "الاسم", name: "title", widget: "string"}
                   - {label: "الوظيفة", name: "description", widget: "text"}
 
+      - name: "contact_page"
+        label: "صفحة اتصل بنا"
+        file: "_data/contact_page.json"
+        description: "محتوى صفحة اتصل بنا"
+        fields:
+          - label: "قسم Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
+          - label: "قسم النموذج"
+            name: "formSection"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+          - label: "قسم المعلومات"
+            name: "infoSection"
+            widget: "object"
+            fields:
+              - {label: "عنوان القسم", name: "title", widget: "string"}
+              - {label: "عنوان بطاقة الاتصال", name: "contactCardTitle", widget: "string"}
+              - {label: "نص التوقيت", name: "contactCardText", widget: "string"}
+              - {label: "عنوان بطاقة واتساب", name: "whatsappCardTitle", widget: "string"}
+              - {label: "نص زر واتساب", name: "whatsappButtonText", widget: "string"}
+              - {label: "عنوان بطاقة البريد", name: "emailCardTitle", widget: "string"}
+              - {label: "عنوان السوشيال ميديا", name: "socialTitle", widget: "string"}
+          - label: "قسم الفروع"
+            name: "branchesSection"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+          - label: "الأسئلة الشائعة"
+            name: "faq"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - label: "الأسئلة"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "السؤال", name: "question", widget: "string"}
+                  - {label: "الإجابة", name: "answer", widget: "text"}
+
+      - name: "offers_page"
+        label: "صفحة العروض"
+        file: "_data/offers.json"
+        description: "محتوى صفحة العروض"
+        fields:
+          - label: "قسم Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
+          - label: "تنويه موسمي"
+            name: "seasonalNote"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - {label: "النص", name: "text", widget: "text"}
+          - label: "قسم العروض"
+            name: "offersSection"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - {label: "الوصف", name: "subtitle", widget: "string"}
+              - label: "قائمة العروض"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "اسم العرض", name: "title", widget: "string"}
+                  - {label: "أيقونة", name: "icon", widget: "string"}
+                  - {label: "الوصف", name: "description", widget: "text"}
+                  - {label: "محتويات العرض", name: "includes", widget: "list", fields: [{label: "أيقونة", name: "icon", widget: "string"}, {label: "النص", name: "text", widget: "string"}]}
+                  - {label: "المميزات", name: "features", widget: "list", field: {label: "الميزة", name: "item", widget: "string"}}
+                  - {label: "ملصق السعر", name: "priceLabel", widget: "string"}
+                  - {label: "عرض مميز؟", name: "isSpecial", widget: "boolean", required: false}
+                  - {label: "ملصق التميز", name: "specialLabel", widget: "string", required: false}
+          - label: "لماذا عروضنا"
+            name: "whyUs"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - label: "العناصر"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "أيقونة", name: "icon", widget: "string"}
+                  - {label: "العنوان", name: "title", widget: "string"}
+                  - {label: "الوصف", name: "description", widget: "text"}
+          - label: "الشروط"
+            name: "conditions"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - {label: "عنوان المعلومات", name: "infoTitle", widget: "string"}
+              - {label: "القائمة", name: "items", widget: "list", field: {label: "الشرط", name: "item", widget: "string"}}
+          - label: "CTA"
+            name: "cta"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - {label: "الوصف", name: "subtitle", widget: "string"}
+
+      - name: "branches_page_content"
+        label: "صفحة الفروع (محتوى ثابت)"
+        file: "_data/branches_page.json"
+        description: "العناوين والنصوص في صفحة الفروع"
+        fields:
+          - label: "قسم Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
+
+      - name: "products_page_content"
+        label: "صفحة المنتجات (محتوى ثابت)"
+        file: "_data/products_page.json"
+        description: "العناوين والنصوص الثابتة في صفحة المنتجات"
+        fields:
+          - label: "قسم Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
+          - label: "قسم التصنيفات"
+            name: "categories"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+          - label: "لماذا تختارنا"
+            name: "whyUs"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - label: "العناصر"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "أيقونة", name: "icon", widget: "string"}
+                  - {label: "العنوان", name: "title", widget: "string"}
+                  - {label: "الوصف", name: "description", widget: "text"}
+          - label: "أزرار CTA"
+            name: "cta"
+            widget: "object"
+            fields:
+              - {label: "زر العروض", name: "offersButton", widget: "string"}
+              - {label: "زر التواصل", name: "contactButton", widget: "string"}
+
   # ===== المنتجات =====
   - name: "products"
     label: "المنتجات"
