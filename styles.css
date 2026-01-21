@@ -9,27 +9,38 @@
 /* ===== متغيرات الألوان ===== */
 :root {
   /* الألوان الرئيسية */
-  --primary-wood: #3E2723;        /* بني غامق - لون الخشب */
-  --primary-wood-light: #5D4037;  /* بني فاتح */
-  --primary-wood-dark: #1B0C08;   /* بني داكن جداً */
-  
-  --secondary-white: #FFFFFF;      /* أبيض */
-  --secondary-silver: #C0C0C0;     /* سيلفر */
-  --secondary-silver-light: #E8E8E8; /* سيلفر فاتح */
-  --secondary-silver-dark: #A0A0A0;  /* سيلفر غامق */
-  
+  --primary-wood: #3E2723;
+  /* بني غامق - لون الخشب */
+  --primary-wood-light: #5D4037;
+  /* بني فاتح */
+  --primary-wood-dark: #1B0C08;
+  /* بني داكن جداً */
+
+  --secondary-white: #FFFFFF;
+  /* أبيض */
+  --secondary-silver: #C0C0C0;
+  /* سيلفر */
+  --secondary-silver-light: #E8E8E8;
+  /* سيلفر فاتح */
+  --secondary-silver-dark: #A0A0A0;
+  /* سيلفر غامق */
+
   /* ألوان إضافية */
-  --gold-accent: #D4AF37;          /* ذهبي للتميز */
-  --beige-bg: #F5F5DC;             /* بيج للخلفيات */
-  --dark-text: #212121;            /* نص غامق */
-  --light-text: #757575;           /* نص فاتح */
-  
+  --gold-accent: #D4AF37;
+  /* ذهبي للتميز */
+  --beige-bg: #F5F5DC;
+  /* بيج للخلفيات */
+  --dark-text: #212121;
+  /* نص غامق */
+  --light-text: #757575;
+  /* نص فاتح */
+
   /* الظلال */
   --shadow-sm: 0 2px 4px rgba(62, 39, 35, 0.1);
   --shadow-md: 0 4px 8px rgba(62, 39, 35, 0.15);
   --shadow-lg: 0 8px 16px rgba(62, 39, 35, 0.2);
   --shadow-xl: 0 12px 24px rgba(62, 39, 35, 0.25);
-  
+
   /* المسافات */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -37,13 +48,13 @@
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
   --spacing-2xl: 4rem;
-  
+
   /* حدود الزوايا */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
-  
+
   /* الانتقالات */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
@@ -73,7 +84,12 @@ body {
 }
 
 /* ===== العناوين ===== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--spacing-sm);
@@ -384,11 +400,21 @@ a:hover {
 }
 
 /* ===== بطاقات المميزات ===== */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+/* ===== تم التعديل: استخدام Flexbox للتوسيط ===== */
+.features-grid,
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--spacing-lg);
   margin-top: var(--spacing-xl);
+}
+
+.features-grid>*,
+.products-grid>* {
+  flex: 0 1 300px;
+  max-width: 350px;
+  width: 100%;
 }
 
 .feature-card {
@@ -508,6 +534,7 @@ a:hover {
     opacity: 0;
     transform: translateY(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -519,6 +546,7 @@ a:hover {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -529,6 +557,7 @@ a:hover {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -547,35 +576,35 @@ a:hover {
     padding: var(--spacing-md);
     box-shadow: var(--shadow-lg);
   }
-  
+
   .navbar-menu.active {
     display: flex;
   }
-  
+
   .navbar-toggle {
     display: block;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.2rem;
   }
-  
+
   .hero-buttons {
     flex-direction: column;
   }
-  
+
   h1 {
     font-size: 2rem;
   }
-  
+
   h2 {
     font-size: 1.75rem;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
@@ -592,17 +621,45 @@ a:hover {
   text-align: center;
 }
 
-.mb-1 { margin-bottom: var(--spacing-xs); }
-.mb-2 { margin-bottom: var(--spacing-sm); }
-.mb-3 { margin-bottom: var(--spacing-md); }
-.mb-4 { margin-bottom: var(--spacing-lg); }
-.mb-5 { margin-bottom: var(--spacing-xl); }
+.mb-1 {
+  margin-bottom: var(--spacing-xs);
+}
 
-.mt-1 { margin-top: var(--spacing-xs); }
-.mt-2 { margin-top: var(--spacing-sm); }
-.mt-3 { margin-top: var(--spacing-md); }
-.mt-4 { margin-top: var(--spacing-lg); }
-.mt-5 { margin-top: var(--spacing-xl); }
+.mb-2 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.mb-3 {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-4 {
+  margin-bottom: var(--spacing-lg);
+}
+
+.mb-5 {
+  margin-bottom: var(--spacing-xl);
+}
+
+.mt-1 {
+  margin-top: var(--spacing-xs);
+}
+
+.mt-2 {
+  margin-top: var(--spacing-sm);
+}
+
+.mt-3 {
+  margin-top: var(--spacing-md);
+}
+
+.mt-4 {
+  margin-top: var(--spacing-lg);
+}
+
+.mt-5 {
+  margin-top: var(--spacing-xl);
+}
 
 /* --- ??????? ??? ?????? --- */
 .cart-floating-btn {
@@ -618,7 +675,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   z-index: 999;
   transition: all 0.3s ease;
@@ -658,7 +715,7 @@ a:hover {
   width: 350px;
   height: 100vh;
   background-color: white;
-  box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
   z-index: 1001;
   transition: left 0.4s ease;
   display: flex;
@@ -668,7 +725,7 @@ a:hover {
 [dir='rtl'] .cart-sidebar {
   left: auto;
   right: -400px;
-  box-shadow: -2px 0 15px rgba(0,0,0,0.2);
+  box-shadow: -2px 0 15px rgba(0, 0, 0, 0.2);
   transition: right 0.4s ease;
 }
 
@@ -686,7 +743,7 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   display: none;
   opacity: 0;
@@ -844,11 +901,14 @@ a:hover {
 
 
 /* ===== View Transitions ===== */
-@view-transition { navigation: auto; }
+@view-transition {
+  navigation: auto;
+}
 
 /* ===== Utilities for Card Interactivity ===== */
 .product-card {
-  position: relative; /* Context for stretched-link */
+  position: relative;
+  /* Context for stretched-link */
 }
 
 .stretched-link::after {
