@@ -1,0 +1,30 @@
+# Node modules
+node_modules/
+
+# Build output
+_site/
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+
+# Cache
+.cache/
+.eleventy-cache/
+
+# Temporary files
+*.tmp
+*.temp

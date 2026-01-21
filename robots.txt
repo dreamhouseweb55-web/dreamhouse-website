@@ -1,0 +1,23 @@
+# robots.txt لموقع دريم هاوس - Dream House
+
+User-agent: *
+Allow: /
+
+# السماح بفهرسة جميع الصفحات
+Allow: /index.html
+Allow: /about.html
+Allow: /products.html
+Allow: /offers.html
+Allow: /branches.html
+Allow: /contact.html
+
+# السماح بفهرسة المجلدات
+Allow: /images/
+Allow: /styles.css
+Allow: /script.js
+
+# موقع خريطة الموقع
+Sitemap: https://www.dreamhouse-egypt.com/sitemap.xml
+
+# تحسين الزحف
+Crawl-delay: 1

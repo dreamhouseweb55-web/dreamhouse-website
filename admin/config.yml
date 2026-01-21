@@ -1,0 +1,34 @@
+backend:
+  name: git-gateway
+  branch: main # اسم الفرع الرئيسي في GitHub
+
+media_folder: "images" # المجلد الذي سيبحث فيه عن الصور
+public_folder: "images" # المسار العام للصور
+
+collections:
+  - name: "products" # اسم المجموعة برمجياً
+    label: "المنتجات" # الاسم الظاهر للموظف
+    files:
+      - name: "all_products"
+        label: "كل المنتجات"
+        file: "data/products.json" # الملف الذي سيتم التعديل عليه
+        description: "إدارة جميع منتجات المعرض"
+        fields:
+          - name: "products"
+            label: "قائمة المنتجات"
+            widget: "list" # يسمح بإضافة عناصر متعددة
+            fields:
+              - {label: "كود المنتج (ID)", name: "id", widget: "string", hint: "يجب أن يكون مميزاً بالانجليزية (ex: bed-005)"}
+              - {label: "اسم المنتج", name: "name", widget: "string"}
+              - {label: "السعر", name: "price", widget: "number", value_type: "int"}
+              - {label: "القسم", name: "category", widget: "select", options: [
+                  {label: "غرف نوم رئيسية", value: "bedrooms"},
+                  {label: "غرف نوم أطفال", value: "kids-bedrooms"},
+                  {label: "أنتريهات", value: "sofas"},
+                  {label: "ركنات", value: "corners"},
+                  {label: "غرف سفرة", value: "dining"},
+                  {label: "مطابخ", value: "kitchens"}
+                ]}
+              - {label: "صورة المنتج", name: "image", widget: "image"}
+              - {label: "الوصف", name: "description", widget: "text"}
+              - {label: "المميزات", name: "features", widget: "list", field: {widget: "string"}}

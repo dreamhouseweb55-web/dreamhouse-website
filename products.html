@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>منتجاتنا - دريم هاوس | غرف نوم، أنتريهات، ركنات، مطابخ</title>
+  <meta name="description"
+    content="تصفح مجموعة دريم هاوس المتنوعة من الأثاث: غرف نوم رئيسية وأطفال، أنتريهات أمريكان ومودرن، ركنات، غرف سفرة، مطابخ. جودة عالية وأسعار تنافسية.">
+  <meta name="keywords" content="غرف نوم, انتريهات, ركنات, غرف سفرة, مطابخ, اثاث مودرن, اثاث امريكان">
+  <link rel="canonical" href="https://www.dreamhouse-egypt.com/products.html">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      justify-content: center;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .filter-btn {
+      padding: var(--spacing-sm) var(--spacing-lg);
+      border: 2px solid var(--primary-wood);
+      background: transparent;
+      color: var(--primary-wood);
+      border-radius: var(--radius-md);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-normal);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--primary-wood);
+      color: var(--secondary-white);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <img src="images/logo.png" alt="دريم هاوس Logo" width="50" height="50">
+        <span class="navbar-brand">دريم هاوس</span>
+      </div>
+      <button class="navbar-toggle" aria-label="فتح القائمة">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="navbar-menu">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="about.html">من نحن</a></li>
+        <li><a href="products.html">المنتجات</a></li>
+        <li><a href="offers.html">العروض الخاصة</a></li>
+        <li><a href="branches.html">الفروع</a></li>
+        <li><a href="contact.html">اتصل بنا</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero" style="height: 400px;">
+    <div class="hero-content">
+      <h1 class="hero-title">منتجاتنا</h1>
+      <p class="hero-subtitle">اكتشف تشكيلة واسعة من الأثاث الفاخر</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">تصفح حسب الفئة</h2>
+
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all" onclick="filterProducts('all')">
+          <i class="fas fa-th"></i> جميع المنتجات
+        </button>
+        <button class="filter-btn" data-filter="bedrooms" onclick="filterProducts('bedrooms')">
+          <i class="fas fa-bed"></i> غرف نوم رئيسية
+        </button>
+        <button class="filter-btn" data-filter="kids-bedrooms" onclick="filterProducts('kids-bedrooms')">
+          <i class="fas fa-child"></i> غرف نوم أطفال
+        </button>
+        <button class="filter-btn" data-filter="sofas" onclick="filterProducts('sofas')">
+          <i class="fas fa-couch"></i> أنتريهات
+        </button>
+        <button class="filter-btn" data-filter="corners" onclick="filterProducts('corners')">
+          <i class="fas fa-chair"></i> ركنات
+        </button>
+        <button class="filter-btn" data-filter="dining" onclick="filterProducts('dining')">
+          <i class="fas fa-utensils"></i> غرف سفرة
+        </button>
+        <button class="filter-btn" data-filter="kitchens" onclick="filterProducts('kitchens')">
+          <i class="fas fa-blender"></i> مطابخ
+        </button>
+      </div>
+
+      <!-- حاوية المنتجات الديناميكية -->
+      <div class="products-grid" id="products-container">
+        <!-- سيتم تحميل المنتجات هنا تلقائياً من ملف products.js -->
+        <div style="grid-column: 1/-1; text-align: center; padding: 50px;">
+          <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--gold-accent);"></i>
+          <p>جاري تحميل المنتجات...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- زر عائم للسلة (للموبايل والوصول السريع) -->
+  <div class="cart-floating-btn" id="cartFloatingBtn">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-count">0</span>
+  </div>
+
+  <!-- نافذة سلة التسوق الجانبية -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
+      <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+      <!-- المنتجات المضافة ستظهر هنا -->
+      <div class="empty-cart-msg">
+        <i class="fas fa-shopping-basket"></i>
+        <p>السلة فارغة حالياً</p>
+        <button class="btn btn-primary" onclick="closeCart()">تصفح المنتجات</button>
+      </div>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>الإجمالي:</span>
+        <span class="total-price">0 ج.م</span>
+      </div>
+      <button class="btn btn-whatsapp-checkout" onclick="checkoutWhatsApp()">
+        <i class="fab fa-whatsapp"></i> إتمام الطلب عبر واتساب
+      </button>
+    </div>
+  </div>
+  <div class="cart-overlay" id="cartOverlay"></div>
+
+  <section class="section"
+    style="background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%); color: white;">
+    <div class="container">
+      <h2 class="section-title" style="color: white;">لماذا تختار منتجاتنا؟</h2>
+
+      <div class="features-grid">
+        <div class="feature-card" style="background: rgba(255, 255, 255, 0.1);">
+          <div class="feature-icon" style="color: var(--gold-accent);">
+            <i class="fas fa-check-double"></i>
+          </div>
+          <h3 class="feature-title" style="color: white;">جودة مضمونة</h3>
+          <p class="feature-description" style="color: var(--secondary-silver-light);">جميع منتجاتنا مصنوعة من أجود
+            الخامات</p>
+        </div>
+
+        <div class="feature-card" style="background: rgba(255, 255, 255, 0.1);">
+          <div class="feature-icon" style="color: var(--gold-accent);">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3 class="feature-title" style="color: white;">تصاميم متنوعة</h3>
+          <p class="feature-description" style="color: var(--secondary-silver-light);">تشكيلة واسعة لتناسب جميع الأذواق
+          </p>
+        </div>
+
+        <div class="feature-card" style="background: rgba(255, 255, 255, 0.1);">
+          <div class="feature-icon" style="color: var(--gold-accent);">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+          <h3 class="feature-title" style="color: white;">أسعار تنافسية</h3>
+          <p class="feature-description" style="color: var(--secondary-silver-light);">أفضل قيمة مقابل المال</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--spacing-xl);">
+        <a href="offers.html" class="btn btn-gold" style="margin: 0 var(--spacing-sm);">
+          <i class="fas fa-tags"></i> اطلع على العروض الخاصة
+        </a>
+        <a href="contact.html" class="btn btn-secondary" style="margin: 0 var(--spacing-sm);">
+          <i class="fas fa-phone"></i> تواصل معنا
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>عن دريم هاوس</h3>
+        <p>معرض أثاث رائد في مصر بخبرة 5 سنوات. نقدم أفضل الأثاث المنزلي بأسعار تنافسية وضمان حقيقي 5 سنوات.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/dreamhouse" target="_blank" aria-label="فيسبوك"><i
+              class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/dreamhouse" target="_blank" aria-label="إنستجرام"><i
+              class="fab fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@dreamhouse" target="_blank" aria-label="تيك توك"><i
+              class="fab fa-tiktok"></i></a>
+          <a href="https://wa.me/201000000000" target="_blank" aria-label="واتساب"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>روابط سريعة</h3>
+        <ul>
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="about.html">من نحن</a></li>
+          <li><a href="products.html">المنتجات</a></li>
+          <li><a href="offers.html">العروض الخاصة</a></li>
+          <li><a href="branches.html">الفروع</a></li>
+          <li><a href="contact.html">اتصل بنا</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>منتجاتنا</h3>
+        <ul>
+          <li><a href="products.html#bedrooms">غرف نوم رئيسية</a></li>
+          <li><a href="products.html#kids-bedrooms">غرف نوم أطفال</a></li>
+          <li><a href="products.html#sofas">أنتريهات</a></li>
+          <li><a href="products.html#corners">ركنات</a></li>
+          <li><a href="products.html#dining">غرف سفرة</a></li>
+          <li><a href="products.html#kitchens">مطابخ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>تواصل معنا</h3>
+        <ul>
+          <li><i class="fas fa-phone"></i> +20 100 000 0000</li>
+          <li><i class="fas fa-envelope"></i> info@dreamhouse-egypt.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> مدينة نصر، القاهرة</li>
+          <li><i class="fas fa-map-marker-alt"></i> 6 أكتوبر، الجيزة</li>
+          <li><i class="fas fa-clock"></i> السبت - الخميس: 10 ص - 10 م</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2024 دريم هاوس - Dream House. جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
+
+  <!-- script.js الآن يحمل البيانات بنفسه -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
