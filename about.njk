@@ -1,0 +1,106 @@
+---
+layout: base.njk
+title: من نحن
+---
+  <section class="hero" style="height: 400px;">
+    <div class="hero-content">
+      <h1 class="hero-title">{{ about.hero.title }}</h1>
+      <p class="hero-subtitle">{{ about.hero.subtitle }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">{{ about.intro.title }}</h2>
+
+      <div style="max-width: 800px; margin: 0 auto; text-align: center; margin-bottom: var(--spacing-xl);">
+        <p style="font-size: 1.2rem; line-height: 1.8; color: var(--dark-text); margin-bottom: var(--spacing-md);">
+          {{ about.intro.description }}
+        </p>
+      </div>
+
+      <div class="features-grid">
+      {% for item in about.visionValues %}
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="{{ item.icon }}"></i>
+          </div>
+          <h3 class="feature-title">{{ item.title }}</h3>
+          <p class="feature-description">{{ item.description }}</p>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--beige-bg);">
+    <div class="container">
+      <h2 class="section-title">{{ about.whyUs.title }}</h2>
+
+      <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+      {% for item in about.whyUs.items %}
+        <div class="feature-card">
+          <h3 class="feature-title">
+            <i class="{{ item.icon }}" style="color: var(--gold-accent); margin-left: 10px;"></i>
+            {{ item.title }}
+          </h3>
+          <p class="feature-description">{{ item.description }}</p>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">{{ about.timeline.title }}</h2>
+
+      <div style="max-width: 900px; margin: 0 auto;">
+      {% for item in about.timeline.items %}
+        <div class="feature-card" style="margin-bottom: var(--spacing-lg); {% if loop.last %}border: 3px solid var(--gold-accent);{% endif %}">
+          <h3 class="feature-title" style="color: var(--gold-accent);">
+            <i class="fas fa-calendar-alt"></i> {{ item.year }} - {{ item.title }}
+          </h3>
+          <p class="feature-description">{{ item.description }}</p>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%); color: white;">
+    <div class="container">
+      <h2 class="section-title" style="color: white;">{{ about.team.title }}</h2>
+      <p class="section-subtitle" style="color: var(--secondary-silver-light);">
+        {{ about.team.subtitle }}
+      </p>
+
+      <div class="features-grid">
+      {% for item in about.team.items %}
+        <div class="feature-card" style="background: rgba(255, 255, 255, 0.1);">
+          <div class="feature-icon" style="color: var(--gold-accent);">
+            <i class="{{ item.icon }}"></i>
+          </div>
+          <h3 class="feature-title" style="color: white;">{{ item.title }}</h3>
+          <p class="feature-description" style="color: var(--secondary-silver-light);">{{ item.description }}</p>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">انضم لعائلة دريم هاوس</h2>
+      <p class="section-subtitle">ابدأ رحلتك معنا اليوم</p>
+
+      <div style="margin-top: var(--spacing-xl);">
+        <a href="/products/" class="btn btn-primary" style="margin: 0 var(--spacing-sm);">
+          <i class="fas fa-shopping-cart"></i> تصفح المنتجات
+        </a>
+        <a href="/contact.html" class="btn btn-gold" style="margin: 0 var(--spacing-sm);">
+          <i class="fas fa-phone"></i> تواصل معنا
+        </a>
+      </div>
+    </div>
+  </section>

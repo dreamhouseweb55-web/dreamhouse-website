@@ -120,13 +120,80 @@ collections:
               - {label: "أيقونة", name: "icon", widget: "string", default: "fas fa-map-marker-alt"}
               - {label: "فرع جديد؟", name: "isNew", widget: "boolean", required: false, default: false}
 
+      - name: "about_page"
+        label: "صفحة من نحن"
+        file: "_data/about.json"
+        description: "محتوى صفحة من نحن"
+        fields:
+          - label: "قسم Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "العنوان الرئيسي", name: "title", widget: "string"}
+              - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
+          
+          - label: "المقدمة"
+            name: "intro"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - {label: "الوصف", name: "description", widget: "text"}
+          
+          - label: "الرؤية والقيم"
+            name: "visionValues"
+            widget: "list"
+            fields:
+              - {label: "أيقونة", name: "icon", widget: "string"}
+              - {label: "العنوان", name: "title", widget: "string"}
+              - {label: "الوصف", name: "description", widget: "text"}
+          
+          - label: "لماذا نحن"
+            name: "whyUs"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - label: "العناصر"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "أيقونة", name: "icon", widget: "string"}
+                  - {label: "العنوان", name: "title", widget: "string"}
+                  - {label: "الوصف", name: "description", widget: "text"}
+          
+          - label: "جدول زمني"
+            name: "timeline"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - label: "الأحداث"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "السنة", name: "year", widget: "string"}
+                  - {label: "العنوان", name: "title", widget: "string"}
+                  - {label: "الوصف", name: "description", widget: "text"}
+
+          - label: "فريق العمل"
+            name: "team"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
+              - label: "الأعضاء"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "أيقونة", name: "icon", widget: "string"}
+                  - {label: "الاسم", name: "title", widget: "string"}
+                  - {label: "الوظيفة", name: "description", widget: "text"}
+
   # ===== المنتجات =====
   - name: "products"
     label: "المنتجات"
     files:
       - name: "all_products"
         label: "كل المنتجات"
-        file: "data/products.json"
+        file: "_data/products.json"
         description: "إدارة جميع منتجات المعرض"
         fields:
           - name: "products"

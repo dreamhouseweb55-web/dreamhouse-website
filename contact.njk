@@ -1,0 +1,208 @@
+---
+layout: base.njk
+title: اتصل بنا
+---
+  <section class="hero" style="height: 350px;">
+    <div class="hero-content">
+      <h1 class="hero-title">تواصل معنا</h1>
+      <p class="hero-subtitle">نحن هنا لمساعدتك في كل خطوة</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--spacing-xl);">
+
+        <!-- نموذج الاتصال -->
+        <div style="grid-column: span 1;">
+          <h2 class="section-title" style="text-align: right;">أرسل لنا رسالة</h2>
+
+          <form id="contactForm" style="background: var(--secondary-white); padding: var(--spacing-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+            <div style="margin-bottom: var(--spacing-md);">
+              <label for="name" style="display: block; margin-bottom: var(--spacing-xs); font-weight: 600; color: var(--primary-wood);">
+                الاسم الكامل <span style="color: red;">*</span>
+              </label>
+              <input type="text" id="name" name="name" required style="width: 100%; padding: var(--spacing-sm); border: 2px solid var(--secondary-silver); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 1rem;" placeholder="أدخل اسمك">
+            </div>
+
+            <div style="margin-bottom: var(--spacing-md);">
+              <label for="phone" style="display: block; margin-bottom: var(--spacing-xs); font-weight: 600; color: var(--primary-wood);">
+                رقم الهاتف <span style="color: red;">*</span>
+              </label>
+              <input type="tel" id="phone" name="phone" required style="width: 100%; padding: var(--spacing-sm); border: 2px solid var(--secondary-silver); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 1rem;" placeholder="مثال: 01012345678">
+            </div>
+
+            <div style="margin-bottom: var(--spacing-md);">
+              <label for="email" style="display: block; margin-bottom: var(--spacing-xs); font-weight: 600; color: var(--primary-wood);">
+                البريد الإلكتروني (اختياري)
+              </label>
+              <input type="email" id="email" name="email" style="width: 100%; padding: var(--spacing-sm); border: 2px solid var(--secondary-silver); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 1rem;" placeholder="example@email.com">
+            </div>
+
+            <div style="margin-bottom: var(--spacing-md);">
+              <label for="interest" style="display: block; margin-bottom: var(--spacing-xs); font-weight: 600; color: var(--primary-wood);">
+                مهتم بـ
+              </label>
+              <select id="interest" name="interest" style="width: 100%; padding: var(--spacing-sm); border: 2px solid var(--secondary-silver); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 1rem;">
+                <option value="">اختر المنتج</option>
+                <option value="bedrooms">غرف نوم رئيسية</option>
+                <option value="kids-bedrooms">غرف نوم أطفال</option>
+                <option value="sofas">أنتريهات</option>
+                <option value="corners">ركنات</option>
+                <option value="dining">غرف سفرة</option>
+                <option value="kitchens">مطابخ</option>
+                <option value="package-3">عرض 3 غرف</option>
+                <option value="package-4">عرض 4 غرف</option>
+                <option value="other">أخرى</option>
+              </select>
+            </div>
+
+            <div style="margin-bottom: var(--spacing-md);">
+              <label for="message" style="display: block; margin-bottom: var(--spacing-xs); font-weight: 600; color: var(--primary-wood);">
+                رسالتك <span style="color: red;">*</span>
+              </label>
+              <textarea id="message" name="message" rows="5" required style="width: 100%; padding: var(--spacing-sm); border: 2px solid var(--secondary-silver); border-radius: var(--radius-md); font-family: 'Cairo', sans-serif; font-size: 1rem; resize: vertical;" placeholder="اكتب رسالتك أو استفسارك هنا..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <i class="fas fa-paper-plane"></i> إرسال الرسالة
+            </button>
+          </form>
+        </div>
+
+        <!-- معلومات التواصل -->
+        <div>
+          <h2 class="section-title" style="text-align: right;">معلومات التواصل</h2>
+
+          <div class="feature-card" style="margin-bottom: var(--spacing-md);">
+            <h3 class="feature-title">
+              <i class="fas fa-phone" style="color: var(--gold-accent); margin-left: 10px;"></i>
+              اتصل بنا
+            </h3>
+            <p class="feature-description">
+              <a href="tel:{{ settings.contact.phone }}" style="color: var(--primary-wood); font-size: 1.2rem; font-weight: 600;">
+                {{ settings.contact.phone }}
+              </a>
+            </p>
+            <p class="feature-description" style="margin-top: var(--spacing-xs);">
+              متاح من السبت إلى الخميس<br>
+              من 10 صباحاً حتى 10 مساءً
+            </p>
+          </div>
+
+          <div class="feature-card" style="margin-bottom: var(--spacing-md);">
+            <h3 class="feature-title">
+              <i class="fab fa-whatsapp" style="color: var(--gold-accent); margin-left: 10px;"></i>
+              واتساب
+            </h3>
+            <a href="https://wa.me/{{ settings.contact.whatsapp }}" target="_blank" class="btn btn-gold" style="width: 100%;">
+              <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
+            </a>
+          </div>
+
+          <div class="feature-card" style="margin-bottom: var(--spacing-md);">
+            <h3 class="feature-title">
+              <i class="fas fa-envelope" style="color: var(--gold-accent); margin-left: 10px;"></i>
+              البريد الإلكتروني
+            </h3>
+            <p class="feature-description">
+              <a href="mailto:{{ settings.contact.email }}" style="color: var(--primary-wood); font-weight: 600;">
+                {{ settings.contact.email }}
+              </a>
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="feature-title">
+              <i class="fas fa-share-alt" style="color: var(--gold-accent); margin-left: 10px;"></i>
+              تابعنا على السوشيال ميديا
+            </h3>
+            <div class="social-links" style="justify-content: flex-start;">
+              <a href="{{ settings.social.facebook }}" target="_blank" aria-label="فيسبوك" style="background: #1877F2;">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="{{ settings.social.instagram }}" target="_blank" aria-label="إنستجرام" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="{{ settings.social.tiktok }}" target="_blank" aria-label="تيك توك" style="background: #000000;">
+                <i class="fab fa-tiktok"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--beige-bg);">
+    <div class="container">
+      <h2 class="section-title">فروعنا</h2>
+
+      <div class="features-grid">
+      {% for branch in branches.branches | slice(0, 2) %}
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <h3 class="feature-title">{{ branch.name }}</h3>
+          <p class="feature-description">
+            <strong>العنوان:</strong> {{ branch.location }}<br>
+            <strong>ساعات العمل:</strong><br>
+            {{ branch.hours | nl2br | safe }}
+          </p>
+          <div style="margin-top: var(--spacing-md);">
+            <a href="tel:{{ branch.phone }}" class="btn btn-secondary" style="width: 100%; margin-bottom: var(--spacing-xs);">
+              <i class="fas fa-phone"></i> اتصل بالفرع
+            </a>
+            <a href="/branches/" class="btn btn-primary" style="width: 100%;">
+              <i class="fas fa-map"></i> عرض الموقع
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">الأسئلة الشائعة</h2>
+
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="feature-card" style="margin-bottom: var(--spacing-md);">
+          <h3 class="feature-title">ما هي مدة التسليم؟</h3>
+          <p class="feature-description">
+            نقوم بتسليم وتركيب المنتجات خلال 48 ساعة فقط من التعاقد.
+          </p>
+        </div>
+
+        <div class="feature-card" style="margin-bottom: var(--spacing-md);">
+          <h3 class="feature-title">هل التوصيل والتركيب مجاني؟</h3>
+          <p class="feature-description">
+            نعم، نقدم خدمة التوصيل والتركيب مجاناً داخل القاهرة الكبرى.
+          </p>
+        </div>
+
+        <div class="feature-card" style="margin-bottom: var(--spacing-md);">
+          <h3 class="feature-title">ما هي مدة الضمان؟</h3>
+          <p class="feature-description">
+            نقدم ضمان 5 سنوات على الأخشاب وكثافة الإسفنج، مما يعكس ثقتنا المطلقة في جودة منتجاتنا.
+          </p>
+        </div>
+
+        <div class="feature-card" style="margin-bottom: var(--spacing-md);">
+          <h3 class="feature-title">هل يمكن الدفع بالتقسيط؟</h3>
+          <p class="feature-description">
+            للاستفسار عن خيارات الدفع والتقسيط، يرجى التواصل معنا مباشرة عبر الهاتف أو واتساب.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">هل يمكن زيارة المعرض قبل الشراء؟</h3>
+          <p class="feature-description">
+            بالتأكيد! نرحب بزيارتك لأي من فروعنا لمشاهدة المنتجات والاستفسار عن أي تفاصيل.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,205 @@
+---
+layout: base.njk
+title: فروعنا
+---
+  <section class="hero" style="height: 400px;">
+    <div class="hero-content">
+      <h1 class="hero-title">فروعنا</h1>
+      <p class="hero-subtitle">في خدمتك في أفضل المواقع</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">فروع دريم هاوس</h2>
+      <p class="section-subtitle">زرنا في أي من فروعنا وتمتع بتجربة تسوق فريدة</p>
+
+      <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); margin-top: var(--spacing-xl);">
+        {% for branch in branches.branches %}
+            <div class="feature-card" {% if branch.isNew %}style="border: 3px solid var(--gold-accent);"{% endif %}>
+                <div style="background: linear-gradient(135deg, {% if branch.isNew %}var(--gold-accent) 0%, #F4D03F{% else %}var(--primary-wood) 0%, var(--primary-wood-light){% endif %} 100%); padding: var(--spacing-lg); border-radius: var(--radius-md) var(--radius-md) 0 0; color: {% if branch.isNew %}var(--primary-wood){% else %}white{% endif %}; text-align: center;">
+                    <i class="{{ branch.icon }}" style="font-size: 3rem; color: {% if branch.isNew %}var(--primary-wood){% else %}var(--gold-accent){% endif %}; margin-bottom: var(--spacing-sm);"></i>
+                    <h3 style="font-size: 1.75rem; color: {% if branch.isNew %}var(--primary-wood){% else %}white{% endif %}; margin: 0;">{{ branch.name }}</h3>
+                    {% if branch.isNew %}
+                    <p style="margin-top: var(--spacing-xs); font-weight: 600;">الافتتاح الكبير!</p>
+                    {% endif %}
+                </div>
+
+                <div style="padding: var(--spacing-lg);">
+                    <div style="margin-bottom: var(--spacing-md);">
+                        <h4 style="color: var(--primary-wood); margin-bottom: var(--spacing-sm);">
+                            <i class="fas fa-location-arrow" style="color: var(--gold-accent);"></i> {% if branch.isNew %}الموقع{% else %}العنوان{% endif %}
+                        </h4>
+                        <p style="color: var(--dark-text); font-size: 1.1rem;">
+                            {{ branch.location }}
+                        </p>
+                    </div>
+
+                    <div style="margin-bottom: var(--spacing-md);">
+                        <h4 style="color: var(--primary-wood); margin-bottom: var(--spacing-sm);">
+                            <i class="fas fa-{% if branch.isNew %}building{% else %}clock{% endif %}" style="color: var(--gold-accent);"></i> {% if branch.isNew %}مساحة العرض{% else %}ساعات العمل{% endif %}
+                        </h4>
+                        <p style="color: var(--dark-text); {% if branch.isNew %}font-size: 1.3rem; font-weight: 700;{% endif %}">
+                             {{ branch.hours | nl2br | safe }}
+                        </p>
+                        {% if branch.isNew %}
+                        <p style="color: var(--light-text);">مساحة عرض ضخمة غير مسبوقة</p>
+                        {% endif %}
+                    </div>
+
+                    {% if branch.isNew %}
+                    <div style="margin-bottom: var(--spacing-md);">
+                        <h4 style="color: var(--primary-wood); margin-bottom: var(--spacing-sm);">
+                            <i class="fas fa-magic" style="color: var(--gold-accent);"></i> المميزات الخاصة
+                        </h4>
+                        <ul style="list-style: none; padding: 0; color: var(--dark-text);">
+                            <li style="margin-bottom: var(--spacing-xs);">
+                                <i class="fas fa-check" style="color: green;"></i> تجربة تسوق فريدة ومتنوعة
+                            </li>
+                            <li style="margin-bottom: var(--spacing-xs);">
+                                <i class="fas fa-check" style="color: green;"></i> قسم خاص للمطابخ
+                            </li>
+                            <li style="margin-bottom: var(--spacing-xs);">
+                                <i class="fas fa-check" style="color: green;"></i> خدمة مصمم داخلي مجانية
+                            </li>
+                            <li>
+                                <i class="fas fa-check" style="color: green;"></i> عرض ثلاثي الأبعاد للمطبخ
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="background: var(--gold-accent); color: var(--primary-wood); padding: var(--spacing-md); border-radius: var(--radius-md); text-align: center; font-weight: 700; font-size: 1.2rem;">
+                        الافتتاح قريباً جداً!
+                    </div>
+                    {% else %}
+                    <div style="margin-bottom: var(--spacing-md);">
+                        <h4 style="color: var(--primary-wood); margin-bottom: var(--spacing-sm);">
+                            <i class="fas fa-phone" style="color: var(--gold-accent);"></i> التواصل
+                        </h4>
+                        <p style="color: var(--dark-text);">
+                            <a href="tel:{{ branch.phone }}" style="color: var(--primary-wood); font-weight: 600;">
+                                {{ branch.phone }}
+                            </a>
+                        </p>
+                    </div>
+
+                    <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+                        <a href="tel:{{ branch.phone }}" class="btn btn-primary" style="flex: 1;">
+                            <i class="fas fa-phone"></i> اتصل بالفرع
+                        </a>
+                        <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-gold" style="flex: 1;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> واتساب
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: var(--beige-bg);">
+    <div class="container">
+      <h2 class="section-title">لماذا تزورنا؟</h2>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3 class="feature-title">شاهد المنتجات مباشرة</h3>
+          <p class="feature-description">لمس وفحص المنتجات قبل الشراء لضمان رضاك التام</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="feature-title">استشارة مجانية</h3>
+          <p class="feature-description">فريقنا المتخصص سيساعدك في اختيار الأنسب لمنزلك</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-tape"></i>
+          </div>
+          <h3 class="feature-title">قياس المساحات</h3>
+          <p class="feature-description">خدمة قياس مجانية للتأكد من ملاءمة القطع لمساحتك</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3 class="feature-title">تنسيق الألوان</h3>
+          <p class="feature-description">نساعدك في تنسيق الألوان والتصاميم بشكل متناسق</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-percent"></i>
+          </div>
+          <h3 class="feature-title">عروض خاصة</h3>
+          <p class="feature-description">عروض حصرية للزوار في المعرض</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-coffee"></i>
+          </div>
+          <h3 class="feature-title">أجواء مريحة</h3>
+          <p class="feature-description">بيئة مريحة تجعل زيارتك تجربة ممتعة</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <!-- Static Transportation Info -->
+    <div class="container">
+        <h2 class="section-title">كيف تصل إلينا؟</h2>
+        <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+            <div class="feature-card">
+                <h3 class="feature-title"><i class="fas fa-car"></i> بالسيارة</h3>
+                <p class="feature-description">يمكنك الوصول بسهولة إلى جميع فروعنا بالسيارة. فروعنا في مواقع استراتيجية سهلة الوصول.</p>
+                <div style="background: var(--beige-bg); padding: var(--spacing-sm); border-radius: var(--radius-md); margin-top: var(--spacing-md);">
+                    <i class="fas fa-info-circle" style="color: var(--gold-accent);"></i> <strong>متوفر مواقف سيارات واسعة</strong>
+                </div>
+            </div>
+            <div class="feature-card">
+                <h3 class="feature-title"><i class="fas fa-subway"></i> بالمواصلات العامة</h3>
+                <p class="feature-description">فروعنا قريبة من محطات المترو والمواصلات العامة لسهولة الوصول.</p>
+                <div style="background: var(--beige-bg); padding: var(--spacing-sm); border-radius: var(--radius-md); margin-top: var(--spacing-md);">
+                    <i class="fas fa-info-circle" style="color: var(--gold-accent);"></i> <strong>موقع متميز ومعروف</strong>
+                </div>
+            </div>
+            <div class="feature-card">
+                <h3 class="feature-title"><i class="fas fa-taxi"></i> بالتاكسي / أوبر</h3>
+                <p class="feature-description">يمكنك طلب تاكسي أو أوبر بسهولة إلى أي من فروعنا.</p>
+                <div style="background: var(--beige-bg); padding: var(--spacing-sm); border-radius: var(--radius-md); margin-top: var(--spacing-md);">
+                    <i class="fas fa-info-circle" style="color: var(--gold-accent);"></i> <strong>موقع معروف لدى السائقين</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%); color: white;">
+    <div class="container text-center">
+      <h2 class="section-title" style="color: white;">احجز زيارتك الآن</h2>
+       <p style="font-size: 1.2rem; margin-bottom: var(--spacing-xl); color: var(--secondary-silver-light);">
+        يمكنك الزيارة مباشرة أو حجز موعد لضمان خدمة أفضل
+      </p>
+      <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
+        <a href="/contact.html" class="btn btn-gold">
+          <i class="fas fa-calendar-check"></i> احجز موعد
+        </a>
+        <a href="tel:{{ settings.contact.phone }}" class="btn btn-secondary">
+          <i class="fas fa-phone"></i> اتصل بنا
+        </a>
+        <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-secondary" target="_blank">
+          <i class="fab fa-whatsapp"></i> واتساب
+        </a>
+      </div>
+    </div>
+  </section>

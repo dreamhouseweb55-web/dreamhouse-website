@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>{{ title }} - {{ settings.siteName }}</title>
+    <meta name="description" content="{{ description or settings.description }}">
+    <meta name="keywords" content="{{ settings.keywords }}">
+    <meta name="author" content="{{ settings.siteNameEn }}">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ title }} - {{ settings.siteName }}">
+    <meta property="og:description" content="{{ description or settings.description }}">
+    <meta property="og:site_name" content="{{ settings.siteNameEn }}">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="/images/logo.png" alt="{{ settings.siteName }} Logo" width="50" height="50">
+                <span class="navbar-brand">{{ settings.siteName }}</span>
+            </div>
+            
+            <button class="navbar-toggle" aria-label="فتح القائمة">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="navbar-menu">
+                <li><a href="/">الرئيسية</a></li>
+                <li><a href="/about/">من نحن</a></li>
+                <li><a href="/products/">المنتجات</a></li>
+                <li><a href="/offers.html">العروض الخاصة</a></li>
+                <li><a href="/branches/">الفروع</a></li>
+                <li><a href="/contact.html">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        {{ content | safe }}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>عن {{ settings.siteName }}</h3>
+                <p>{{ settings.footer.aboutText }}</p>
+                <div class="social-links">
+                    <a href="{{ settings.social.facebook }}" target="_blank" aria-label="فيسبوك">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="{{ settings.social.instagram }}" target="_blank" aria-label="إنستجرام">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="{{ settings.social.tiktok }}" target="_blank" aria-label="تيك توك">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://wa.me/{{ settings.contact.whatsapp }}" target="_blank" aria-label="واتساب">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="/">الرئيسية</a></li>
+                    <li><a href="/about/">من نحن</a></li>
+                    <li><a href="/products/">المنتجات</a></li>
+                    <li><a href="/offers.html">العروض الخاصة</a></li>
+                    <li><a href="/branches/">الفروع</a></li>
+                    <li><a href="/contact.html">اتصل بنا</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>منتجاتنا</h3>
+                <ul>
+                    <li><a href="/products/#bedrooms">غرف نوم رئيسية</a></li>
+                    <li><a href="/products/#kids-bedrooms">غرف نوم أطفال</a></li>
+                    <li><a href="/products/#sofas">أنتريهات</a></li>
+                    <li><a href="/products/#corners">ركنات</a></li>
+                    <li><a href="/products/#dining">غرف سفرة</a></li>
+                    <li><a href="/products/#kitchens">مطابخ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> {{ settings.contact.phone }}</li>
+                    <li><i class="fas fa-envelope"></i> {{ settings.contact.email }}</li>
+                    <li><i class="fas fa-map-marker-alt"></i> مدينة نصر، القاهرة</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 6 أكتوبر، الجيزة</li>
+                    <li><i class="fas fa-clock"></i> السبت - الخميس: 10 ص - 10 م</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; {{ settings.footer.copyright }}</p>
+            <p>{{ settings.footer.credits }}</p>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
