@@ -79,8 +79,8 @@ title: {{ offers.hero.title }}
               </div>
 
               <div class="d-grid">
-                <a href="/contact/" class="btn btn-warning fw-bold text-dark btn-lg">
-                  <i class="fas fa-phone me-2"></i> استفسر عن العرض
+                <a href="https://wa.me/{{ settings.contact.whatsapp }}?text={{ 'مرحباً، أرغب في طلب عرض: ' | urlencode }}{{ offer.title | urlencode }}" class="btn btn-warning fw-bold text-dark btn-lg" target="_blank">
+                  <i class="fab fa-whatsapp me-2"></i> اطلب العرض
                 </a>
               </div>
             </div>
