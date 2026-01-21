@@ -842,3 +842,8 @@ a:hover {
   margin-bottom: 15px;
 }
 
+
+/* ===== View Transitions ===== */
+@view-transition { navigation: auto; }
+
+html { view-transition-name: root; }
