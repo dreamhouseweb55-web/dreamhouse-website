@@ -1,11 +1,42 @@
 // ===== نظام سلة التسوق =====
-let cart = JSON.parse(localStorage.getItem('dreamhouse_cart')) || [];
+import { showNotification } from './utils';
 
-window.addToCart = function (productId) {
-    // التأكد من أن القائمة (products defined in products.js) ليست فارغة
-    if (typeof products === 'undefined' || products.length === 0) return;
+// Define types
+interface CartItem {
+    id: string;
+    name: string;
+    price: number;
+    image: string;
+    quantity: number;
+}
 
-    const product = products.find(p => p.id === productId);
+interface Product {
+    id: string;
+    name: string;
+    price: number;
+    image: string;
+    category: string;
+    description: string;
+}
+
+// Extend Window interface
+declare global {
+    interface Window {
+        addToCart: (productId: string) => void;
+        removeFromCart: (productId: string) => void;
+        updateQuantity: (productId: string, change: number) => void;
+        checkoutWhatsApp: () => void;
+        products: Product[]; // Assuming this is set globally
+        bootstrap: any; // For Bootstrap API
+    }
+}
+
+let cart: CartItem[] = JSON.parse(localStorage.getItem('dreamhouse_cart') || '[]');
+
+window.addToCart = function (productId: string): void {
+    if (typeof window.products === 'undefined' || window.products.length === 0) return;
+
+    const product = window.products.find(p => p.id === productId);
     if (!product) return;
 
     const existingItem = cart.find(item => item.id === productId);
@@ -25,41 +56,35 @@ window.addToCart = function (productId) {
     }
 
     updateCartDisplay();
-    openCart();
+    // Use Bootstrap Offcanvas
+    const cartEl = document.getElementById('cartSidebar');
+    if (cartEl && window.bootstrap) {
+        let bsOffcanvas = window.bootstrap.Offcanvas.getInstance(cartEl);
+        if (!bsOffcanvas) {
+            bsOffcanvas = new window.bootstrap.Offcanvas(cartEl);
+        }
+        bsOffcanvas.show();
+    }
 };
 
-window.removeFromCart = function (productId) {
+window.removeFromCart = function (productId: string): void {
     cart = cart.filter(item => item.id !== productId);
     updateCartDisplay();
 };
 
-window.updateQuantity = function (productId, change) {
+window.updateQuantity = function (productId: string, change: number): void {
     const item = cart.find(item => item.id === productId);
     if (item) {
         item.quantity += change;
         if (item.quantity <= 0) {
-            removeFromCart(productId);
+            window.removeFromCart(productId);
         } else {
             updateCartDisplay();
         }
     }
 };
 
-window.openCart = function () {
-    const sidebar = document.getElementById('cartSidebar');
-    const overlay = document.getElementById('cartOverlay');
-    if (sidebar) sidebar.classList.add('active');
-    if (overlay) overlay.classList.add('active');
-};
-
-window.closeCart = function () {
-    const sidebar = document.getElementById('cartSidebar');
-    const overlay = document.getElementById('cartOverlay');
-    if (sidebar) sidebar.classList.remove('active');
-    if (overlay) overlay.classList.remove('active');
-};
-
-window.checkoutWhatsApp = function () {
+window.checkoutWhatsApp = function (): void {
     if (cart.length === 0) return;
 
     let message = `مرحباً دريم هاوس، أود طلب المنتجات التالية:%0a%0a`;
@@ -78,11 +103,11 @@ window.checkoutWhatsApp = function () {
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
 };
 
-function updateCartDisplay() {
+function updateCartDisplay(): void {
     localStorage.setItem('dreamhouse_cart', JSON.stringify(cart));
 
     const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-    document.querySelectorAll('.cart-count').forEach(el => el.textContent = count);
+    document.querySelectorAll('.cart-count').forEach(el => el.textContent = count.toString());
 
     const cartItemsContainer = document.getElementById('cartItems');
     const totalPriceElement = document.querySelector('.total-price');
@@ -92,10 +117,10 @@ function updateCartDisplay() {
 
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = `
-                <div class="empty-cart-msg">
-                    <i class="fas fa-shopping-basket"></i>
+                <div class="text-center py-5 text-muted">
+                    <i class="fas fa-shopping-basket fa-3x mb-3"></i>
                     <p>السلة فارغة حالياً</p>
-                    <button class="btn btn-primary" onclick="closeCart()">تصفح المنتجات</button>
+                    <button class="btn btn-outline-primary" data-bs-dismiss="offcanvas">تصفح المنتجات</button>
                 </div>
             `;
             if (totalPriceElement) totalPriceElement.textContent = '0 ج.م';
@@ -106,18 +131,18 @@ function updateCartDisplay() {
                 total += itemTotal;
 
                 const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
+                cartItem.className = 'd-flex align-items-center mb-3 pb-3 border-bottom';
                 cartItem.innerHTML = `
-                    <div style="flex:1;">
-                        <div class="cart-item-title">${item.name}</div>
-                        <div class="cart-item-price">${item.price.toLocaleString()} ج.م</div>
-                        <div class="cart-item-controls">
-                            <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
-                            <span class="qty-val">${item.quantity}</span>
-                            <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1 text-dark fw-bold">${item.name}</h6>
+                        <div class="text-warning fw-bold small">${item.price.toLocaleString()} ج.م</div>
+                        <div class="d-flex align-items-center mt-2 gap-2">
+                            <button class="btn btn-sm btn-light border px-2" onclick="updateQuantity('${item.id}', -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="btn btn-sm btn-light border px-2" onclick="updateQuantity('${item.id}', 1)">+</button>
                         </div>
                     </div>
-                    <button class="remove-item" onclick="removeFromCart('${item.id}')">
+                    <button class="btn btn-link text-danger p-0" onclick="removeFromCart('${item.id}')">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 `;
@@ -128,3 +153,5 @@ function updateCartDisplay() {
         }
     }
 }
+// Initial display update
+updateCartDisplay();

@@ -1,12 +1,12 @@
 // ===== أدوات مساعدة =====
-function showNotification(message, type = 'info') {
+export function showNotification(message: string, type: 'info' | 'success' | 'error' = 'info'): void {
     const notification = document.createElement('div');
     notification.style.cssText = `
         position: fixed;
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
-        background-color: ${type === 'success' ? '#4CAF50' : '#3E2723'};
+        background-color: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#3E2723'};
         color: white;
         padding: 12px 25px;
         border-radius: 30px;
