@@ -1,0 +1,89 @@
+---
+pagination:
+  data: products.products
+  size: 1
+  alias: product
+permalink: "product/{{ product.id }}/index.html"
+layout: base.njk
+title: "{{ product.name }}"
+---
+
+<div class="container" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl);">
+  <!-- Breadcrumb -->
+  <nav style="margin-bottom: var(--spacing-lg); color: var(--light-text);">
+    <a href="/">الرئيسية</a> &gt; 
+    <a href="/products/">المنتجات</a> &gt; 
+    <span style="color: var(--primary-wood);">{{ product.name }}</span>
+  </nav>
+
+  <div class="product-details-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-2xl); align-items: start;">
+    
+    <!-- Product Image -->
+    <div class="product-details-image">
+      <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 2px solid var(--gold-accent);">
+        <img src="/{{ product.image }}" alt="{{ product.name }}" style="width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 4/3;">
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-details-info">
+      <h1 style="font-size: 2.5rem; margin-bottom: var(--spacing-sm);">{{ product.name }}</h1>
+      
+      <div style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-md);">
+        <span style="font-size: 2rem; font-weight: bold; color: var(--gold-accent);">
+          {% if product.price %}
+            {{ product.price.toLocaleString() }} ج.م
+          {% else %}
+            تواصل للسعر
+          {% endif %}
+        </span>
+        <span class="feature-badge" style="background: var(--primary-wood); color: white;">متاح الآن</span>
+      </div>
+
+      <p style="font-size: 1.1rem; color: var(--light-text); line-height: 1.8; margin-bottom: var(--spacing-lg);">
+        {{ product.description }}
+      </p>
+
+      {% if product.features %}
+      <div style="margin-bottom: var(--spacing-lg);">
+        <h3 style="font-size: 1.2rem; margin-bottom: var(--spacing-sm);">المميزات:</h3>
+        <ul style="list-style: none; padding: 0;">
+          {% for feature in product.features %}
+            <li style="margin-bottom: var(--spacing-xs); display: flex; align-items: center;">
+              <i class="fas fa-check-circle" style="color: var(--gold-accent); margin-left: 10px;"></i>
+              {{ feature }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <div class="actions" style="display: flex; gap: var(--spacing-md); flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="addToCart('{{ product.id }}')" style="flex: 1; min-width: 200px;">
+          <i class="fas fa-cart-plus"></i> أضف للسلة
+        </button>
+        <a href="https://wa.me/{{ settings.contact.whatsapp }}?text=أستفسر عن منتج: {{ product.name }}" target="_blank" class="btn btn-gold" style="flex: 1; min-width: 200px;">
+          <i class="fab fa-whatsapp"></i> اطلب عبر واتساب
+        </a>
+      </div>
+      
+      <div style="margin-top: var(--spacing-xl); padding-top: var(--spacing-md); border-top: 1px solid var(--secondary-silver-light);">
+        <p style="font-size: 0.9rem; color: var(--light-text);">
+          <i class="fas fa-truck" style="color: var(--primary-wood);"></i> توصيل لجميع المحافظات
+          <span style="margin: 0 10px;">|</span>
+          <i class="fas fa-shield-alt" style="color: var(--primary-wood);"></i> ضمان استبدال
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Responsive CSS for this page locally -->
+<style>
+  @media (max-width: 768px) {
+    .product-details-container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+  }
+</style>

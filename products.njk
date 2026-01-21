@@ -69,13 +69,17 @@ title: المنتجات
       <div class="products-grid" id="products-container">
         {% for product in products.products %}
         <div class="product-card" data-category="{{ product.category }}">
-            <div class="product-image" style="background-image: url('/{{ product.image }}'); background-size: cover; background-position: center; height: 250px; position: relative;">
-                <div style="position: absolute; top: 10px; right: 10px; background: var(--gold-accent); color: var(--primary-wood); padding: 5px 10px; border-radius: 4px; font-weight: bold;">
-                    {{ product.price }} ج.م
+            <a href="/product/{{ product.id }}/" style="text-decoration: none; color: inherit; display: block;">
+                <div class="product-image" style="background-image: url('/{{ product.image }}'); background-size: cover; background-position: center; height: 250px; position: relative;">
+                    <div style="position: absolute; top: 10px; right: 10px; background: var(--gold-accent); color: var(--primary-wood); padding: 5px 10px; border-radius: 4px; font-weight: bold;">
+                        {{ product.price }} ج.م
+                    </div>
                 </div>
-            </div>
+            </a>
             <div class="product-content">
-                <h3 class="product-title">{{ product.name }}</h3>
+                <a href="/product/{{ product.id }}/" style="text-decoration: none; color: inherit;">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                </a>
                 <p class="product-description">{{ product.description }}</p>
                 <div class="product-features">
                     {% for feature in product.features %}
