@@ -6,11 +6,11 @@
     "cta": {
       "primary": {
         "text": "تصفح المنتجات",
-        "link": "products.html"
+        "link": "/products/"
       },
       "secondary": {
         "text": "اتصل بنا",
-        "link": "contact.html"
+        "link": "/contact/"
       }
     }
   },

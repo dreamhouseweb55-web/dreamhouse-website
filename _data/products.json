@@ -125,6 +125,594 @@
         "سهل التنظيف",
         "إكسسوارات إيطالي"
       ]
+    },
+    {
+      "id": "new-product-01",
+      "name": "منتج جديد 1",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-01.jpeg",
+      "image_alt": "صورة منتج جديد 1",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-02",
+      "name": "منتج جديد 2",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-02.jpeg",
+      "image_alt": "صورة منتج جديد 2",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-03",
+      "name": "منتج جديد 3",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-03.jpeg",
+      "image_alt": "صورة منتج جديد 3",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-04",
+      "name": "منتج جديد 4",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-04.jpeg",
+      "image_alt": "صورة منتج جديد 4",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-05",
+      "name": "منتج جديد 5",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-05.jpeg",
+      "image_alt": "صورة منتج جديد 5",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-06",
+      "name": "منتج جديد 6",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-06.jpeg",
+      "image_alt": "صورة منتج جديد 6",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-07",
+      "name": "منتج جديد 7",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-07.jpeg",
+      "image_alt": "صورة منتج جديد 7",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-08",
+      "name": "منتج جديد 8",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-08.jpeg",
+      "image_alt": "صورة منتج جديد 8",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-09",
+      "name": "منتج جديد 9",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-09.jpeg",
+      "image_alt": "صورة منتج جديد 9",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-10",
+      "name": "منتج جديد 10",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-10.jpeg",
+      "image_alt": "صورة منتج جديد 10",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-11",
+      "name": "منتج جديد 11",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-11.jpeg",
+      "image_alt": "صورة منتج جديد 11",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-12",
+      "name": "منتج جديد 12",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-12.jpeg",
+      "image_alt": "صورة منتج جديد 12",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-13",
+      "name": "منتج جديد 13",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-13.jpeg",
+      "image_alt": "صورة منتج جديد 13",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-14",
+      "name": "منتج جديد 14",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-14.jpeg",
+      "image_alt": "صورة منتج جديد 14",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-15",
+      "name": "منتج جديد 15",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-15.jpeg",
+      "image_alt": "صورة منتج جديد 15",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-16",
+      "name": "منتج جديد 16",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-16.jpeg",
+      "image_alt": "صورة منتج جديد 16",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-17",
+      "name": "منتج جديد 17",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-17.jpeg",
+      "image_alt": "صورة منتج جديد 17",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-18",
+      "name": "منتج جديد 18",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-18.jpeg",
+      "image_alt": "صورة منتج جديد 18",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-19",
+      "name": "منتج جديد 19",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-19.jpeg",
+      "image_alt": "صورة منتج جديد 19",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-20",
+      "name": "منتج جديد 20",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-20.jpeg",
+      "image_alt": "صورة منتج جديد 20",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-21",
+      "name": "منتج جديد 21",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-21.jpeg",
+      "image_alt": "صورة منتج جديد 21",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-22",
+      "name": "منتج جديد 22",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-22.jpeg",
+      "image_alt": "صورة منتج جديد 22",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-23",
+      "name": "منتج جديد 23",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-23.jpeg",
+      "image_alt": "صورة منتج جديد 23",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-24",
+      "name": "منتج جديد 24",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-24.jpeg",
+      "image_alt": "صورة منتج جديد 24",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-25",
+      "name": "منتج جديد 25",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-25.jpeg",
+      "image_alt": "صورة منتج جديد 25",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-26",
+      "name": "منتج جديد 26",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-26.jpeg",
+      "image_alt": "صورة منتج جديد 26",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-27",
+      "name": "منتج جديد 27",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-27.jpeg",
+      "image_alt": "صورة منتج جديد 27",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-28",
+      "name": "منتج جديد 28",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-28.jpeg",
+      "image_alt": "صورة منتج جديد 28",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-29",
+      "name": "منتج جديد 29",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-29.jpeg",
+      "image_alt": "صورة منتج جديد 29",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-30",
+      "name": "منتج جديد 30",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-30.jpeg",
+      "image_alt": "صورة منتج جديد 30",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-31",
+      "name": "منتج جديد 31",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-31.jpeg",
+      "image_alt": "صورة منتج جديد 31",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-32",
+      "name": "منتج جديد 32",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-32.jpeg",
+      "image_alt": "صورة منتج جديد 32",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-33",
+      "name": "منتج جديد 33",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-33.jpeg",
+      "image_alt": "صورة منتج جديد 33",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-34",
+      "name": "منتج جديد 34",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-34.jpeg",
+      "image_alt": "صورة منتج جديد 34",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-35",
+      "name": "منتج جديد 35",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-35.jpeg",
+      "image_alt": "صورة منتج جديد 35",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-36",
+      "name": "منتج جديد 36",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-36.jpeg",
+      "image_alt": "صورة منتج جديد 36",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-37",
+      "name": "منتج جديد 37",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-37.jpeg",
+      "image_alt": "صورة منتج جديد 37",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-38",
+      "name": "منتج جديد 38",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-38.jpeg",
+      "image_alt": "صورة منتج جديد 38",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-39",
+      "name": "منتج جديد 39",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-39.jpeg",
+      "image_alt": "صورة منتج جديد 39",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-40",
+      "name": "منتج جديد 40",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-40.jpeg",
+      "image_alt": "صورة منتج جديد 40",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-41",
+      "name": "منتج جديد 41",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-41.jpeg",
+      "image_alt": "صورة منتج جديد 41",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
+    },
+    {
+      "id": "new-product-42",
+      "name": "منتج جديد 42",
+      "price": 0,
+      "category": "bedrooms",
+      "image": "/images/products/new-product-42.jpeg",
+      "image_alt": "صورة منتج جديد 42",
+      "description": "وصف مبدئي للمنتج (قم بتعديله من لوحة التحكم)",
+      "long_description": "### تفاصيل المنتج\n\nقم بتعديل هذا النص من لوحة التحكم.",
+      "features": [
+        "ميزة 1",
+        "ميزة 2"
+      ]
     }
   ]
 }

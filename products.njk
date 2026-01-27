@@ -11,7 +11,7 @@ title: {{ products_page.hero.title }}
   </div>
 </section>
 
-<div class="container">
+<div class="container-fluid px-4 px-lg-5">
 
   <!-- Categories Filter -->
   <div class="row justify-content-center mb-5">
@@ -29,9 +29,9 @@ title: {{ products_page.hero.title }}
   </div>
 
   <!-- Products Grid -->
-  <div class="row g-4" id="products-grid">
+  <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4" id="products-grid">
     {% for product in products.products %}
-    <div class="col-lg-4 col-md-6 product-item" data-category="{{ product.category }}">
+    <div class="col product-item" data-category="{{ product.category }}">
       <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden product-card">
         <div class="position-relative overflow-hidden">
             <img src="{{ product.image }}" class="card-img-top object-fit-cover" alt="{{ product.name }}" style="height: 280px; transition: transform 0.5s ease;">
@@ -90,7 +90,7 @@ title: {{ products_page.hero.title }}
   <div class="text-center mt-5">
       <p class="lead mb-4">هل تبحث عن عروض ومجموعة كاملة؟</p>
       <div class="d-flex justify-content-center gap-3">
-         <a href="/offers/" class="btn btn-warning btn-lg text-dark fw-bold px-5">{{ products_page.cta.offersButton }}</a>
+         <a href="/offers/" class="btn btn-warning btn-lg fw-bold px-5">{{ products_page.cta.offersButton }}</a>
          <a href="/contact/" class="btn btn-outline-primary btn-lg px-5">{{ products_page.cta.contactButton }}</a>
       </div>
   </div>

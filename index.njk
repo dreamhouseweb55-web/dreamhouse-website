@@ -8,7 +8,7 @@ title: الرئيسية
       <h1 class="display-2 fw-bold mb-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">{{ home.hero.title }}</h1>
       <p class="lead mb-5 fs-3" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">{{ home.hero.subtitle }}</p>
       <div class="d-flex justify-content-center gap-3 flex-wrap">
-        <a href="{{ home.hero.cta.primary.link }}" class="btn btn-warning btn-lg px-5 py-3 fw-bold text-dark">{{ home.hero.cta.primary.text }}</a>
+        <a href="{{ home.hero.cta.primary.link }}" class="btn btn-warning btn-lg px-5 py-3 fw-bold">{{ home.hero.cta.primary.text }}</a>
         <a href="{{ home.hero.cta.secondary.link }}" class="btn btn-outline-light btn-lg px-5 py-3 fw-bold">{{ home.hero.cta.secondary.text }}</a>
       </div>
     </div>
@@ -16,13 +16,13 @@ title: الرئيسية
 
   <!-- ===== قسم المميزات ===== -->
   <section class="py-5" id="features">
-    <div class="container text-center">
+    <div class="container-fluid px-4 px-lg-5 text-center">
       <h2 class="mb-3 fw-bold">{{ home.features.sectionTitle }}</h2>
       <p class="text-muted mb-5">{{ home.features.sectionSubtitle }}</p>
       
-      <div class="row g-4">
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
       {% for feature in home.features.items %}
-        <div class="col-md-4">
+        <div class="col">
           <div class="card h-100 border-0 shadow-sm p-4 hover-lift">
             <div class="mb-3 text-warning display-5">
               <i class="{{ feature.icon }}"></i>
@@ -38,13 +38,13 @@ title: الرئيسية
 
   <!-- ===== قسم المنتجات ===== -->
   <section class="py-5 bg-light" id="products">
-    <div class="container">
+    <div class="container-fluid px-4 px-lg-5">
       <div class="text-center mb-5">
         <h2 class="fw-bold">منتجاتنا المميزة</h2>
         <p class="text-muted">تشكيلة واسعة من الأثاث لجميع الأذواق والمساحات</p>
       </div>
       
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
         <!-- Bedrooms -->
         <div class="col">
             <div class="card h-100 border-0 shadow overflow-hidden group-hover-effect">
@@ -166,7 +166,7 @@ title: الرئيسية
         </div>
         <div class="col-lg-6 p-5">
           <div class="text-start">
-            <span class="badge bg-warning text-dark px-3 py-2 mb-3 fw-bold rounded-pill">{{ home.quality.badge }}</span>
+            <span class="badge bg-warning px-3 py-2 mb-3 fw-bold rounded-pill">{{ home.quality.badge }}</span>
             <h2 class="display-5 fw-bold mb-4 text-primary">{{ home.quality.title }}</h2>
             <p class="lead text-muted mb-4 text-dark fs-3 font-monospace">{{ home.quality.subtitle }}</p>
             <p class="text-muted mb-5">
@@ -309,7 +309,7 @@ title: الرئيسية
         <a href="/contact/" class="btn btn-primary btn-lg">
           <i class="fas fa-envelope me-2"></i> أرسل استفسار
         </a>
-        <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-warning btn-lg text-dark fw-bold" target="_blank">
+        <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-warning btn-lg fw-bold" target="_blank">
           <i class="fab fa-whatsapp me-2"></i> واتساب
         </a>
         <a href="tel:{{ settings.contact.phone }}" class="btn btn-outline-dark btn-lg">

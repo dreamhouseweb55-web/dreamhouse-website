@@ -7,7 +7,7 @@ permalink: styles.css
 :root {
     --primary-wood: #5D4037;
     --primary-wood-light: #8D6E63;
-    --gold-accent: #D4AF37;
+    --gold-accent: #D32F2F; /* Changed to RED per brand identity */
     font-family: 'Tajawal', 'Cairo', sans-serif;
 }
 
@@ -69,8 +69,23 @@ a { text-decoration: none; }
     color: #fff;
 }
 .btn-warning:hover {
-    background-color: #C49F30;
-    border-color: #C49F30;
+    background-color: #b71c1c; /* Darker Red */
+    border-color: #b71c1c;
     color: #fff;
+}
+
+/* Bootstrap Overrides for Brand Identity (Red instead of Yellow) */
+.text-warning {
+    color: var(--gold-accent) !important;
+}
+.bg-warning {
+    background-color: var(--gold-accent) !important;
+}
+.border-warning {
+    border-color: var(--gold-accent) !important;
+}
+.badge.bg-warning {
+    background-color: var(--gold-accent) !important;
+    color: #fff !important;
 }
 

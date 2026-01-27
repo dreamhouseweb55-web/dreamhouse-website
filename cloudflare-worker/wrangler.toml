@@ -1,0 +1,10 @@
+name = "dreamhouse-git-gateway"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Environment variables (secrets)
+# Run: wrangler secret put GITHUB_TOKEN
+# Then paste your GitHub Personal Access Token
+
+[vars]
+# Public variables can go here

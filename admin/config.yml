@@ -1,9 +1,8 @@
 backend:
-  name: github
-  repo: dreamhouseweb55-web/dreamhouse-website # اسم المستودع الخاص بك
-  branch: main # اسم الفرع الرئيسي في GitHub
+  name: git-gateway
+  branch: main
 
-local_backend: true # تفعيل التعديل المحلي (بدون سيرفر)
+local_backend: true
 
 media_folder: "images" # المجلد الذي سيبحث فيه عن الصور
 public_folder: "/images" # المسار العام للصور

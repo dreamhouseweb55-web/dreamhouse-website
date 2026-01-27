@@ -102,3 +102,32 @@ export function initCounters(): void {
     });
     counters.forEach(c => observer.observe(c));
 }
+
+export function initNavbar(): void {
+    const navbarCollapse = document.getElementById('navbarNav');
+    const toggler = document.querySelector('.navbar-toggler');
+    
+    if (!navbarCollapse || !toggler) return;
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const isMenuOpen = navbarCollapse.classList.contains('show');
+        const isClickInside = navbarCollapse.contains(target) || toggler.contains(target);
+
+        if (isMenuOpen && !isClickInside) {
+             // Use Bootstrap's native collapse method if available, or just click toggler
+             (toggler as HTMLElement).click();
+        }
+    });
+
+    // Close on link click
+    const navLinks = navbarCollapse.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+             if (navbarCollapse.classList.contains('show')) {
+                 (toggler as HTMLElement).click();
+             }
+        });
+    });
+}

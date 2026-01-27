@@ -22,10 +22,9 @@ export async function initProductsSystem(): Promise<void> {
     await loadProductsData();
 
     // 2. عرض المنتجات إذا كنا في صفحة المنتجات
-    const productsContainer = document.getElementById('products-container');
+    const productsContainer = document.getElementById('products-grid');
     if (productsContainer) {
-        renderProducts('all');
-
+        
         // تفعيل الفلاتر
         const filterButtons = document.querySelectorAll('.js-filter-btn');
         filterButtons.forEach(btn => {
@@ -56,27 +55,27 @@ async function loadProductsData(): Promise<void> {
 }
 
 function renderProducts(category: string): void {
-    const productCards = document.querySelectorAll('.product-card');
+    const productItems = document.querySelectorAll('.product-item');
 
     let visibleCount = 0;
 
-    productCards.forEach(el => {
-        const card = el as HTMLElement;
-        const cardCategory = card.getAttribute('data-category');
+    productItems.forEach(el => {
+        const item = el as HTMLElement;
+        const itemCategory = item.getAttribute('data-category');
 
-        if (category === 'all' || cardCategory === category) {
-            card.style.display = 'block';
-            card.style.animation = 'none';
-            card.offsetHeight; /* trigger reflow */
-            card.style.animation = 'fadeInUp 0.5s ease forwards';
+        if (category === 'all' || itemCategory === category) {
+            item.style.display = 'block';
+            item.style.animation = 'none';
+            item.offsetHeight; /* trigger reflow */
+            item.style.animation = 'fadeInUp 0.5s ease forwards';
             visibleCount++;
         } else {
-            card.style.display = 'none';
+            item.style.display = 'none';
         }
     });
 
     // Check for empty results
-    const container = document.getElementById('products-container');
+    const container = document.getElementById('products-grid');
     const noProductsMsg = document.getElementById('no-products-msg');
 
     if (visibleCount === 0 && category !== 'all') {

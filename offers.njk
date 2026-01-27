@@ -11,7 +11,7 @@ title: {{ offers.hero.title }}
   
   <!-- تنويه موسمي -->
   <section class="py-3 bg-warning">
-    <div class="container text-center text-dark">
+    <div class="container text-center text-white">
       <h3 class="h5 fw-bold mb-1">
         <i class="fas fa-info-circle me-1"></i> {{ offers.seasonalNote.title }}
       </h3>
@@ -38,7 +38,7 @@ title: {{ offers.hero.title }}
               {% if offer.isSpecial %}
               <div class="position-absolute top-0 end-0 bg-danger text-white px-2 py-1 small fw-bold">{{ offer.specialLabel }}</div>
               {% endif %}
-              <h3 class="h4 fw-bold text-dark m-0">
+              <h3 class="h4 fw-bold m-0 text-white">
                 <i class="{{ offer.icon }} me-2"></i> {{ offer.title }}
               </h3>
             </div>
@@ -79,7 +79,7 @@ title: {{ offers.hero.title }}
               </div>
 
               <div class="d-grid">
-                <a href="https://wa.me/{{ settings.contact.whatsapp }}?text={{ 'مرحباً، أرغب في طلب عرض: ' | urlencode }}{{ offer.title | urlencode }}" class="btn btn-warning fw-bold text-dark btn-lg" target="_blank">
+                <a href="https://wa.me/{{ settings.contact.whatsapp }}?text={{ 'مرحباً، أرغب في طلب عرض: ' | urlencode }}{{ offer.title | urlencode }}" class="btn btn-warning fw-bold btn-lg" target="_blank">
                   <i class="fab fa-whatsapp me-2"></i> اطلب العرض
                 </a>
               </div>
@@ -141,7 +141,7 @@ title: {{ offers.hero.title }}
       </p>
 
       <div class="d-flex justify-content-center gap-3 flex-wrap">
-        <a href="/contact/" class="btn btn-warning fw-bold text-dark btn-lg">
+        <a href="/contact/" class="btn btn-warning fw-bold btn-lg">
           <i class="fas fa-envelope me-2"></i> أرسل استفسار
         </a>
         <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-outline-light btn-lg" target="_blank">
