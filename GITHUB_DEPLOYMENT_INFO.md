@@ -27,3 +27,6 @@ This file contains the configuration details required for pushing changes to the
    git push origin main
    ```
    *Note: If prompted for authentication, the user must handle the browser login or password entry.*
+
+## Deployment Log
+- **2026-01-27**: Triggered rebuild to inject environment variables.
