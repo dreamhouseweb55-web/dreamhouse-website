@@ -2,6 +2,8 @@ backend:
   name: github
   repo: dreamhouseweb55-web/dreamhouse-website
   branch: main
+  base_url: https://dreamhouse-git-gateway.dreamhouseweb55.workers.dev
+  auth_endpoint: auth
 
 local_backend: true
 
