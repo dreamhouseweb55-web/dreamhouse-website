@@ -187,22 +187,56 @@ h5, h6 { font-size: 1rem !important; margin-bottom: 0.5rem; }
     transition: transform 0.5s ease;
 }
 
-/* Universe Navbar Styles */
+/* Strict Navbar Styles */
 .universe-navbar {
-    background: rgba(211, 47, 47, 0.95) !important; /* Force Red */
+    background: rgba(211, 47, 47, 0.95) !important;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 }
 
-/* Nav Links Hover */
+/* Hover Scale for Icons */
+.hover-scale {
+    transition: transform 0.2s;
+}
+.hover-scale:hover {
+    transform: scale(1.2);
+}
+
+/* Nested Dropdown Styling */
+.dropdown-menu {
+    margin-top: 0;
+}
+.dropdown-menu .dropend .dropdown-toggle::after {
+    display: none; /* Hide default arrow */
+}
+.dropdown-menu .submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    margin-left: 0.2rem;
+    margin-top: -5px;
+}
+.dropdown-menu .dropend:hover .submenu {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Hover Underline for Links */
 .hover-underline {
     position: relative;
-    transition: color 0.3s;
+    padding-bottom: 2px;
 }
 .hover-underline::after {
     content: '';
     position: absolute;
-    bottom: 5px;
+    bottom: 0px;
     left: 0;
     width: 0;
     height: 2px;
@@ -210,35 +244,6 @@ h5, h6 { font-size: 1rem !important; margin-bottom: 0.5rem; }
     transition: width 0.3s ease;
 }
 .hover-underline:hover::after { width: 100%; }
-
-/* Buttons: White Glass -> Red Gradient */
-.btn-white-glass {
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--primary-wood);
-    border: none;
-    transition: all 0.4s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-.btn-white-glass:hover {
-    background: linear-gradient(135deg, #b71c1c 0%, #D32F2F 100%);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-}
-
-/* Dropdown Sub-menus */
-.dropdown-menu .dropend .dropdown-toggle::after { display: none; }
-.dropdown-menu .submenu {
-    display: none;
-    position: absolute;
-    left: 100%;
-    top: 0;
-    margin-left: 0.5rem;
-}
-.dropdown-menu .dropend:hover .submenu {
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
 
 /* Hamburger Icon */
 .hamburger-icon span {
@@ -255,11 +260,6 @@ h5, h6 { font-size: 1rem !important; margin-bottom: 0.5rem; }
 .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(2) { opacity: 0; }
 .navbar-toggler[aria-expanded="true"] .hamburger-icon span:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 
