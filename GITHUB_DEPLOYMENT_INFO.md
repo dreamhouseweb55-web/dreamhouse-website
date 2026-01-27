@@ -33,3 +33,4 @@ This file contains the configuration details required for pushing changes to the
 - **2026-01-27**: Final build for client delivery validation.
 - **2026-01-27**: Updated Cloudflare Worker to handle '/settings' route (fixing API_ERROR).
 - **2026-01-27**: Implemented Custom GitHub OAuth Authentication (Replacing Git Gateway) for superior stability and UX.
+- **2026-01-27**: Design Overhaul: Local 'Almarai Bold' font, Clean Navbar, and Spacious Layout.
