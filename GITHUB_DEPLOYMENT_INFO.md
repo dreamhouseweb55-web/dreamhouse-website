@@ -32,3 +32,4 @@ This file contains the configuration details required for pushing changes to the
 - **2026-01-27**: Triggered rebuild to inject environment variables.
 - **2026-01-27**: Final build for client delivery validation.
 - **2026-01-27**: Updated Cloudflare Worker to handle '/settings' route (fixing API_ERROR).
+- **2026-01-27**: Switched CMS backend to 'github' (Direct Integration) for maximum stability.
