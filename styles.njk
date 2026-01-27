@@ -19,50 +19,72 @@ permalink: styles.css
     font-family: 'Almarai', sans-serif;
 }
 
+/* Aggressive Compression for "Half Size" Effect */
+html {
+    font-size: 13px; /* Drastic reduction from browser default 16px. All REM units will scale down by ~20% automatically */
+}
+
 body {
     direction: rtl;
     text-align: right;
     font-family: 'Almarai', sans-serif;
-    background-color: #f8f9fa; /* Bootstrap light gray */
-    line-height: 1.5; /* Reduced from 1.8 for compactness */
-    font-size: 0.95rem; /* Slightly smaller base font */
+    background-color: #f8f9fa;
+    line-height: 1.4; /* Tighter line height */
 }
 
-/* Global Spacing Utilities */
+/* Force Tiny Headers */
+h1 { font-size: 1.5rem !important; margin-bottom: 0.5rem; }
+h2 { font-size: 1.3rem !important; margin-bottom: 0.5rem; }
+h3 { font-size: 1.1rem !important; margin-bottom: 0.4rem; }
+h4 { font-size: 1rem !important; margin-bottom: 0.3rem; }
+h5, h6 { font-size: 0.9rem !important; margin-bottom: 0.2rem; }
+
+/* Tighter Spacing */
 section, main {
-    margin-bottom: 2rem; /* Reduced from 4rem */
+    margin-bottom: 1.5rem; /* Very tight sections */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.container {
+    max-width: 1140px; /* Keep width but content will look smaller inside */
+}
+
+/* Card & Component Compression */
+.card {
     margin-bottom: 1rem;
-    line-height: 1.3;
+    border: none;
+}
+.card-body {
+    padding: 0.75rem !important; /* Reduced padding */
+}
+.card-title {
+    font-size: 1.1rem;
 }
 
-/* Explicit Header Size Prevention */
-h1 { font-size: 2rem; }
-h2 { font-size: 1.75rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1.1rem; }
-h6 { font-size: 1rem; }
-
-a { text-decoration: none; }
-
-/* Navbar Compactness */
+/* Navbar Ultra-Compact */
+.navbar {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+    min-height: auto;
+}
+.navbar-brand img {
+    height: 40px !important; /* Smaller Logo */
+}
 .navbar-dark .navbar-nav .nav-link {
-    font-size: 0.85rem; /* Smaller navbar links */
-    padding: 0.25rem 0.8rem !important; /* Tighter padding */
+    font-size: 0.8rem !important;
+    padding: 0.2rem 0.6rem !important;
+    margin: 0 1px;
 }
 
-/* Navbar Overrides */
-.navbar-dark .navbar-nav .nav-link {
-    color: rgba(255,255,255,0.9);
-    font-weight: 500;
-    font-size: 0.9rem;
-    padding: 0.4rem 1rem !important;
-    border-radius: 50rem;
-    transition: all 0.3s ease;
-    margin: 0 2px;
+/* Button Scaling */
+.btn {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+}
+.btn-lg {
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
 }
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link:focus {
