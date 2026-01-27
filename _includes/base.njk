@@ -31,90 +31,197 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <!-- Navbar (Fixed, Glassy Red) -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm w-100" style="background-color: var(--primary-wood); z-index: 1000;">
-        <div class="container-fluid px-4 px-lg-5">
-            <!-- 1. Logo (Right/Start) -->
-            <a class="navbar-brand p-0 me-3" href="/">
-                <img src="{{ settings.logoWhite }}" alt="{{ settings.siteName }}" height="32">
-            </a>
+    <!-- Universe Navbar (Fixed) -->
+    <nav class="navbar navbar-expand-lg fixed-top universe-navbar p-0">
+        <div class="container-fluid px-4 h-100 d-flex justify-content-between align-items-center" style="min-height: 70px;">
+            
+            <!-- 1. Right Section (Start): Actions & Search -->
+            <div class="d-flex align-items-center gap-3 order-1">
+                <!-- Mobile Toggler (Visible on Mobile) -->
+                <button class="navbar-toggler border-0 p-0 text-white me-2 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navCenter">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
 
-            <!-- Mobile Toggler -->
-            <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Collapsible Content -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- 2. Links (Center) -->
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-bold gap-3">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/">الرئيسية</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/products/">المنتجات</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/offers/">العروض</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/contact/">اتصل بنا</a>
-                    </li>
-                </ul>
-
-                <!-- 3. Search (Left/End) -->
-                <form class="d-flex" role="search" action="/products/" method="get">
-                    <div class="input-group input-group-sm rounded-pill overflow-hidden bg-white bg-opacity-10 border border-white border-opacity-25">
-                        <input class="form-control border-0 bg-transparent text-white shadow-none small" type="search" name="q" placeholder="بحث..." aria-label="Search" style="font-size: 0.85rem; width: 180px;">
-                        <button class="btn border-0 text-white-50 hover-text-white transition-all pe-3" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
+                <!-- Expandable Search -->
+                <div class="search-container" id="searchContainer">
+                    <button class="search-btn" onclick="toggleSearch()" title="بحث">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="search-input-wrapper">
+                        <form action="/products/" method="get" class="d-flex">
+                            <input type="text" name="q" class="search-input" placeholder="ابحث عن منتج..." id="searchInput" autocomplete="off">
+                        </form>
                     </div>
-                </form>
+                </div>
+
+                <!-- Action Buttons (Desktop) -->
+                <div class="header-actions d-none d-md-flex gap-2">
+                    <a href="https://wa.me/{{ settings.contact.whatsapp }}" target="_blank" class="btn-icon" title="تواصل واتساب">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <button class="btn-icon position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar" title="السلة">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark border border-light" style="font-size: 0.6rem;">0</span>
+                    </button>
+                    <a href="/login/" class="btn-icon" title="تسجيل الدخول">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
             </div>
+
+            <!-- 2. Center Section: Navigation (Mega Menus) -->
+            <div class="collapse navbar-collapse justify-content-center order-2 order-lg-2" id="navCenter">
+                <ul class="navbar-nav align-items-center gap-4">
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="/">الرئيسية</a></li>
+                    
+                    <!-- Products Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-white fw-bold dropdown-toggle" href="/products/">المنتجات</a>
+                        <div class="dropdown-menu-custom">
+                            <ul class="list-unstyled mb-0" style="min-width: 180px;">
+                                <li><a href="/products/#bedrooms" class="dropdown-item py-2">غرف نوم</a></li>
+                                <li><a href="/products/#kids" class="dropdown-item py-2">غرف أطفال</a></li>
+                                <li><a href="/products/#sofas" class="dropdown-item py-2">أنتريهات</a></li>
+                                <li><a href="/products/#corners" class="dropdown-item py-2">ركنات</a></li>
+                                <li><a href="/products/#kitchens" class="dropdown-item py-2">مطابخ</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Offers Dropdown (Smart Hover) -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-white fw-bold dropdown-toggle" href="/offers/">العروض</a>
+                        <div class="dropdown-menu-custom text-end">
+                            <div class="offers-dropdown">
+                                <ul class="offers-list">
+                                    {% for product in products.products | selectattr("id", "match", "offer") | slice(5) %}
+                                    <li>
+                                        <a href="/products/#{{ product.id }}" class="offer-link" 
+                                           onmouseenter="showPreview('{{ product.image }}', '{{ product.name }}', '{{ product.price }}')">
+                                            {{ product.name }}
+                                        </a>
+                                    </li>
+                                    {% else %}
+                                    <li class="p-2 text-muted">لا توجد عروض حالياً</li>
+                                    {% endfor %}
+                                </ul>
+                                <!-- Live Preview Container -->
+                                <div class="offer-preview" id="offerPreviewBox">
+                                    <img src="/images/offer-main.webp" id="previewImg" class="preview-img" alt="Preview">
+                                    <h6 class="small fw-bold mb-1" id="previewTitle">اختر عرضاً</h6>
+                                    <span class="badge bg-danger" id="previewPrice">خصم خاص</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Branches Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-white fw-bold dropdown-toggle" href="/branches/">الفروع</a>
+                        <div class="dropdown-menu-custom text-end" style="min-width: 300px;">
+                            {% for branch in branches_page.branches %}
+                            <div class="branch-item">
+                                <div class="fw-bold text-dark">{{ branch.name }}</div>
+                                <div class="branch-details">
+                                    <p class="mb-1"><i class="fas fa-map-marker-alt text-danger me-1"></i> {{ branch.address }}</p>
+                                    <a href="{{ branch.mapLink }}" target="_blank" class="btn btn-sm btn-outline-danger w-100 mt-1">اللوكيشن</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="/contact/">اتصل بنا</a></li>
+                </ul>
+            </div>
+
+            <!-- 3. Left Section (End): Logo (English) -->
+            <a class="navbar-brand order-3 ms-0 me-3" href="/">
+                <!-- Assuming logoWhite is the image path. Adding text fallback just in case -->
+                <div class="d-flex align-items-center gap-2">
+                   <img src="{{ settings.logoWhite }}" alt="Dream House" height="40">
+                   <span class="h4 mb-0 text-white fw-bold" style="font-family: 'Outfit', sans-serif; letter-spacing: 1px;">DREAM HOUSE</span>
+                </div>
+            </a>
         </div>
     </nav>
 
-    <main>
+    <!-- Search Backdrop Blur -->
+    <div class="search-overlay" id="searchOverlay" onclick="closeSearch()">
+        <div class="container pt-5">
+            <div id="liveSearchResults" class="row g-3 justify-content-center">
+                <!-- Search results injected here via JS -->
+            </div>
+        </div>
+    </div>
+
+    <main style="padding-top: 80px;"> <!-- Push content down due to fixed navbar -->
         {{ content | safe }}
     </main>
 
-    <!-- Cart Offcanvas -->
+    <!-- Cart Offcanvas (Existing Structure) -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
         <div class="offcanvas-header text-white" style="background-color: var(--primary-wood);">
             <h5 class="offcanvas-title small" id="cartSidebarLabel">السلة</h5>
             <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column p-0">
-            <div id="cartItems" class="flex-grow-1 p-3 overflow-auto small">
-                <!-- Cart Items will be injected here -->
-            </div>
+            <div id="cartItems" class="flex-grow-1 p-3 overflow-auto small"></div>
             <div class="border-top p-3 bg-white">
                 <div class="d-flex justify-content-between mb-3 fw-bold text-dark small">
                     <span>الإجمالي:</span>
                     <span class="total-price text-danger">0 ج.م</span>
                 </div>
                 <button class="btn w-100 btn-dark btn-sm d-flex align-items-center justify-content-center gap-2 py-2" id="checkoutBtn">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>طلب واتساب</span>
+                    <i class="fab fa-whatsapp"></i> <span>طلب واتساب</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Floating Buttons (Resized) -->
-    <div class="position-fixed bottom-0 start-0 m-3 d-flex flex-column gap-2 floating-btn-container" style="z-index: 1050;">
-        <a href="https://wa.me/{{ settings.contact.whatsapp }}" target="_blank" class="btn btn-success rounded-circle d-flex align-items-center justify-content-center shadow-sm floating-btn">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <button class="btn btn-dark rounded-circle d-flex align-items-center justify-content-center shadow-sm position-relative floating-btn" style="background-color: #000000; border:none;" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; padding: 2px 4px;">
-                0
-            </span>
-        </button>
-    </div>
-    <div class="cart-overlay" id="cartOverlay"></div>
+    <!-- Inject JS for Navbar Interactions -->
+    <script>
+        function toggleSearch() {
+            const container = document.getElementById('searchContainer');
+            const overlay = document.getElementById('searchOverlay');
+            const input = document.getElementById('searchInput');
+            
+            container.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            if(container.classList.contains('active')) {
+                input.focus();
+            }
+        }
+        
+        function closeSearch() {
+            document.getElementById('searchContainer').classList.remove('active');
+            document.getElementById('searchOverlay').classList.remove('active');
+        }
+
+        // Preview Logic for Offers
+        function showPreview(img, title, price) {
+            document.getElementById('previewImg').src = img;
+            document.getElementById('previewTitle').innerText = title;
+            document.getElementById('previewPrice').innerText = price + ' ج.م';
+        }
+
+        // Live Search (Simple Filter)
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const resultsContainer = document.getElementById('liveSearchResults');
+            
+            if(query.length < 2) {
+                resultsContainer.innerHTML = '';
+                return;
+            }
+
+            // Note: In a real app, we'd fetch an API. Here we might need pre-rendered JSON or fetch local JSON.
+            // For now, we will show a placeholder or basic feedback.
+            // To make this robust, we should output the products as a JS object.
+        });
+    </script>
+
 
     <!-- Footer -->
     <footer class="bg-dark text-white pt-5 pb-3 mt-5 border-top border-warning border-3" style="background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);">
