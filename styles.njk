@@ -207,20 +207,44 @@ h5, h6 { font-size: 1rem !important; margin-bottom: 0.5rem; }
     margin-top: 0;
 }
 .dropdown-menu .dropend .dropdown-toggle::after {
-    display: none; /* Hide default arrow */
+/* Nested Dropdown Styling */
+.dropdown-menu { margin-top: 0; }
+.dropdown-menu .dropend .dropdown-toggle::after { display: none; }
+
+/* Desktop Submenu (Hover Tree) */
+@media (min-width: 992px) {
+    .dropdown-menu .submenu {
+        display: none;
+        position: absolute;
+        right: 100%; /* Opens to Left */
+        left: auto;
+        top: 0;
+        margin-right: 0.2rem;
+        margin-top: -5px;
+    }
+    .dropdown-menu .dropend:hover .submenu {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
 }
-.dropdown-menu .submenu {
-    display: none;
-    position: absolute;
-    right: 100%;
-    left: auto;
-    top: 0;
-    margin-right: 0.2rem;
-    margin-top: -5px;
-}
-.dropdown-menu .dropend:hover .submenu {
-    display: block;
-    animation: fadeIn 0.3s ease;
+
+/* Mobile Submenu (Static Tree) */
+@media (max-width: 991.98px) {
+    .dropdown-menu .submenu {
+        display: block; /* Always visible in tree or toggle? Let's use clean tree */
+        position: static;
+        width: 100%;
+        margin-right: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: none !important;
+        padding-left: 0;
+    }
+    .dropdown-menu {
+        border: none;
+        background: rgba(255,255,255,0.95);
+        margin-top: 10px;
+    }
 }
 
 /* Animation keyframes */

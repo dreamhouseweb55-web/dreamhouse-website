@@ -33,126 +33,128 @@
 <body>
     <!-- Strict Navbar (User Specified) -->
     <nav class="navbar navbar-expand-lg fixed-top universe-navbar p-0">
-        <div class="container-fluid px-4 h-100 d-flex flex-row-reverse justify-content-between align-items-center" style="min-height: 80px;">
+        <div class="container-fluid px-4 h-100 d-flex justify-content-between align-items-center" style="min-height: 80px;">
             
-            <!-- 1. Left: Logo (Image Only, No Extra Text) -->
+            <!-- 1. Right Section: Toggler + Search + Nav -->
+            <div class="d-flex align-items-center gap-3">
+                
+                <!-- Mobile Toggler -->
+                <button class="navbar-toggler border-0 p-0 text-white d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                    <div class="hamburger-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+
+                <!-- Navbar Content (Desktop: Right | Mobile: Collapsed) -->
+                <div class="collapse navbar-collapse flex-grow-0" id="navContent">
+                    <div class="d-flex flex-column flex-lg-row align-items-end align-items-lg-center gap-4">
+                        
+                        <!-- Search Icon -->
+                        <div class="search-trigger order-1 order-lg-2 ms-lg-3">
+                            <button class="btn text-white p-0 border-0" onclick="openSearchOverlay()" title="Search">
+                                <i class="fas fa-search fa-lg hover-scale"></i>
+                            </button>
+                        </div>
+    
+                        <!-- Navigation Links -->
+                        <ul class="navbar-nav align-items-center gap-3 order-2 order-lg-1">
+                            <!-- HOME (With Active State) -->
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold hover-underline {% if page.url == '/' or page.url == '/index.html' %}text-warning{% else %}text-white{% endif %}" href="/">HOME</a>
+                            </li>
+                            
+                            <!-- Products Tree Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white fw-bold dropdown-toggle hover-underline" href="#" data-bs-auto-close="outside">PRODUCTS</a>
+                                <ul class="dropdown-menu shadow-lg border-0 rounded-3 p-0" style="min-width: 220px;">
+                                    <!-- Category: Bedrooms -->
+                                    <li class="dropend">
+                                        <a class="dropdown-item d-flex justify-content-between align-items-center py-2 px-3" href="#" data-bs-toggle="dropdown">
+                                            Bedrooms <i class="fas fa-chevron-left small ms-2"></i>
+                                        </a>
+                                        <ul class="dropdown-menu shadow-lg border-0 rounded-3 p-2 submenu">
+                                            {% for product in products.products | selectattr("category", "equalto", "bedrooms") %}
+                                            <li><a class="dropdown-item rounded-2 small" href="/products/#{{ product.id }}">{{ product.name }}</a></li>
+                                            {% endfor %}
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item rounded-2 fw-bold text-danger" href="/products/#bedrooms">View All</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Category: Living -->
+                                    <li class="dropend">
+                                        <a class="dropdown-item d-flex justify-content-between align-items-center py-2 px-3" href="#" data-bs-toggle="dropdown">
+                                            Living <i class="fas fa-chevron-left small ms-2"></i>
+                                        </a>
+                                        <ul class="dropdown-menu shadow-lg border-0 rounded-3 p-2 submenu">
+                                            {% for product in products.products | selectattr("category", "equalto", "living") %}
+                                            <li><a class="dropdown-item rounded-2 small" href="/products/#{{ product.id }}">{{ product.name }}</a></li>
+                                            {% endfor %}
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item rounded-2 fw-bold text-danger" href="/products/#sofas">View All</a></li>
+                                        </ul>
+                                    </li>
+                                    <!-- Category: Kitchens -->
+                                    <li class="dropend">
+                                        <a class="dropdown-item d-flex justify-content-between align-items-center py-2 px-3" href="#" data-bs-toggle="dropdown">
+                                            Kitchens <i class="fas fa-chevron-left small ms-2"></i>
+                                        </a>
+                                        <ul class="dropdown-menu shadow-lg border-0 rounded-3 p-2 submenu">
+                                             {% for product in products.products | selectattr("category", "equalto", "kitchens") %}
+                                            <li><a class="dropdown-item rounded-2 small" href="/products/#{{ product.id }}">{{ product.name }}</a></li>
+                                            {% endfor %}
+                                             <li><a class="dropdown-item rounded-2 fw-bold text-danger" href="/products/#kitchens">View All</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+    
+                            <!-- Offers Dropdown -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white fw-bold dropdown-toggle hover-underline" href="/offers/">OFFERS</a>
+                                <div class="dropdown-menu shadow-lg border-0 rounded-3 p-2" style="min-width: 300px;">
+                                    {% for product in products.products | selectattr("id", "match", "offer") %}
+                                    <div class="offer-item position-relative p-2 rounded-2 border-bottom">
+                                        <a href="/products/#{{ product.id }}" class="text-dark text-decoration-none fw-bold d-block">
+                                            {{ product.name }} <span class="badge bg-danger ms-2">{{ product.price }} LE</span>
+                                        </a>
+                                        <div class="offer-preview-popup position-absolute top-0 start-100 ms-2 bg-white shadow-lg rounded-3 overflow-hidden p-0" style="width: 200px; display: none; z-index: 1000;">
+                                            <img src="{{ product.image }}" class="w-100" style="height: 120px; object-fit: cover;">
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </li>
+    
+                            <!-- Branches -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white fw-bold dropdown-toggle hover-underline" href="/branches/">BRANCHES</a>
+                                <ul class="dropdown-menu shadow-lg border-0 rounded-3 p-2" style="min-width: 250px;">
+                                    {% for branch in branches_page.branches %}
+                                    <li class="position-relative branch-hover-item p-2 rounded-2 border-bottom">
+                                        <div class="fw-bold">{{ branch.name }}</div>
+                                        <div class="branch-popup position-absolute top-0 start-100 ms-2 bg-white shadow-lg p-3 rounded-3 border" style="width: 220px; display: none; z-index: 100;">
+                                            <h6 class="small fw-bold text-danger">{{ branch.name }}</h6>
+                                            <p class="small text-muted mb-2">{{ branch.address }}</p>
+                                            <a href="{{ branch.mapLink }}" target="_blank" class="btn btn-sm btn-dark w-100 rounded-pill">Go to Map</a>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+    
+                            <li class="nav-item"><a class="nav-link text-white fw-bold hover-underline" href="/contact/">CONTACT</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Left Section: Logo (Moved to End of HTML flow -> Left in RTL) -->
             <a class="navbar-brand m-0" href="/">
                 <img src="{{ settings.logoWhite }}" alt="Dream House" height="45">
             </a>
 
-            <!-- Mobile Toggler -->
-            <button class="navbar-toggler border-0 p-0 text-white d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-                <div class="hamburger-icon">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
-
-            <!-- 2. Right: Search + Navigation Links -->
-            <div class="collapse navbar-collapse flex-grow-0" id="navContent">
-                <div class="d-flex flex-column flex-lg-row align-items-end align-items-lg-center gap-4">
-                    
-                    <!-- Search Icon (Expands on Click) -->
-                    <div class="search-trigger order-1 order-lg-2 ms-lg-3">
-                        <button class="btn text-white p-0 border-0" onclick="openSearchOverlay()" title="Search">
-                            <i class="fas fa-search fa-lg hover-scale"></i>
-                        </button>
-                    </div>
-
-                    <!-- Navigation Links -->
-                    <ul class="navbar-nav align-items-center gap-3 order-2 order-lg-1">
-                        <li class="nav-item"><a class="nav-link text-white fw-bold hover-underline" href="/">HOME</a></li>
-                        
-                        <!-- Products Tree Dropdown -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-white fw-bold dropdown-toggle hover-underline" href="#" data-bs-auto-close="outside">PRODUCTS</a>
-                            <ul class="dropdown-menu shadow-lg border-0 rounded-3 p-0" style="min-width: 220px;">
-                                <!-- Category: Bedrooms -->
-                                <li class="dropend">
-                                    <a class="dropdown-item d-flex justify-content-between align-items-center py-2 px-3" href="#" data-bs-toggle="dropdown">
-                                        Bedrooms <i class="fas fa-chevron-right small ms-2"></i>
-                                    </a>
-                                    <ul class="dropdown-menu shadow-lg border-0 rounded-3 p-2 submenu">
-                                        {% for product in products.products | selectattr("category", "equalto", "bedrooms") %}
-                                        <li><a class="dropdown-item rounded-2 small" href="/products/#{{ product.id }}">{{ product.name }}</a></li>
-                                        {% endfor %}
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item rounded-2 fw-bold text-danger" href="/products/#bedrooms">View All</a></li>
-                                    </ul>
-                                </li>
-                                <!-- Category: Living -->
-                                <li class="dropend">
-                                    <a class="dropdown-item d-flex justify-content-between align-items-center py-2 px-3" href="#" data-bs-toggle="dropdown">
-                                        Living <i class="fas fa-chevron-right small ms-2"></i>
-                                    </a>
-                                    <ul class="dropdown-menu shadow-lg border-0 rounded-3 p-2 submenu">
-                                        {% for product in products.products | selectattr("category", "equalto", "living") %}
-                                        <li><a class="dropdown-item rounded-2 small" href="/products/#{{ product.id }}">{{ product.name }}</a></li>
-                                        {% endfor %}
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item rounded-2 fw-bold text-danger" href="/products/#sofas">View All</a></li>
-                                    </ul>
-                                </li>
-                                <!-- Category: Kitchens -->
-                                <li class="dropend">
-                                    <a class="dropdown-item d-flex justify-content-between align-items-center py-2 px-3" href="#" data-bs-toggle="dropdown">
-                                        Kitchens <i class="fas fa-chevron-right small ms-2"></i>
-                                    </a>
-                                    <ul class="dropdown-menu shadow-lg border-0 rounded-3 p-2 submenu">
-                                         {% for product in products.products | selectattr("category", "equalto", "kitchens") %}
-                                        <li><a class="dropdown-item rounded-2 small" href="/products/#{{ product.id }}">{{ product.name }}</a></li>
-                                        {% endfor %}
-                                         <li><a class="dropdown-item rounded-2 fw-bold text-danger" href="/products/#kitchens">View All</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <!-- Offers Dropdown (Hover Preview) -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-white fw-bold dropdown-toggle hover-underline" href="/offers/">OFFERS</a>
-                            <div class="dropdown-menu shadow-lg border-0 rounded-3 p-2" style="min-width: 300px;">
-                                {% for product in products.products | selectattr("id", "match", "offer") %}
-                                <div class="offer-item position-relative p-2 rounded-2 border-bottom">
-                                    <a href="/products/#{{ product.id }}" class="text-dark text-decoration-none fw-bold d-block">
-                                        {{ product.name }} <span class="badge bg-danger ms-2">{{ product.price }} LE</span>
-                                    </a>
-                                    <!-- Hover Card -->
-                                    <div class="offer-preview-popup position-absolute top-0 start-100 ms-2 bg-white shadow-lg rounded-3 overflow-hidden p-0" style="width: 200px; display: none; z-index: 1000;">
-                                        <img src="{{ product.image }}" class="w-100" style="height: 120px; object-fit: cover;">
-                                        <div class="p-2 text-center bg-light">
-                                            <p class="small m-0 text-danger fw-bold">Click to View</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </li>
-
-                        <!-- Branches Dropdown (Hover Details) -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-white fw-bold dropdown-toggle hover-underline" href="/branches/">BRANCHES</a>
-                            <ul class="dropdown-menu shadow-lg border-0 rounded-3 p-2" style="min-width: 250px;">
-                                {% for branch in branches_page.branches %}
-                                <li class="position-relative branch-hover-item p-2 rounded-2 border-bottom">
-                                    <div class="fw-bold">{{ branch.name }}</div>
-                                    <!-- Hover Detail Popup -->
-                                    <div class="branch-popup position-absolute top-0 start-100 ms-2 bg-white shadow-lg p-3 rounded-3 border" style="width: 220px; display: none; z-index: 100;">
-                                        <h6 class="small fw-bold text-danger">{{ branch.name }}</h6>
-                                        <p class="small text-muted mb-2">{{ branch.address }}</p>
-                                        <p class="small text-muted mb-2"><i class="fas fa-phone me-1"></i> {{ branch.phone }}</p>
-                                        <a href="{{ branch.mapLink }}" target="_blank" class="btn btn-sm btn-dark w-100 rounded-pill">Go to Map</a>
-                                    </div>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-
-                        <li class="nav-item"><a class="nav-link text-white fw-bold hover-underline" href="/contact/">CONTACT</a></li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </nav>
 
