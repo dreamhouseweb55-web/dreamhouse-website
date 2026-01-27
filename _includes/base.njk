@@ -31,38 +31,47 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top py-1" style="background: linear-gradient(180deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%); box-shadow: var(--shadow-lg);">
-        <div class="container">
-            <!-- Title Removed per Design Request -->
+    <!-- Navbar (Fixed, Glassy Red) -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm w-100" style="background-color: var(--primary-wood); z-index: 1000;">
+        <div class="container-fluid px-4 px-lg-5">
+            <!-- 1. Logo (Right/Start) -->
+            <a class="navbar-brand p-0 me-3" href="/">
+                <img src="{{ settings.logoWhite }}" alt="{{ settings.siteName }}" height="32">
+            </a>
 
-            <!-- Toggler -->
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- Mobile Toggler -->
+            <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Search Bar (Added) -->
-            <form class="d-flex mx-auto" role="search" action="/products/" method="get">
-                <div class="input-group input-group-sm" style="max-width: 200px;">
-                    <input class="form-control form-control-sm border-0 small" type="search" name="q" placeholder="بحث..." aria-label="Search" style="font-size: 0.8rem; background: rgba(255,255,255,0.9);">
-                    <button class="btn btn-dark btn-sm p-1 px-2" type="submit"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
-
-            <!-- Nav Links (Right/Start next to title) -->
-            <div class="collapse navbar-collapse flex-grow-0 me-2" id="navbarNav">
-                <ul class="navbar-nav gap-2">
-                    <li class="nav-item"><a class="nav-link fw-bold" href="/">الرئيسية</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold" href="/products/">المنتجات</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold" href="/offers/">العروض</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold" href="/contact/">اتصل</a></li>
+            <!-- Collapsible Content -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- 2. Links (Center) -->
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-bold gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/products/">المنتجات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/offers/">العروض</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/contact/">اتصل بنا</a>
+                    </li>
                 </ul>
-            </div>
 
-            <!-- Logo (Left/End) -->
-            <a class="navbar-brand ms-auto p-0" href="/">
-                <img src="{{ settings.logoWhite }}" alt="{{ settings.siteName }}" height="30">
-            </a>
+                <!-- 3. Search (Left/End) -->
+                <form class="d-flex" role="search" action="/products/" method="get">
+                    <div class="input-group input-group-sm rounded-pill overflow-hidden bg-white bg-opacity-10 border border-white border-opacity-25">
+                        <input class="form-control border-0 bg-transparent text-white shadow-none small" type="search" name="q" placeholder="بحث..." aria-label="Search" style="font-size: 0.85rem; width: 180px;">
+                        <button class="btn border-0 text-white-50 hover-text-white transition-all pe-3" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </nav>
 
