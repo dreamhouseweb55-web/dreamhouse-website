@@ -24,20 +24,35 @@ body {
     text-align: right;
     font-family: 'Almarai', sans-serif;
     background-color: #f8f9fa; /* Bootstrap light gray */
-    line-height: 1.8; /* Increased for breathing room */
+    line-height: 1.5; /* Reduced from 1.8 for compactness */
+    font-size: 0.95rem; /* Slightly smaller base font */
 }
 
 /* Global Spacing Utilities */
 section, main {
-    margin-bottom: 4rem; /* More space between sections */
+    margin-bottom: 2rem; /* Reduced from 4rem */
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 1.5rem;
-    line-height: 1.4;
+    margin-bottom: 1rem;
+    line-height: 1.3;
 }
 
+/* Explicit Header Size Prevention */
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.1rem; }
+h6 { font-size: 1rem; }
+
 a { text-decoration: none; }
+
+/* Navbar Compactness */
+.navbar-dark .navbar-nav .nav-link {
+    font-size: 0.85rem; /* Smaller navbar links */
+    padding: 0.25rem 0.8rem !important; /* Tighter padding */
+}
 
 /* Navbar Overrides */
 .navbar-dark .navbar-nav .nav-link {
