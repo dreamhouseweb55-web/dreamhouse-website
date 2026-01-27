@@ -41,19 +41,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+            <!-- Search Bar (Added) -->
+            <form class="d-flex mx-auto" role="search" action="/products/" method="get">
+                <div class="input-group input-group-sm" style="max-width: 200px;">
+                    <input class="form-control form-control-sm border-0 small" type="search" name="q" placeholder="بحث..." aria-label="Search" style="font-size: 0.8rem; background: rgba(255,255,255,0.9);">
+                    <button class="btn btn-dark btn-sm p-1 px-2" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+
             <!-- Nav Links (Right/Start next to title) -->
-            <div class="collapse navbar-collapse flex-grow-0 me-3" id="navbarNav">
-                <ul class="navbar-nav gap-3">
+            <div class="collapse navbar-collapse flex-grow-0 me-2" id="navbarNav">
+                <ul class="navbar-nav gap-2">
                     <li class="nav-item"><a class="nav-link fw-bold" href="/">الرئيسية</a></li>
                     <li class="nav-item"><a class="nav-link fw-bold" href="/products/">المنتجات</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold" href="/offers/">العروض الخاصة</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold" href="/contact/">اتصل بنا</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="/offers/">العروض</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="/contact/">اتصل</a></li>
                 </ul>
             </div>
 
             <!-- Logo (Left/End) -->
             <a class="navbar-brand ms-auto p-0" href="/">
-                <img src="{{ settings.logoWhite }}" alt="{{ settings.siteName }}" height="50">
+                <img src="{{ settings.logoWhite }}" alt="{{ settings.siteName }}" height="30">
             </a>
         </div>
     </nav>
@@ -65,34 +73,34 @@
     <!-- Cart Offcanvas -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
         <div class="offcanvas-header text-white" style="background-color: var(--primary-wood);">
-            <h5 class="offcanvas-title" id="cartSidebarLabel">سلة المشتريات</h5>
+            <h5 class="offcanvas-title small" id="cartSidebarLabel">السلة</h5>
             <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column p-0">
-            <div id="cartItems" class="flex-grow-1 p-3 overflow-auto">
+            <div id="cartItems" class="flex-grow-1 p-3 overflow-auto small">
                 <!-- Cart Items will be injected here -->
             </div>
-            <div class="border-top p-3 bg-light">
-                <div class="d-flex justify-content-between mb-3 fw-bold text-dark h5">
+            <div class="border-top p-3 bg-white">
+                <div class="d-flex justify-content-between mb-3 fw-bold text-dark small">
                     <span>الإجمالي:</span>
-                    <span class="total-price text-primary">0 ج.م</span>
+                    <span class="total-price text-danger">0 ج.م</span>
                 </div>
-                <button class="btn w-100 btn-success d-flex align-items-center justify-content-center gap-2 py-2" id="checkoutBtn">
-                    <i class="fab fa-whatsapp fa-lg"></i>
-                    <span>إتمام الطلب عبر واتساب</span>
+                <button class="btn w-100 btn-dark btn-sm d-flex align-items-center justify-content-center gap-2 py-2" id="checkoutBtn">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>طلب واتساب</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Floating Buttons -->
-    <div class="position-fixed bottom-0 start-0 m-4 d-flex flex-column gap-3" style="z-index: 1050;">
-        <a href="https://wa.me/{{ settings.contact.whatsapp }}" target="_blank" class="btn btn-success rounded-circle d-flex align-items-center justify-content-center shadow-lg" style="width: 60px; height: 60px;">
-            <i class="fab fa-whatsapp fa-2x"></i>
+    <!-- Floating Buttons (Resized) -->
+    <div class="position-fixed bottom-0 start-0 m-3 d-flex flex-column gap-2 floating-btn-container" style="z-index: 1050;">
+        <a href="https://wa.me/{{ settings.contact.whatsapp }}" target="_blank" class="btn btn-success rounded-circle d-flex align-items-center justify-content-center shadow-sm floating-btn">
+            <i class="fab fa-whatsapp"></i>
         </a>
-        <button class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center shadow-lg position-relative" style="width: 60px; height: 60px; background-color: var(--gold-accent); border:none;" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
-            <i class="fas fa-shopping-cart fa-lg text-dark"></i>
-            <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        <button class="btn btn-dark rounded-circle d-flex align-items-center justify-content-center shadow-sm position-relative floating-btn" style="background-color: #000000; border:none;" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; padding: 2px 4px;">
                 0
             </span>
         </button>

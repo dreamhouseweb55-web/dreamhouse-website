@@ -1,28 +1,19 @@
 :root {
-    /* الألوان الرئيسية */
-    --primary-wood: #3E2723;
-    /* بني غامق - لون الخشب */
-    --primary-wood-light: #5D4037;
-    /* بني فاتح */
-    --primary-wood-dark: #1B0C08;
-    /* بني داكن جداً */
+    /* الألوان الرئيسية - Red / Black / White Identity */
+    --primary-wood: #D32F2F; /* Primary RED (was Brown) */
+    --primary-wood-light: #000000; /* Secondary BLACK (was Light Brown) */
+    --primary-wood-dark: #000000; /* Darker BLACK */
 
     --secondary-white: #FFFFFF;
-    /* أبيض */
-    --secondary-silver: #C0C0C0;
-    /* سيلفر */
-    --secondary-silver-light: #E8E8E8;
-    /* سيلفر فاتح */
-    --secondary-silver-dark: #A0A0A0;
-    /* سيلفر غامق */
+    --secondary-silver: #F0F0F0;
+    --secondary-silver-light: #FFFFFF;
+    --secondary-silver-dark: #333333;
 
     /* ألوان إضافية */
-    --gold-accent: #D4AF37;
-    /* ذهبي للتميز */
-    --beige-bg: #F5F5DC;
-    /* بيج للخلفيات */
-    --dark-text: #212121;
-    /* نص غامق */
+    --gold-accent: #D32F2F; /* Unified RED */
+    --beige-bg: #FFFFFF; /* White backgrounds only */
+    --dark-text: #000000;
+    --light-text: #666666;
     --light-text: #757575;
     /* نص فاتح */
 

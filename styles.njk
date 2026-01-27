@@ -96,18 +96,59 @@ h5, h6 { font-size: 1rem !important; margin-bottom: 0.5rem; }
     height: auto !important;
 }
 
-/* Navbar - Micro */
+/* Navbar Ultra-Compact (1/3 Size) */
 .navbar {
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 40px !important; /* Force very short height */
+    background: var(--primary-wood) !important; /* Pure Red Background */
 }
 .navbar-brand img {
-    height: 35px !important;
+    height: 30px !important; /* Tiny Logo */
 }
 .navbar-dark .navbar-nav .nav-link {
     font-size: 0.8rem !important;
-    padding: 0.2rem 0.6rem !important;
-    margin: 0 1px;
+    padding: 0.15rem 0.5rem !important; /* Minimal padding */
+    line-height: 1;
+}
+
+/* Floating Buttons - Micro Sized */
+.floating-btn-container {
+    gap: 0.5rem !important;
+    bottom: 1rem !important;
+    left: 1rem !important;
+}
+.floating-btn {
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 0.9rem !important;
+    padding: 0 !important;
+}
+
+/* Color Overrides for Red/Black/White Theme */
+.text-warning { color: #000000 !important; } /* Highlights are Black */
+.bg-warning { background-color: #000000 !important; }
+.btn-warning {
+    background-color: #000000;
+    border-color: #000000;
+    color: #fff;
+}
+.btn-primary {
+    background-color: var(--primary-wood);
+    border-color: var(--primary-wood);
+}
+.btn-outline-primary {
+    color: var(--primary-wood);
+    border-color: var(--primary-wood);
+}
+.btn-outline-primary:hover {
+    background-color: var(--primary-wood);
+    color: #fff;
+}
+
+/* Section Backgrounds - Strip Beige */
+.bg-light, section.bg-light {
+    background-color: #FFFFFF !important;
 }
 
 /* Button Scaling */
