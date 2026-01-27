@@ -12,12 +12,8 @@ permalink: styles.css
     font-display: swap;
 }
 
-:root {
-    --primary-wood: #5D4037;
-    --primary-wood-light: #8D6E63;
-    --gold-accent: #D32F2F; /* Changed to RED per brand identity */
-    font-family: 'Almarai', sans-serif;
-}
+/* Font Loaded from Local */
+/* :root variables are loaded from src/css/variables.css */
 
 /* Aggressive Compression with Massive White Space */
 html {
@@ -184,38 +180,5 @@ h5, h6 { font-size: 1rem !important; margin-bottom: 0.5rem; }
     transition: transform 0.5s ease;
 }
 
-/* Buttons */
-.btn-primary {
-    background-color: var(--primary-wood);
-    border-color: var(--primary-wood);
-}
-.btn-primary:hover {
-    background-color: #4E342E;
-    border-color: #4E342E;
-}
-.btn-warning {
-    background-color: var(--gold-accent);
-    border-color: var(--gold-accent);
-    color: #fff;
-}
-.btn-warning:hover {
-    background-color: #b71c1c; /* Darker Red */
-    border-color: #b71c1c;
-    color: #fff;
-}
-
-/* Bootstrap Overrides for Brand Identity (Red instead of Yellow) */
-.text-warning {
-    color: var(--gold-accent) !important;
-}
-.bg-warning {
-    background-color: var(--gold-accent) !important;
-}
-.border-warning {
-    border-color: var(--gold-accent) !important;
-}
-.badge.bg-warning {
-    background-color: var(--gold-accent) !important;
-    color: #fff !important;
-}
+/* End of Styles */
 
