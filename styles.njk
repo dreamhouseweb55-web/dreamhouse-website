@@ -21,7 +21,7 @@ permalink: styles.css
 
 /* Aggressive Compression with Massive White Space */
 html {
-    font-size: 12px; /* Ultra-small base size for "Micro" feel */
+    font-size: 11px; /* Extremely small base size */
 }
 
 body {
@@ -29,12 +29,12 @@ body {
     text-align: right;
     font-family: 'Almarai', sans-serif;
     background-color: #f8f9fa;
-    line-height: 2.0; /* Very airy text */
+    line-height: 2.2; /* Very airy text to compensate for small size */
 }
 
 /* Massive Spacing (Negative Space) */
 section, main {
-    margin-bottom: 6rem; /* Huge vertical gaps */
+    margin-bottom: 8rem; /* Ultra huge vertical gaps */
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
@@ -42,38 +42,67 @@ section, main {
 /* Horizontal Breathing Room */
 .container {
     max-width: 1200px;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
 
 /* Tiny Headers but Airy */
-h1 { font-size: 1.8rem !important; margin-bottom: 1.5rem; letter-spacing: 0.5px; }
-h2 { font-size: 1.5rem !important; margin-bottom: 1.2rem; }
+h1 { font-size: 1.6rem !important; margin-bottom: 1.5rem; letter-spacing: 0.5px; }
+h2 { font-size: 1.4rem !important; margin-bottom: 1.2rem; }
 h3 { font-size: 1.2rem !important; margin-bottom: 1rem; }
 h4 { font-size: 1.1rem !important; margin-bottom: 0.8rem; }
 h5, h6 { font-size: 1rem !important; margin-bottom: 0.5rem; }
 
-/* Card - Float in space */
+/* Half-Size Component Overrides */
+.btn {
+    padding: 0.2rem 0.6rem !important; /* Half normal padding */
+    font-size: 0.9rem !important;
+    border-radius: 4px !important; /* Less rounded to look sharper/smaller */
+    min-height: auto !important;
+}
+.btn-lg {
+    padding: 0.3rem 0.8rem !important;
+    font-size: 1rem !important;
+}
+
+/* Compact Cards */
 .card {
     margin-bottom: 2rem;
     border: none;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Subtle shadow */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
 }
 .card-body {
-    padding: 1.5rem !important; /* More internal space */
+    padding: 0.8rem !important; /* Very tight internal spacing */
 }
 .card-title {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+    font-size: 1.1rem !important;
+    margin-bottom: 0.5rem !important;
+}
+.card-text {
+    font-size: 0.9rem !important;
+}
+.product-price {
+    font-size: 1rem !important;
+}
+.product-image {
+    height: 180px !important; /* Force smaller images */
+    object-fit: cover;
 }
 
-/* Navbar - Small but spaced */
+/* Form Inputs */
+.form-control, .form-select {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.9rem !important;
+    height: auto !important;
+}
+
+/* Navbar - Micro */
 .navbar {
-    padding-top: 0.8rem !important;
-    padding-bottom: 0.8rem !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
 }
 .navbar-brand img {
-    height: 40px !important; /* Smaller Logo */
+    height: 35px !important;
 }
 .navbar-dark .navbar-nav .nav-link {
     font-size: 0.8rem !important;
