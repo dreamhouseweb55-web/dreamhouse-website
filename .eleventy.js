@@ -1,7 +1,7 @@
 module.exports = function (eleventyConfig) {
   // Copy static files to output
   eleventyConfig.addPassthroughCopy("images");
-  eleventyConfig.addPassthroughCopy("admin");
+  eleventyConfig.addPassthroughCopy("admin/config.yml");
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
   eleventyConfig.addPassthroughCopy("data");
