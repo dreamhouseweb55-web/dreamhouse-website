@@ -12,7 +12,21 @@ export default {
 
         const url = new URL(request.url);
 
-        // Only allow requests to /api path
+        // Handle settings request (Decap CMS checks this route)
+        if (url.pathname === '/settings' || url.pathname === '/api/settings') {
+            return new Response(JSON.stringify({
+                github_allowed_orgs: [],
+                github_enabled: true,
+                roles: null
+            }), {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                }
+            });
+        }
+
+        // Only allow requests to /api path for other attempts
         if (!url.pathname.startsWith('/api')) {
             return new Response('Not Found', { status: 404 });
         }
