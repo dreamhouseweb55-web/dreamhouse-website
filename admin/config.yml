@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: main
   # استبدل الرابط أدناه برابط الوركر الخاص بك من Cloudflare Dashboard إذا كان مختلفاً
-  api_root: "https://dreamhouse-git-gateway.dreamhouseweb55-web.workers.dev/api"
+  api_root: "https://dreamhouse-git-gateway.dreamhouseweb55.workers.dev/"
 
 local_backend: true
 
