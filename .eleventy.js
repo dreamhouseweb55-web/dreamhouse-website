@@ -5,6 +5,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
   eleventyConfig.addPassthroughCopy("data");
+  eleventyConfig.addPassthroughCopy("assets");
 
   // Watch for changes in these files
   eleventyConfig.addWatchTarget("src/css/");

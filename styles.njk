@@ -4,18 +4,37 @@ permalink: styles.css
 {% include "src/css/variables.css" %}
 
 /* Custom Overrides on top of Bootstrap */
+@font-face {
+    font-family: 'Almarai';
+    src: url('/assets/fonts/Almarai-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --primary-wood: #5D4037;
     --primary-wood-light: #8D6E63;
     --gold-accent: #D32F2F; /* Changed to RED per brand identity */
-    font-family: 'Tajawal', 'Cairo', sans-serif;
+    font-family: 'Almarai', sans-serif;
 }
 
 body {
     direction: rtl;
     text-align: right;
-    font-family: var(--font-primary, 'Tajawal', sans-serif);
+    font-family: 'Almarai', sans-serif;
     background-color: #f8f9fa; /* Bootstrap light gray */
+    line-height: 1.8; /* Increased for breathing room */
+}
+
+/* Global Spacing Utilities */
+section, main {
+    margin-bottom: 4rem; /* More space between sections */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
 }
 
 a { text-decoration: none; }
