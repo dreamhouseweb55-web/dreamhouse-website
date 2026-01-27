@@ -19,9 +19,9 @@ permalink: styles.css
     font-family: 'Almarai', sans-serif;
 }
 
-/* Aggressive Compression for "Half Size" Effect */
+/* Aggressive Compression with Massive White Space */
 html {
-    font-size: 13px; /* Drastic reduction from browser default 16px. All REM units will scale down by ~20% automatically */
+    font-size: 12px; /* Ultra-small base size for "Micro" feel */
 }
 
 body {
@@ -29,44 +29,48 @@ body {
     text-align: right;
     font-family: 'Almarai', sans-serif;
     background-color: #f8f9fa;
-    line-height: 1.4; /* Tighter line height */
+    line-height: 2.0; /* Very airy text */
 }
 
-/* Force Tiny Headers */
-h1 { font-size: 1.5rem !important; margin-bottom: 0.5rem; }
-h2 { font-size: 1.3rem !important; margin-bottom: 0.5rem; }
-h3 { font-size: 1.1rem !important; margin-bottom: 0.4rem; }
-h4 { font-size: 1rem !important; margin-bottom: 0.3rem; }
-h5, h6 { font-size: 0.9rem !important; margin-bottom: 0.2rem; }
-
-/* Tighter Spacing */
+/* Massive Spacing (Negative Space) */
 section, main {
-    margin-bottom: 1.5rem; /* Very tight sections */
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    margin-bottom: 6rem; /* Huge vertical gaps */
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
+/* Horizontal Breathing Room */
 .container {
-    max-width: 1140px; /* Keep width but content will look smaller inside */
+    max-width: 1200px;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
-/* Card & Component Compression */
+/* Tiny Headers but Airy */
+h1 { font-size: 1.8rem !important; margin-bottom: 1.5rem; letter-spacing: 0.5px; }
+h2 { font-size: 1.5rem !important; margin-bottom: 1.2rem; }
+h3 { font-size: 1.2rem !important; margin-bottom: 1rem; }
+h4 { font-size: 1.1rem !important; margin-bottom: 0.8rem; }
+h5, h6 { font-size: 1rem !important; margin-bottom: 0.5rem; }
+
+/* Card - Float in space */
 .card {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Subtle shadow */
 }
 .card-body {
-    padding: 0.75rem !important; /* Reduced padding */
+    padding: 1.5rem !important; /* More internal space */
 }
 .card-title {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
 }
 
-/* Navbar Ultra-Compact */
+/* Navbar - Small but spaced */
 .navbar {
-    padding-top: 0.25rem !important;
-    padding-bottom: 0.25rem !important;
-    min-height: auto;
+    padding-top: 0.8rem !important;
+    padding-bottom: 0.8rem !important;
 }
 .navbar-brand img {
     height: 40px !important; /* Smaller Logo */
