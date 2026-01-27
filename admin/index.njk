@@ -119,18 +119,24 @@ permalink: "/admin/index.html"
                 document.body.removeAttribute('style');
                 
                 // Mock Netlify Identity to bypass CMS Login Screen
-                // This tells Decap CMS that we are already logged in via Firebase
                 window.netlifyIdentity = {
                     currentUser: function() {
                         return {
                             id: "firebase_user",
                             email: "{{ env.ALLOWED_EMAIL or 'dreamhouseweb55@gmail.com' }}",
-                            token: { access_token: "mock-token" }
+                            token: { access_token: "mock-token" },
+                            app_metadata: { provider: "google" },
+                            user_metadata: { full_name: "Admin" }
                         };
                     },
                     on: function(event, cb) {
-                        // Automatically trigger login callback
                         if (event === 'login') cb(window.netlifyIdentity.currentUser());
+                        if (event === 'init') cb(window.netlifyIdentity.currentUser());
+                    },
+                    init: function(opts) {
+                        console.log('Mock Identity Initialized');
+                        // Trigger login immediately
+                        this.on('login', () => {});
                     },
                     open: function() { console.log('Identity open called'); },
                     close: function() {},
