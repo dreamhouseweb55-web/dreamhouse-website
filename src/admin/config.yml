@@ -115,8 +115,9 @@ collections:
                   - {label: "صورة الخلفية", name: "image", widget: "image"} # يمكن استخدام color gradient أو صورة
                   - {label: "لون الخلفية (Gradient CSS)", name: "background", widget: "string", required: false, hint: "مثال: linear-gradient(135deg, #8B7355 0%, #D4AF37 100%)"}
                   - {label: "الرابط", name: "link", widget: "string"}
-                  - {label: "مميزات (Badge 1)", name: "badge1", widget: "string", required: false}
                   - {label: "مميزات (Badge 2)", name: "badge2", widget: "string", required: false}
+          
+          - label: "قسم الجودة"
             name: "quality"
             widget: "object"
             fields:

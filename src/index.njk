@@ -3,7 +3,7 @@ layout: base.njk
 title: الرئيسية
 ---
   <!-- ===== القسم الرئيسي (Hero) ===== -->
-  <section class="d-flex align-items-center justify-content-center text-center position-relative text-white" style="min-height: 80vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ home.hero.image }}') no-repeat center center/cover; background-color: var(--primary-wood);">
+  <section class="d-flex align-items-center justify-content-center text-center position-relative text-white" style="min-height: 60vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ home.hero.image }}') no-repeat center center/cover; background-color: var(--primary-wood);">
     <div class="container position-relative z-2">
       <h1 class="fw-bold mb-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">{{ home.hero.title }}</h1>
       <p class="lead mb-5" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">{{ home.hero.subtitle }}</p>
@@ -23,8 +23,8 @@ title: الرئيسية
       <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
       {% for feature in home.features.items %}
         <div class="col">
-          <div class="card h-100 border-0 shadow-sm p-3 hover-lift">
-            <div class="mb-3 text-danger highlight-icon">
+          <div class="card h-100 border-0 p-4 feature-card">
+            <div class="feature-icon mx-auto">
               <i class="{{ feature.icon }}"></i>
             </div>
             <h3 class="h5 fw-bold mb-3">{{ feature.title }}</h3>
@@ -62,7 +62,7 @@ title: الرئيسية
                 <div class="card-body text-center d-flex flex-column">
                     <h3 class="fw-bold mb-2">{{ category.title }}</h3>
                     <p class="card-text text-muted small mb-3">{{ category.description }}</p>
-                    <div class="d-flex justify-content-center gap-2 mb-3">
+                    <div class="d-none d-md-flex justify-content-center gap-2 mb-3">
                         {% if category.badge1 %}
                         <span class="badge bg-light text-dark border">{{ category.badge1 }}</span>
                         {% endif %}
@@ -142,7 +142,7 @@ title: الرئيسية
       {% for stat in home.stats.items %}
         <div class="col-md-3 col-6">
           <div class="p-4 rounded bg-white bg-opacity-10 border border-danger h-100">
-            <div class="mb-3 text-danger">
+            <div class="mb-3 text-white">
               <i class="{{ stat.icon }} fa-2x"></i>
             </div>
             <div class="h3 fw-bold mb-2"><span class="counter" data-target="{{ stat.number }}">0</span>+</div>
