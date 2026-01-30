@@ -1,8 +1,9 @@
 backend:
-  name: test-repo
-
-# Note: Using test-repo for demo. Data is stored in browser only.
-# For production with GitHub, use local backend: npm run cms
+  name: github
+  repo: dreamhouseweb55-web/dreamhouse-website
+  branch: main
+  base_url: https://dreamhouse-git-gateway.dreamhouseweb55.workers.dev
+  auth_endpoint: auth
 
 # Local backend for development
 local_backend: true
