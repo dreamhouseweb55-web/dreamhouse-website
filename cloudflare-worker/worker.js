@@ -179,52 +179,42 @@ export default {
         
         addLog('Token received: ' + token.substring(0, 10) + '...');
         
-        // Format expected by Decap CMS
-        var data = { token: token, provider: provider };
-        var messageStr = "authorization:" + provider + ":success:" + JSON.stringify(data);
+        // The EXACT format Decap CMS expects
+        // See: https://github.com/decaporg/decap-cms/blob/main/packages/netlify-cms-lib-auth/src/implicit-oauth.js
+        var content = {
+            token: token,
+            provider: provider
+        };
         
-        addLog('Message prepared');
+        addLog('Message format: authorization:github:success:{token,provider}');
         
         if (!window.opener) {
-            showError('لا يوجد نافذة أصلية (opener). تأكد من فتح صفحة التسجيل من لوحة التحكم.');
-            addLog('ERROR: window.opener is null');
+            showError('لا يوجد نافذة أصلية (opener). تأكد من فتح صفحة التسجيل من لوحة التحكم وليس مباشرة.');
+            addLog('ERROR: window.opener is null or undefined');
             return;
         }
         
-        addLog('window.opener found');
+        addLog('window.opener found: ' + (typeof window.opener));
         
         try {
-            // Send to opener window
-            window.opener.postMessage(messageStr, "*");
-            addLog('Message sent with wildcard origin');
+            // Method 1: Direct message format (what Decap CMS expects)
+            var msg = "authorization:" + provider + ":success:" + JSON.stringify(content);
+            addLog('Sending: ' + msg.substring(0, 50) + '...');
             
-            // Try specific origins
-            var origins = [
-                "https://dreamhouse-website.pages.dev",
-                "https://dreamhouseweb55-web.github.io",
-                "http://localhost:8080"
-            ];
-            
-            origins.forEach(function(origin) {
-                try {
-                    window.opener.postMessage(messageStr, origin);
-                    addLog('Message sent to: ' + origin);
-                } catch(e) {
-                    addLog('Failed to send to ' + origin + ': ' + e.message);
-                }
-            });
+            window.opener.postMessage(msg, "*");
+            addLog('✓ Message sent to opener');
             
             showSuccess();
             
-            // Close after delay
+            // Give time for message to be received before closing
             setTimeout(function() { 
-                addLog('Closing window...');
+                addLog('Window will close now...');
                 window.close(); 
-            }, 2000);
+            }, 1500);
             
         } catch(e) {
             showError('خطأ في إرسال البيانات: ' + e.message);
-            addLog('ERROR: ' + e.message);
+            addLog('ERROR: ' + e.stack);
         }
     })();
     </script>

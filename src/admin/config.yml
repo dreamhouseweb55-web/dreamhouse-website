@@ -5,6 +5,7 @@ backend:
   base_url: https://dreamhouse-git-gateway.dreamhouseweb55.workers.dev
   auth_endpoint: auth
 
+# Enable local backend only for local development (npm run cms)
 local_backend: true
 
 media_folder: "src/images" # المسار الفعلي داخل المشروع
