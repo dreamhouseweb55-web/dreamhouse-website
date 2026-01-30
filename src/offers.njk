@@ -10,7 +10,7 @@ title: {{ offers.hero.title }}
   </section>
   
   <!-- تنويه موسمي -->
-  <section class="py-3 bg-warning">
+  <section class="py-3 bg-danger">
     <div class="container text-center text-white">
       <h3 class="h5 fw-bold mb-1">
         <i class="fas fa-info-circle me-1"></i> {{ offers.seasonalNote.title }}
@@ -32,11 +32,11 @@ title: {{ offers.hero.title }}
 
         {% for offer in offers.offersSection.items %}
         <div class="col-lg-5 col-md-6">
-          <div class="card h-100 shadow{% if offer.isSpecial %}-lg transform-scale-sm{% endif %} border-warning border-3">
-            <div class="card-header {% if offer.isSpecial %}text-white position-relative overflow-hidden{% else %}bg-warning{% endif %} text-center py-3 border-0" 
+          <div class="card h-100 shadow{% if offer.isSpecial %}-lg transform-scale-sm{% endif %} border-danger border-3">
+            <div class="card-header {% if offer.isSpecial %}text-white position-relative overflow-hidden{% else %}bg-danger{% endif %} text-center py-3 border-0" 
                  {% if offer.isSpecial %}style="background: linear-gradient(135deg, var(--gold-accent) 0%, #F4D03F 100%);"{% endif %}>
               {% if offer.isSpecial %}
-              <div class="position-absolute top-0 end-0 bg-danger text-white px-2 py-1 small fw-bold">{{ offer.specialLabel }}</div>
+              <div class="position-absolute top-0 end-0 bg-primary text-white px-2 py-1 small fw-bold">{{ offer.specialLabel }}</div>
               {% endif %}
               <h3 class="h4 fw-bold m-0 text-white">
                 <i class="{{ offer.icon }} me-2"></i> {{ offer.title }}
@@ -49,12 +49,12 @@ title: {{ offers.hero.title }}
 
               <div class="mb-4">
                 <h4 class="h6 fw-bold text-primary mb-3">
-                  <i class="fas fa-check-circle text-warning me-2"></i> يشمل العرض:
+                  <i class="fas fa-check-circle text-danger me-2"></i> يشمل العرض:
                 </h4>
                 <ul class="list-group list-group-flush mb-0">
                   {% for item in offer.includes %}
                   <li class="list-group-item px-0 py-2 border-light">
-                    <i class="{{ item.icon }} text-warning me-2"></i>
+                    <i class="{{ item.icon }} text-danger me-2"></i>
                     {{ item.text | safe }}
                   </li>
                   {% endfor %}
@@ -63,7 +63,7 @@ title: {{ offers.hero.title }}
 
               <div class="alert alert-light border shadow-sm mb-4">
                 <h4 class="h6 fw-bold text-primary mb-2">
-                  <i class="fas fa-gift text-warning me-2"></i> مميزات العرض:
+                  <i class="fas fa-gift text-danger me-2"></i> مميزات العرض:
                 </h4>
                 <div class="row g-2">
                     {% for feature in offer.features %}
@@ -79,7 +79,7 @@ title: {{ offers.hero.title }}
               </div>
 
               <div class="d-grid">
-                <a href="https://wa.me/{{ settings.contact.whatsapp }}?text={{ 'مرحباً، أرغب في طلب عرض: ' | urlencode }}{{ offer.title | urlencode }}" class="btn btn-warning fw-bold btn-lg" target="_blank">
+                <a href="https://wa.me/{{ settings.contact.whatsapp }}?text=مرحباً، أرغب في طلب عرض:%0a%0a*{{ offer.title }}*" class="btn btn-danger fw-bold btn-lg" target="_blank">
                   <i class="fab fa-whatsapp me-2"></i> اطلب العرض
                 </a>
               </div>
@@ -100,7 +100,7 @@ title: {{ offers.hero.title }}
         {% for item in offers.whyUs.items %}
         <div class="col-md-4">
           <div class="card h-100 border-0 shadow-sm p-4 text-center">
-             <div class="display-5 text-warning mb-3"><i class="{{ item.icon }}"></i></div>
+             <div class="display-5 text-danger mb-3"><i class="{{ item.icon }}"></i></div>
              <h3 class="h5 fw-bold mb-2">{{ item.title }}</h3>
              <p class="text-muted small">{{ item.description }}</p>
           </div>
@@ -141,7 +141,7 @@ title: {{ offers.hero.title }}
       </p>
 
       <div class="d-flex justify-content-center gap-3 flex-wrap">
-        <a href="/contact/" class="btn btn-warning fw-bold btn-lg">
+        <a href="/contact/" class="btn btn-danger fw-bold btn-lg">
           <i class="fas fa-envelope me-2"></i> أرسل استفسار
         </a>
         <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-outline-light btn-lg" target="_blank">

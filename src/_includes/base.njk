@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    {% include "components/head.njk" %}
+</head>
+<body>
+    {% include "components/navbar.njk" %}
+    {% include "components/search-overlay.njk" %}
+
+    <main>
+        {{ content | safe }}
+    </main>
+
+    {% include "components/cart-sidebar.njk" %}
+    {% include "components/floating-buttons.njk" %}
+
+    {% include "components/footer.njk" %}
+    {% include "components/scripts.njk" %}
+</body>
+</html>

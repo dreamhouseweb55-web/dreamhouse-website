@@ -1,0 +1,23 @@
+    <!-- Cart Offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+        <div class="offcanvas-header text-white" style="background-color: var(--primary-wood);">
+            <h5 class="offcanvas-title small" id="cartSidebarLabel">السلة</h5>
+            <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column p-0">
+            <div id="cartItems" class="flex-grow-1 p-3 overflow-auto small">
+                <!-- Cart Items will be injected here -->
+            </div>
+            <div class="border-top p-3 bg-white">
+                <div class="d-flex justify-content-between mb-3 fw-bold text-dark small">
+                    <span>الإجمالي:</span>
+                    <span class="total-price text-danger">0 ج.م</span>
+                </div>
+                <button class="btn w-100 btn-dark btn-sm d-flex align-items-center justify-content-center gap-2 py-2" id="checkoutBtn">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>طلب واتساب</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>

@@ -1,0 +1,207 @@
+<!-- Search Overlay -->
+<div id="searchOverlay" class="search-overlay">
+    <div class="search-backdrop"></div>
+    
+    <!-- Close Button -->
+    <button class="search-close-btn js-close-search" aria-label="Close Search">
+        <i class="fas fa-times"></i>
+    </button>
+
+    <div class="search-container container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Search Layout -->
+                <div class="search-input-wrapper mb-5 slide-in-down">
+                    <i class="fas fa-search search-icon text-white-50"></i>
+                    <input type="text" id="searchInput" class="form-control form-control-lg search-input" placeholder="ابحث عن..." autocomplete="off">
+                </div>
+
+                <div id="searchResults" class="search-results row g-4">
+                    <!-- Results will be injected here -->
+                    <div class="col-12 text-center text-white-50 mt-4 fade-in-up">
+                        <div class="mb-3">
+                            <i class="fas fa-search fa-4x opacity-25"></i>
+                        </div>
+                        <p class="fs-5 fw-light">ابدأ الكتابة للبحث في تشكيلة دريم هاوس</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Main Overlay */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Glass Backdrop */
+.search-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 10, 5, 0.92); /* Darker, richer background */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+/* Container */
+.search-container {
+    position: relative;
+    z-index: 2;
+    padding-top: 120px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+/* Premium Close Button */
+.search-close-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px; /* Right for LTR, but in RTL check alignment. Usually Top/Left or Top/Right is fine */
+    z-index: 2050;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.search-close-btn:hover {
+    background: var(--bs-danger);
+    border-color: var(--bs-danger);
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 0 20px rgba(220, 53, 69, 0.4);
+}
+
+/* Input Styling */
+.search-input-wrapper {
+    position: relative;
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0;
+    padding: 1.5rem 3.5rem 1.5rem 1rem;
+    color: white;
+    font-size: 2rem;
+    font-weight: 300;
+    transition: all 0.3s ease;
+    text-align: right;
+}
+
+.search-input:focus {
+    background: transparent;
+    border-color: var(--bs-danger);
+    box-shadow: none; /* Remove default outline */
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    color: white;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 200;
+}
+
+.search-icon {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.8rem;
+    pointer-events: none;
+    transition: color 0.3s;
+}
+
+.search-input:focus + .search-icon, /* This selector won't work because icon is before input in HTML */
+.search-input-wrapper:focus-within .search-icon {
+    color: var(--bs-danger) !important;
+}
+
+
+/* Animations */
+.slide-in-down {
+    animation: slideInDown 0.5s ease-out forwards;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes slideInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Result Items */
+.search-result-item {
+    animation: fadeInUp 0.4s ease forwards;
+    opacity: 0;
+}
+
+.search-result-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.search-result-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .search-container {
+        padding-top: 100px;
+    }
+    .search-close-btn {
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    .search-input {
+        font-size: 1.5rem;
+    }
+}
+</style>

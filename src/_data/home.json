@@ -50,6 +50,66 @@
       }
     ]
   },
+  "categories": {
+    "title": "منتجاتنا المميزة",
+    "subtitle": "تشكيلة واسعة من الأثاث لجميع الأذواق والمساحات",
+    "items": [
+      {
+        "title": "غرف نوم رئيسية",
+        "description": "تصاميم عصرية وكلاسيكية لغرف نوم فاخرة بأحجام مختلفة",
+        "icon": "fas fa-bed fa-3x",
+        "background": "linear-gradient(135deg, #8B7355 0%, #D4AF37 100%)",
+        "link": "/products/#bedrooms",
+        "badge1": "خشب طبيعي",
+        "badge2": "ضمان 5 سنوات"
+      },
+      {
+        "title": "غرف نوم أطفال",
+        "description": "غرف نوم ملونة وآمنة لأطفالك بتصاميم مبتكرة",
+        "icon": "fas fa-child fa-3x",
+        "background": "linear-gradient(135deg, #FF6B9D 0%, #C44569 100%)",
+        "link": "/products/#kids-bedrooms",
+        "badge1": "ألوان زاهية",
+        "badge2": "آمن للأطفال"
+      },
+      {
+        "title": "أنتريهات",
+        "description": "أنتريهات أمريكان ومودرن بأشكال متنوعة وأحجام مختلفة",
+        "icon": "fas fa-couch fa-3x",
+        "background": "linear-gradient(135deg, #5F4B8B 0%, #A393BF 100%)",
+        "link": "/products/#sofas",
+        "badge1": "قماش فاخر",
+        "badge2": "إسفنج عالي الكثافة"
+      },
+      {
+        "title": "ركنات",
+        "description": "ركنات عصرية بأشكال وأحجام تناسب جميع المساحات",
+        "icon": "fas fa-chair fa-3x",
+        "background": "linear-gradient(135deg, #E67E22 0%, #D68910 100%)",
+        "link": "/products/#corners",
+        "badge1": "تصاميم حديثة",
+        "badge2": "راحة فائقة"
+      },
+      {
+        "title": "غرف سفرة",
+        "description": "غرف سفرة كاملة بتصاميم أنيقة لضيافة مميزة",
+        "icon": "fas fa-utensils fa-3x",
+        "background": "linear-gradient(135deg, #27AE60 0%, #229954 100%)",
+        "link": "/products/#dining",
+        "badge1": "خشب فاخر",
+        "badge2": "تشطيب راقي"
+      },
+      {
+        "title": "مطابخ",
+        "description": "مطابخ عصرية مع خدمة تصميم مجانية في الفرع الجديد",
+        "icon": "fas fa-blender fa-3x",
+        "background": "linear-gradient(135deg, #2C3E50 0%, #34495E 100%)",
+        "link": "/products/#kitchens",
+        "badge1": "قريباً",
+        "badge2": "تصميم مجاني"
+      }
+    ]
+  },
   "quality": {
     "title": "جودة تدوم العمر",
     "description": "في دريم هاوس، نستخدم أجود أنواع الأخشاب الطبيعية (زان أحمر، كونتر طبقات) وأقمشة مستوردة عالية التحمل. ضمان حقيقي 5 سنوات.",

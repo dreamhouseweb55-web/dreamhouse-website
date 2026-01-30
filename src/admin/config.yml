@@ -7,8 +7,8 @@ backend:
 
 local_backend: true
 
-media_folder: "images" # المجلد الذي سيبحث فيه عن الصور
-public_folder: "/images" # المسار العام للصور
+media_folder: "src/images" # المسار الفعلي داخل المشروع
+public_folder: "/images" # المسار الذي سيظهر في الكود (HTML)
 
 collections:
   # ===== الإعدادات العامة =====
@@ -17,7 +17,7 @@ collections:
     files:
       - name: "general_settings"
         label: "الإعدادات الأساسية"
-        file: "_data/settings.json"
+        file: "src/_data/settings.json"
         description: "التحكم في البيانات العامة للموقع"
         fields:
           - {label: "اسم الموقع بالعربي", name: "siteName", widget: "string"}
@@ -59,7 +59,7 @@ collections:
     files:
       - name: "home_page"
         label: "الصفحة الرئيسية"
-        file: "_data/home.json"
+        file: "src/_data/home.json"
         description: "محتوى الصفحة الرئيسية"
         fields:
           - label: "قسم Hero"
@@ -99,8 +99,24 @@ collections:
                   - {label: "أيقونة (Font Awesome class)", name: "icon", widget: "string"}
                   - {label: "العنوان", name: "title", widget: "string"}
                   - {label: "الوصف", name: "description", widget: "text"}
-          
-          - label: "قسم الجودة (الفيل)"
+          - label: "قسم المنتجات (التصنيفات)"
+            name: "categories"
+            widget: "object"
+            fields:
+              - {label: "العنوان", name: "title", widget: "string"}
+              - {label: "الوصف", name: "subtitle", widget: "string"}
+              - label: "التصنيفات"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "العنوان", name: "title", widget: "string"}
+                  - {label: "الوصف", name: "description", widget: "string"}
+                  - {label: "أيقونة (FontAwesome)", name: "icon", widget: "string"}
+                  - {label: "صورة الخلفية", name: "image", widget: "image"} # يمكن استخدام color gradient أو صورة
+                  - {label: "لون الخلفية (Gradient CSS)", name: "background", widget: "string", required: false, hint: "مثال: linear-gradient(135deg, #8B7355 0%, #D4AF37 100%)"}
+                  - {label: "الرابط", name: "link", widget: "string"}
+                  - {label: "مميزات (Badge 1)", name: "badge1", widget: "string", required: false}
+                  - {label: "مميزات (Badge 2)", name: "badge2", widget: "string", required: false}
             name: "quality"
             widget: "object"
             fields:
@@ -127,7 +143,7 @@ collections:
       
       - name: "branches"
         label: "الفروع"
-        file: "_data/branches.json"
+        file: "src/_data/branches.json"
         description: "معلومات الفروع"
         fields:
           - label: "الفروع"
@@ -143,7 +159,7 @@ collections:
 
       - name: "about_page"
         label: "صفحة من نحن"
-        file: "_data/about.json"
+        file: "src/_data/about.json"
         description: "محتوى صفحة من نحن"
         fields:
           - label: "قسم Hero"
@@ -211,7 +227,7 @@ collections:
 
       - name: "contact_page"
         label: "صفحة اتصل بنا"
-        file: "_data/contact_page.json"
+        file: "src/_data/contact_page.json"
         description: "محتوى صفحة اتصل بنا"
         fields:
           - label: "قسم Hero"
@@ -256,7 +272,7 @@ collections:
 
       - name: "offers_page"
         label: "صفحة العروض"
-        file: "_data/offers.json"
+        file: "src/_data/offers.json"
         description: "محتوى صفحة العروض"
         fields:
           - label: "قسم Hero"
@@ -268,7 +284,7 @@ collections:
               - {label: "العنوان الفرعي", name: "subtitle", widget: "string"}
           - label: "تنويه موسمي"
             name: "seasonalNote"
-            widget: "object"
+            widget: "object"  
             fields:
               - {label: "العنوان", name: "title", widget: "string"}
               - {label: "النص", name: "text", widget: "text"}
@@ -318,7 +334,7 @@ collections:
 
       - name: "branches_page_content"
         label: "صفحة الفروع (محتوى ثابت)"
-        file: "_data/branches_page.json"
+        file: "src/_data/branches_page.json"
         description: "العناوين والنصوص في صفحة الفروع"
         fields:
           - label: "قسم Hero"
@@ -355,7 +371,7 @@ collections:
 
       - name: "products_page_content"
         label: "صفحة المنتجات (محتوى ثابت)"
-        file: "_data/products_page.json"
+        file: "src/_data/products_page.json"
         description: "العناوين والنصوص الثابتة في صفحة المنتجات"
         fields:
           - label: "قسم Hero"
@@ -395,7 +411,7 @@ collections:
     files:
       - name: "all_products"
         label: "كل المنتجات"
-        file: "_data/products.json"
+        file: "src/_data/products.json"
         description: "إدارة جميع منتجات المعرض"
         fields:
           - name: "products"

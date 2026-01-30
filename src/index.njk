@@ -8,7 +8,7 @@ title: الرئيسية
       <h1 class="fw-bold mb-4" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">{{ home.hero.title }}</h1>
       <p class="lead mb-5" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">{{ home.hero.subtitle }}</p>
       <div class="d-flex justify-content-center gap-3 flex-wrap">
-        <a href="{{ home.hero.cta.primary.link }}" class="btn btn-warning btn-lg px-5 py-3 fw-bold">{{ home.hero.cta.primary.text }}</a>
+        <a href="{{ home.hero.cta.primary.link }}" class="btn btn-danger btn-lg px-5 py-3 fw-bold">{{ home.hero.cta.primary.text }}</a>
         <a href="{{ home.hero.cta.secondary.link }}" class="btn btn-outline-light btn-lg px-5 py-3 fw-bold">{{ home.hero.cta.secondary.text }}</a>
       </div>
     </div>
@@ -24,7 +24,7 @@ title: الرئيسية
       {% for feature in home.features.items %}
         <div class="col">
           <div class="card h-100 border-0 shadow-sm p-3 hover-lift">
-            <div class="mb-3 text-warning highlight-icon">
+            <div class="mb-3 text-danger highlight-icon">
               <i class="{{ feature.icon }}"></i>
             </div>
             <h3 class="h5 fw-bold mb-3">{{ feature.title }}</h3>
@@ -45,114 +45,36 @@ title: الرئيسية
       </div>
       
       <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
-        <!-- Bedrooms -->
+        {% for category in home.categories.items %}
         <div class="col">
             <div class="card h-100 border-0 shadow overflow-hidden group-hover-effect">
-                <div class="product-image d-flex align-items-center justify-content-center text-white" style="height: 180px; background: linear-gradient(135deg, #8B7355 0%, #D4AF37 100%);">
-                    <i class="fas fa-bed fa-3x"></i>
+                <div class="product-image d-flex align-items-center justify-content-center text-white" style="height: 180px; background: {{ category.background }}; position: relative;">
+                    <!-- If an image is provided instead of gradient, use it -->
+                    {% if category.image %}
+                      <img src="{{ category.image }}" alt="{{ category.title }}" class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" style="opacity: 0.8;">
+                      <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-25"></div>
+                    {% endif %}
+                    
+                    <div class="position-relative z-2">
+                       <i class="{{ category.icon }}"></i>
+                    </div>
                 </div>
                 <div class="card-body text-center d-flex flex-column">
-                    <h3 class="fw-bold mb-2">غرف نوم رئيسية</h3>
-                    <p class="card-text text-muted small mb-3">تصاميم عصرية وكلاسيكية لغرف نوم فاخرة بأحجام مختلفة</p>
+                    <h3 class="fw-bold mb-2">{{ category.title }}</h3>
+                    <p class="card-text text-muted small mb-3">{{ category.description }}</p>
                     <div class="d-flex justify-content-center gap-2 mb-3">
-                        <span class="badge bg-light text-dark border">خشب طبيعي</span>
-                        <span class="badge bg-light text-dark border">ضمان 5 سنوات</span>
+                        {% if category.badge1 %}
+                        <span class="badge bg-light text-dark border">{{ category.badge1 }}</span>
+                        {% endif %}
+                        {% if category.badge2 %}
+                        <span class="badge bg-light text-dark border">{{ category.badge2 }}</span>
+                        {% endif %}
                     </div>
-                    <a href="/products/#bedrooms" class="btn btn-outline-primary w-100 mt-auto stretched-link">اعرف المزيد</a>
+                    <a href="{{ category.link }}" class="btn btn-outline-primary w-100 mt-auto stretched-link">اعرف المزيد</a>
                 </div>
             </div>
         </div>
-
-        <!-- Kids Bedrooms -->
-        <div class="col">
-            <div class="card h-100 border-0 shadow overflow-hidden group-hover-effect">
-                <div class="product-image d-flex align-items-center justify-content-center text-white" style="height: 180px; background: linear-gradient(135deg, #FF6B9D 0%, #C44569 100%);">
-                    <i class="fas fa-child fa-3x"></i>
-                </div>
-                <div class="card-body text-center d-flex flex-column">
-                    <h3 class="fw-bold mb-2">غرف نوم أطفال</h3>
-                    <p class="card-text text-muted small mb-3">غرف نوم ملونة وآمنة لأطفالك بتصاميم مبتكرة</p>
-                     <div class="d-flex justify-content-center gap-2 mb-3">
-                        <span class="badge bg-light text-dark border">ألوان زاهية</span>
-                        <span class="badge bg-light text-dark border">آمن للأطفال</span>
-                    </div>
-                    <a href="/products/#kids-bedrooms" class="btn btn-outline-primary w-100 mt-auto stretched-link">اعرف المزيد</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sofas -->
-        <div class="col">
-            <div class="card h-100 border-0 shadow overflow-hidden group-hover-effect">
-                <div class="product-image d-flex align-items-center justify-content-center text-white" style="height: 180px; background: linear-gradient(135deg, #5F4B8B 0%, #A393BF 100%);">
-                    <i class="fas fa-couch fa-3x"></i>
-                </div>
-                <div class="card-body text-center d-flex flex-column">
-                    <h3 class="fw-bold mb-2">أنتريهات</h3>
-                    <p class="card-text text-muted small mb-3">أنتريهات أمريكان ومودرن بأشكال متنوعة وأحجام مختلفة</p>
-                     <div class="d-flex justify-content-center gap-2 mb-3">
-                        <span class="badge bg-light text-dark border">قماش فاخر</span>
-                        <span class="badge bg-light text-dark border">إسفنج عالي الكثافة</span>
-                    </div>
-                    <a href="/products/#sofas" class="btn btn-outline-primary w-100 mt-auto stretched-link">اعرف المزيد</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Corners -->
-        <div class="col">
-            <div class="card h-100 border-0 shadow overflow-hidden group-hover-effect">
-                <div class="product-image d-flex align-items-center justify-content-center text-white" style="height: 180px; background: linear-gradient(135deg, #E67E22 0%, #D68910 100%);">
-                    <i class="fas fa-chair fa-3x"></i>
-                </div>
-                <div class="card-body text-center d-flex flex-column">
-                    <h3 class="fw-bold mb-2">ركنات</h3>
-                    <p class="card-text text-muted small mb-3">ركنات عصرية بأشكال وأحجام تناسب جميع المساحات</p>
-                     <div class="d-flex justify-content-center gap-2 mb-3">
-                        <span class="badge bg-light text-dark border">تصاميم حديثة</span>
-                        <span class="badge bg-light text-dark border">راحة فائقة</span>
-                    </div>
-                    <a href="/products/#corners" class="btn btn-outline-primary w-100 mt-auto stretched-link">اعرف المزيد</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Dining -->
-        <div class="col">
-            <div class="card h-100 border-0 shadow overflow-hidden group-hover-effect">
-                <div class="product-image d-flex align-items-center justify-content-center text-white" style="height: 180px; background: linear-gradient(135deg, #27AE60 0%, #229954 100%);">
-                    <i class="fas fa-utensils fa-3x"></i>
-                </div>
-                <div class="card-body text-center d-flex flex-column">
-                    <h3 class="fw-bold mb-2">غرف سفرة</h3>
-                    <p class="card-text text-muted small mb-3">غرف سفرة كاملة بتصاميم أنيقة لضيافة مميزة</p>
-                     <div class="d-flex justify-content-center gap-2 mb-3">
-                        <span class="badge bg-light text-dark border">خشب فاخر</span>
-                        <span class="badge bg-light text-dark border">تشطيب راقي</span>
-                    </div>
-                    <a href="/products/#dining" class="btn btn-outline-primary w-100 mt-auto stretched-link">اعرف المزيد</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Kitchens -->
-        <div class="col">
-              <div class="card h-100 border-0 shadow overflow-hidden group-hover-effect">
-                <div class="product-image d-flex align-items-center justify-content-center text-white" style="height: 180px; background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);">
-                    <i class="fas fa-blender fa-3x"></i>
-                </div>
-                <div class="card-body text-center d-flex flex-column">
-                    <h3 class="fw-bold mb-2">مطابخ</h3>
-                    <p class="card-text text-muted small mb-3">مطابخ عصرية مع خدمة تصميم مجانية في الفرع الجديد</p>
-                     <div class="d-flex justify-content-center gap-2 mb-3">
-                        <span class="badge bg-info text-white border border-info">قريباً</span>
-                        <span class="badge bg-light text-dark border">تصميم مجاني</span>
-                    </div>
-                    <a href="/products/#kitchens" class="btn btn-outline-primary w-100 mt-auto stretched-link">اعرف المزيد</a>
-                </div>
-            </div>
-        </div>
-
+        {% endfor %}
       </div>
     </div>
   </section>
@@ -166,7 +88,7 @@ title: الرئيسية
         </div>
         <div class="col-lg-6 p-4">
           <div class="text-start">
-            <span class="badge bg-warning px-3 py-2 mb-3 fw-bold rounded-pill">{{ home.quality.badge }}</span>
+            <span class="badge bg-danger px-3 py-2 mb-3 fw-bold rounded-pill">{{ home.quality.badge }}</span>
             <h2 class="fw-bold mb-4 text-primary">{{ home.quality.title }}</h2>
             <p class="lead text-muted mb-4 text-dark font-monospace">{{ home.quality.subtitle }}</p>
             <p class="text-muted mb-5 small">
@@ -215,12 +137,12 @@ title: الرئيسية
   <!-- ===== قسم الإحصائيات ===== -->
   <section class="py-5 text-white" id="stats" style="background: linear-gradient(135deg, var(--primary-wood) 0%, var(--primary-wood-light) 100%);">
     <div class="container text-center">
-      <h2 class="mb-5 d-inline-block border-bottom pb-2 border-warning">{{ home.stats.sectionTitle }}</h2>
+      <h2 class="mb-5 d-inline-block border-bottom pb-2 border-danger">{{ home.stats.sectionTitle }}</h2>
       <div class="row g-4">
       {% for stat in home.stats.items %}
         <div class="col-md-3 col-6">
-          <div class="p-4 rounded bg-white bg-opacity-10 border border-warning h-100">
-            <div class="mb-3 text-warning">
+          <div class="p-4 rounded bg-white bg-opacity-10 border border-danger h-100">
+            <div class="mb-3 text-danger">
               <i class="{{ stat.icon }} fa-2x"></i>
             </div>
             <div class="h3 fw-bold mb-2"><span class="counter" data-target="{{ stat.number }}">0</span>+</div>
@@ -249,12 +171,12 @@ title: الرئيسية
               
               <div class="mb-4">
                   <p class="text-muted small mb-2 d-flex align-items-center justify-content-center gap-2">
-                      <i class="fas fa-map-marker-alt text-warning"></i>
+                      <i class="fas fa-map-marker-alt text-danger"></i>
                       {{ branch.address }}
                   </p>
                   {% if branch.phone %}
                   <p class="text-muted small mb-0 d-flex align-items-center justify-content-center gap-2">
-                      <i class="fas fa-phone text-warning"></i>
+                      <i class="fas fa-phone text-danger"></i>
                       {{ branch.phone }}
                   </p>
                   {% endif %}
@@ -288,7 +210,7 @@ title: الرئيسية
         <a href="/contact/" class="btn btn-primary btn-lg">
           <i class="fas fa-envelope me-2"></i> أرسل استفسار
         </a>
-        <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-warning btn-lg fw-bold" target="_blank">
+        <a href="https://wa.me/{{ settings.contact.whatsapp }}" class="btn btn-danger btn-lg fw-bold" target="_blank">
           <i class="fab fa-whatsapp me-2"></i> واتساب
         </a>
         <a href="tel:{{ settings.contact.phone }}" class="btn btn-outline-dark btn-lg">

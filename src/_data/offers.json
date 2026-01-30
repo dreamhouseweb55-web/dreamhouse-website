@@ -13,6 +13,7 @@
         "subtitle": "باقات متكاملة بأسعار استثنائية",
         "items": [
             {
+                "id": "full-apartment",
                 "title": "عرض فرش الشقة بالكامل",
                 "icon": "fas fa-fire",
                 "description": "بأقل من 65 ألف جنيه هتفرش شقتك كلها!",
@@ -41,6 +42,7 @@
                 "specialLabel": "العرض الأقوى"
             },
             {
+                "id": "four-rooms",
                 "title": "عرض 4 غرف",
                 "icon": "fas fa-crown",
                 "description": "الباقة الشاملة للعائلة",

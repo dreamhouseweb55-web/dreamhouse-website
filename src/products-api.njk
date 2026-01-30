@@ -1,0 +1,17 @@
+---
+permalink: products-api.json
+---
+{
+  "products": [
+    {%- for product in products.products -%}
+    {
+      "id": "{{ product.id }}",
+      "name": "{{ product.name }}",
+      "description": "{{ product.description | safe }}",
+      "price": {{ product.price }},
+      "image": "{{ product.image }}",
+      "category": "{{ product.category }}"
+    }{% if not loop.last %},{% endif %}
+    {%- endfor -%}
+  ]
+}

@@ -1,0 +1,20 @@
+{
+    "branches": [
+        {
+            "id": "nasr-city",
+            "name": "فرع مدينة نصر",
+            "address": "شارع مكرم عبيد، مدينة نصر، القاهرة",
+            "phone": "01234567890",
+            "hours": "السبت - الخميس: 10 ص - 10 م",
+            "mapLink": "https://maps.google.com/"
+        },
+        {
+            "id": "6october",
+            "name": "فرع 6 أكتوبر",
+            "address": "المحور المركزي، 6 أكتوبر، الجيزة",
+            "phone": "01234567890",
+            "hours": "السبت - الخميس: 10 ص - 10 م",
+            "mapLink": "https://maps.google.com/"
+        }
+    ]
+}

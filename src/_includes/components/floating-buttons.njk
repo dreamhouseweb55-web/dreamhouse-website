@@ -1,0 +1,12 @@
+    <!-- Floating Buttons (Resized) -->
+    <div class="position-fixed bottom-0 start-0 m-3 d-flex flex-column gap-2 floating-btn-container" style="z-index: 1050;">
+        <a href="https://wa.me/{{ settings.contact.whatsapp }}" target="_blank" class="btn btn-success rounded-circle d-flex align-items-center justify-content-center shadow-sm floating-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <button class="btn btn-dark rounded-circle d-flex align-items-center justify-content-center shadow-sm position-relative floating-btn" style="background-color: #000000; border:none;" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem; padding: 2px 4px;">
+                0
+            </span>
+        </button>
+    </div>

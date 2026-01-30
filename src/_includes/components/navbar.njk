@@ -1,0 +1,87 @@
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm" style="background: var(--primary-wood); border-top: none !important; border-bottom: 1px solid rgba(0,0,0,0.1);">
+        <div class="container">
+            <!-- Logo (Left side) -->
+            <a class="navbar-brand p-0" href="/">
+                <img src="{{ settings.logoWhite }}" alt="{{ settings.siteName }}" height="30">
+            </a>
+
+            <!-- Mobile Actions & Toggler (Left Side) -->
+            <div class="d-flex align-items-center gap-2 order-lg-last">
+                <!-- Search Icon -->
+                <button class="btn btn-link text-white text-decoration-none p-2 js-search-toggle" aria-label="Search">
+                    <i class="fas fa-search fa-lg"></i>
+                </button>
+
+                <!-- Cart Icon -->
+                <button class="btn btn-link text-white text-decoration-none p-2 position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar" aria-label="Cart">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count border border-light" style="font-size: 0.6rem; padding: 0.25em 0.4em;">0</span>
+                </button>
+
+                <!-- Toggler -->
+                <button class="navbar-toggler border-0 p-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <!-- Nav Links and Search (Right side) -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">الرئيسية</a>
+                    </li>
+                    
+                    <!-- Products Dropdown - Bootstrap -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/products/" role="button">
+                            المنتجات
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/products/#bedrooms"><i class="fas fa-bed ms-2"></i> غرف نوم</a></li>
+                            <li><a class="dropdown-item" href="/products/#kids-bedrooms"><i class="fas fa-child ms-2"></i> غرف أطفال</a></li>
+                            <li><a class="dropdown-item" href="/products/#sofas"><i class="fas fa-couch ms-2"></i> أنتريهات</a></li>
+                            <li><a class="dropdown-item" href="/products/#corners"><i class="fas fa-chair ms-2"></i> ركنات</a></li>
+                            <li><a class="dropdown-item" href="/products/#dining"><i class="fas fa-utensils ms-2"></i> سفرة</a></li>
+                            <li><a class="dropdown-item" href="/products/#kitchens"><i class="fas fa-blender ms-2"></i> مطابخ</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger fw-bold" href="/products/">عرض كل المنتجات</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Offers Dropdown - Bootstrap -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/offers/" role="button">
+                            العروض
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for offer in offers.offersSection.items %}
+                            <li><a class="dropdown-item" href="/offers/#{{ offer.id }}">{{ offer.title }}</a></li>
+                            {% endfor %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger fw-bold" href="/offers/">جميع العروض</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Branches Dropdown - Bootstrap -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/branches/" role="button">
+                            الفروع
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for branch in branches.branches %}
+                            <li><a class="dropdown-item" href="{{ branch.mapLink }}" target="_blank"><i class="fas fa-map-marker-alt ms-2"></i> {{ branch.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact/">اتصل بنا</a>
+                    </li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>

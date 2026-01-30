@@ -17,57 +17,127 @@ declare global {
 
 export let products: Product[] = [];
 
-export async function initProductsSystem(): Promise<void> {
-    // 1. تحميل البيانات
-    await loadProductsData();
+// State variables for filtering
+let currentCategory: string = 'all';
+let currentMaxPrice: number = 60000;
 
-    // 2. عرض المنتجات إذا كنا في صفحة المنتجات
-    const productsContainer = document.getElementById('products-grid');
-    if (productsContainer) {
-        
-        // تفعيل الفلاتر
-        const filterButtons = document.querySelectorAll('.js-filter-btn');
-        filterButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const target = e.currentTarget as HTMLElement;
-                filterButtons.forEach(b => b.classList.remove('active'));
-                target.classList.add('active');
-                const filter = target.getAttribute('data-filter');
-                if (filter) {
-                    renderProducts(filter);
-                }
-            });
-        });
-    }
+export async function initProductsSystem(): Promise<void> {
+    // 1. تفعيل الفلاتر (مستقلة عن البيانات)
+    initFilters();
+
+    // 2. تحميل البيانات (للسلة وغيرها)
+    await loadProductsData();
 }
 
 async function loadProductsData(): Promise<void> {
     try {
-        const response = await fetch('/data/products.json?v=' + new Date().getTime());
-        if (!response.ok) throw new Error('Failed to load products');
+        console.log('Fetching products from /products-api.json...');
+        // Use the generated API JSON which is reliable
+        const response = await fetch('/products-api.json?v=' + new Date().getTime());
+
+        if (!response.ok) {
+            throw new Error(`Failed to load products: ${response.status} ${response.statusText}`);
+        }
+
         const data = await response.json();
+
+        if (!data.products || !Array.isArray(data.products)) {
+            throw new Error('Invalid products data structure');
+        }
+
         products = data.products;
-        window.products = products; // Make accessible for cart etc
-        console.log('Products loaded:', products.length);
+        window.products = products;
+
+        console.log('Products successfully loaded:', products.length);
+
+        // Debug notification (optional, can be removed later)
+        // showNotification(`Loaded ${products.length} products`, 'success');
+
     } catch (error) {
-        console.error('Error loading products:', error);
+        console.error('CRITICAL ERROR loading products:', error);
+        // Show visible error to user
+        const errDiv = document.createElement('div');
+        errDiv.style.position = 'fixed';
+        errDiv.style.top = '0';
+        errDiv.style.left = '0';
+        errDiv.style.width = '100%';
+        errDiv.style.padding = '10px';
+        errDiv.style.background = 'red';
+        errDiv.style.color = 'white';
+        errDiv.style.zIndex = '10000';
+        errDiv.style.textAlign = 'center';
+        errDiv.textContent = 'خطأ في تحميل المنتجات: ' + (error as Error).message;
+        document.body.prepend(errDiv);
     }
 }
 
-function renderProducts(category: string): void {
-    const productItems = document.querySelectorAll('.product-item');
+function initFilters(): void {
+    // Category Buttons
+    const filterButtons = document.querySelectorAll('.js-filter-btn');
+    if (filterButtons.length > 0) {
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const target = e.currentTarget as HTMLElement;
 
+                // Update active class
+                filterButtons.forEach(b => b.classList.remove('active'));
+                target.classList.add('active');
+
+                // Update state and apply
+                const filter = target.getAttribute('data-filter');
+                if (filter) {
+                    currentCategory = filter;
+                    applyFilters();
+                }
+            });
+        });
+    }
+
+    // Price Range Slider
+    const priceRange = document.getElementById('priceRange') as HTMLInputElement;
+    const priceValue = document.getElementById('priceValue');
+
+    if (priceRange && priceValue) {
+        // Initial set
+        currentMaxPrice = parseInt(priceRange.value);
+        priceValue.textContent = formatPrice(currentMaxPrice);
+
+        // Event listener
+        priceRange.addEventListener('input', (e) => {
+            const target = e.target as HTMLInputElement;
+            currentMaxPrice = parseInt(target.value);
+            priceValue.textContent = formatPrice(currentMaxPrice);
+            applyFilters();
+        });
+    }
+}
+
+function formatPrice(price: number): string {
+    return new Intl.NumberFormat('ar-EG', { style: 'currency', currency: 'EGP', maximumFractionDigits: 0 }).format(price);
+}
+
+function applyFilters(): void {
+    const productItems = document.querySelectorAll('.product-item');
     let visibleCount = 0;
 
     productItems.forEach(el => {
         const item = el as HTMLElement;
         const itemCategory = item.getAttribute('data-category');
+        const itemPriceStr = item.getAttribute('data-price');
+        const itemPrice = itemPriceStr ? parseFloat(itemPriceStr) : 0;
 
-        if (category === 'all' || itemCategory === category) {
+        // Check conditions
+        const matchCategory = (currentCategory === 'all' || itemCategory === currentCategory);
+        const matchPrice = (itemPrice <= currentMaxPrice);
+
+        if (matchCategory && matchPrice) {
             item.style.display = 'block';
-            item.style.animation = 'none';
-            item.offsetHeight; /* trigger reflow */
-            item.style.animation = 'fadeInUp 0.5s ease forwards';
+            // Simple animation reset
+            if (item.style.animationName !== 'fadeInUp') {
+                item.style.animation = 'none';
+                item.offsetHeight; /* trigger reflow */
+                item.style.animation = 'fadeInUp 0.5s ease forwards';
+            }
             visibleCount++;
         } else {
             item.style.display = 'none';
@@ -75,27 +145,36 @@ function renderProducts(category: string): void {
     });
 
     // Check for empty results
-    const container = document.getElementById('products-grid');
-    const noProductsMsg = document.getElementById('no-products-msg');
+    updateNoResultsMessage(visibleCount);
+}
 
-    if (visibleCount === 0 && category !== 'all') {
-        if (!noProductsMsg && container) {
-            const msg = document.createElement('div');
+function updateNoResultsMessage(visibleCount: number): void {
+    const container = document.querySelector('.product-section') || document.querySelector('.container-fluid'); // Fallback container
+    let msg = document.getElementById('no-products-msg');
+
+    if (visibleCount === 0) {
+        if (!msg && container) {
+            msg = document.createElement('div');
             msg.id = 'no-products-msg';
-            msg.style.gridColumn = '1/-1';
-            msg.style.textAlign = 'center';
-            msg.style.padding = '50px';
+            msg.className = 'col-12 text-center py-5';
             msg.innerHTML = `
             <div class="text-muted">
-                <i class="fas fa-box-open fa-3x mb-3"></i>
-                <p>عذراً، لا توجد منتجات في هذا القسم حالياً.</p>
+                <i class="fas fa-search fa-3x mb-3 text-warning"></i>
+                <h4 class="fw-bold">لا توجد منتجات مطابقة</h4>
+                <p>حاول تغيير خيارات التصفية أو نطاق السعر.</p>
             </div>
          `;
-            container.appendChild(msg);
-        } else if (noProductsMsg) {
-            noProductsMsg.style.display = 'block';
+            // Try to find a good place to insert it. Ideally after the filters.
+            const bedroomsSection = document.getElementById('bedrooms');
+            if (bedroomsSection && bedroomsSection.parentNode) {
+                bedroomsSection.parentNode.insertBefore(msg, bedroomsSection.nextSibling);
+            } else {
+                container.appendChild(msg);
+            }
+        } else if (msg) {
+            msg.style.display = 'block';
         }
-    } else if (noProductsMsg) {
-        noProductsMsg.style.display = 'none';
+    } else if (msg) {
+        msg.style.display = 'none';
     }
 }

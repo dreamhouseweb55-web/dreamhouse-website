@@ -45,21 +45,20 @@ export function initContactForm(): void {
             const originalText = btn.innerHTML;
 
             // Get form values
-            const name = (document.getElementById('name') as HTMLInputElement).value;
-            const phone = (document.getElementById('phone') as HTMLInputElement).value;
-            const email = (document.getElementById('email') as HTMLInputElement).value;
-            const interestSelect = document.getElementById('interest') as HTMLSelectElement;
-            const interest = interestSelect.options[interestSelect.selectedIndex].text;
-            const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+            const nameInput = document.getElementById('name') as HTMLInputElement;
+            const messageInput = document.getElementById('message') as HTMLTextAreaElement;
             const whatsappNumber = contactForm.dataset.whatsapp || '201125601241'; // Fallback
 
+            if (!nameInput || !messageInput) return;
+
+            const name = nameInput.value;
+            const message = messageInput.value;
+
             // Format WhatsApp Message
-            let text = `*استفسار جديد من الموقع الإلكتروني* 🏠\n\n`;
+            let text = `مرحباً دريم هاوس\n`;
+            text += `لدي استفسار جديد بخصوص:\n\n`;
             text += `*الاسم:* ${name}\n`;
-            text += `*رقم الهاتف:* ${phone}\n`;
-            if (email) text += `*البريد:* ${email}\n`;
-            if (interest && interest !== 'اختر المنتج') text += `*مهتم بـ:* ${interest}\n`;
-            text += `\n*الرسالة:* \n${message}`;
+            text += `*الرسالة:*\n${message}`;
 
             // Show loading state
             btn.innerHTML = '<i class="fab fa-whatsapp"></i> جاري التحويل لواتساب...';
@@ -69,7 +68,12 @@ export function initContactForm(): void {
             const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 
             setTimeout(() => {
-                window.open(url, '_blank');
+                const win = window.open(url, '_blank');
+                if (!win) {
+                    showNotification('تم حظر النافذة المنبثقة. يرجى السماح بالنوافذ المنبثقة للتواصل عبر واتساب.', 'error');
+                    window.location.href = url; // Fallback to same window
+                }
+
                 btn.innerHTML = originalText;
                 btn.disabled = false;
                 this.reset();
@@ -106,8 +110,11 @@ export function initCounters(): void {
 export function initNavbar(): void {
     const navbarCollapse = document.getElementById('navbarNav');
     const toggler = document.querySelector('.navbar-toggler');
-    
-    if (!navbarCollapse || !toggler) return;
+
+    if (!navbarCollapse || !toggler) {
+        console.warn('UI Navbar elements missing. Collapsible functionality will be disabled.');
+        return;
+    }
 
     // Close on outside click
     document.addEventListener('click', (e) => {
@@ -116,8 +123,8 @@ export function initNavbar(): void {
         const isClickInside = navbarCollapse.contains(target) || toggler.contains(target);
 
         if (isMenuOpen && !isClickInside) {
-             // Use Bootstrap's native collapse method if available, or just click toggler
-             (toggler as HTMLElement).click();
+            // Use Bootstrap's native collapse method if available, or just click toggler
+            (toggler as HTMLElement).click();
         }
     });
 
@@ -125,9 +132,9 @@ export function initNavbar(): void {
     const navLinks = navbarCollapse.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-             if (navbarCollapse.classList.contains('show')) {
-                 (toggler as HTMLElement).click();
-             }
+            if (navbarCollapse.classList.contains('show')) {
+                (toggler as HTMLElement).click();
+            }
         });
     });
 }

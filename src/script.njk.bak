@@ -1,0 +1,447 @@
+---
+permalink: script.js
+---
+// ===================================
+// NAVBAR DROPDOWN FUNCTIONALITY
+// Enhanced for Mobile & Desktop
+// ===================================
+
+(function() {
+    'use strict';
+    
+    // Detect if device is mobile/touch
+    const isTouchDevice = () => {
+        return (('ontouchstart' in window) ||
+                (navigator.maxTouchPoints > 0) ||
+                (navigator.msMaxTouchPoints > 0));
+    };
+    
+    const IS_MOBILE = isTouchDevice();
+    
+    // ===================================
+    // MOBILE DROPDOWN HANDLERS
+    // ===================================
+    
+    if (IS_MOBILE) {
+        // Handle mobile dropdown toggles
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle-custom');
+            const navbarCollapse = document.getElementById('navbarNav');
+            
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const parent = this.closest('.dropdown-custom');
+                    const dropdown = parent.querySelector('.dropdown-menu-custom');
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown-custom').forEach(item => {
+                        if (item !== parent) {
+                            item.classList.remove('mobile-open');
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    parent.classList.toggle('mobile-open');
+                });
+            });
+            
+            // Handle category tree on mobile (nested dropdowns)
+            const categoryItems = document.querySelectorAll('.category-item-custom');
+            
+            categoryItems.forEach(item => {
+                const header = item.querySelector('.category-header');
+                const panel = item.querySelector('.products-panel');
+                
+                if (header && panel) {
+                    header.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        // Close other category panels
+                        categoryItems.forEach(otherItem => {
+                            if (otherItem !== item) {
+                                otherItem.classList.remove('mobile-open');
+                            }
+                        });
+                        
+                        // Toggle current category
+                        item.classList.toggle('mobile-open');
+                    });
+                }
+            });
+            
+            // Handle offer and branch item clicks on mobile
+            const offerItems = document.querySelectorAll('.offer-item-custom');
+            const branchItems = document.querySelectorAll('.branch-item-custom');
+            
+            offerItems.forEach(item => {
+                const link = item.querySelector('.dropdown-link-custom');
+                if (link) {
+                    link.addEventListener('click', function(e) {
+                        if (!this.closest('.offer-item-custom').classList.contains('mobile-open')) {
+                            e.preventDefault();
+                            
+                            // Close other items
+                            offerItems.forEach(i => i.classList.remove('mobile-open'));
+                            
+                            // Open this item
+                            this.closest('.offer-item-custom').classList.add('mobile-open');
+                        }
+                    });
+                }
+            });
+            
+            branchItems.forEach(item => {
+                const link = item.querySelector('.dropdown-link-custom');
+                if (link) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        // Close other items
+                        branchItems.forEach(i => i.classList.remove('mobile-open'));
+                        
+                        // Open this item
+                        this.closest('.branch-item-custom').classList.add('mobile-open');
+                    });
+                }
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown-custom') && !e.target.closest('.navbar-toggler')) {
+                    document.querySelectorAll('.dropdown-custom').forEach(item => {
+                        item.classList.remove('mobile-open');
+                    });
+                    offerItems.forEach(i => i.classList.remove('mobile-open'));
+                    branchItems.forEach(i => i.classList.remove('mobile-open'));
+                }
+            });
+        });
+    }
+    
+    // ===================================
+    // SEARCH FUNCTIONALITY
+    // ===================================
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchToggleBtn = document.getElementById('searchToggleBtn');
+        const searchExpanded = document.getElementById('searchExpanded');
+        const searchCloseBtn = document.getElementById('searchCloseBtn');
+        const searchInput = document.getElementById('searchInput');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const searchResults = document.getElementById('searchResults');
+        
+        if (!searchToggleBtn || !searchExpanded) return;
+        
+        // Open search
+        searchToggleBtn.addEventListener('click', function() {
+            searchExpanded.classList.add('active');
+            searchOverlay.classList.add('active');
+            setTimeout(() => searchInput.focus(), 300);
+        });
+        
+        // Close search
+        const closeSearch = () => {
+            searchExpanded.classList.remove('active');
+            searchOverlay.classList.remove('active');
+            searchResults.classList.remove('active');
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        };
+        
+        searchCloseBtn.addEventListener('click', closeSearch);
+        searchOverlay.addEventListener('click', closeSearch);
+        
+        // Close search with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && searchExpanded.classList.contains('active')) {
+                closeSearch();
+            }
+        });
+        
+        // Search functionality
+        let searchTimeout;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            const query = this.value.trim().toLowerCase();
+            
+            if (query.length < 2) {
+                searchResults.classList.remove('active');
+                searchResults.innerHTML = '';
+                return;
+            }
+            
+            searchTimeout = setTimeout(() => {
+                performSearch(query);
+            }, 300);
+        });
+        
+        function performSearch(query) {
+            // Fetch products from the API
+            fetch('/products-api.json')
+                .then(response => response.json())
+                .then(data => {
+                    const products = data.products || [];
+                    const results = products.filter(product => 
+                        product.name.toLowerCase().includes(query) ||
+                        (product.description && product.description.toLowerCase().includes(query))
+                    );
+                    
+                    displayResults(results);
+                })
+                .catch(error => {
+                    console.error('Search error:', error);
+                    searchResults.innerHTML = '<div class="search-no-results">حدث خطأ أثناء البحث</div>';
+                    searchResults.classList.add('active');
+                });
+        }
+        
+        function displayResults(results) {
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="search-no-results">لا توجد نتائج</div>';
+            } else {
+                const resultsHTML = results.slice(0, 10).map(product => `
+                    <a href="/product-details/?id=${product.id}" class="search-result-item">
+                        <img src="${product.image}" alt="${product.name}" class="search-result-image" loading="lazy">
+                        <div class="search-result-info">
+                            <div class="search-result-name">${product.name}</div>
+                            <div class="search-result-desc">${product.description || ''}</div>
+                            <div class="search-result-price">${formatPrice(product.price)}</div>
+                        </div>
+                    </a>
+                `).join('');
+                
+                searchResults.innerHTML = resultsHTML;
+            }
+            
+            searchResults.classList.add('active');
+        }
+        
+        function formatPrice(price) {
+            if (!price) return '';
+            return price.toLocaleString('ar-EG') + ' ج.م';
+        }
+    });
+    
+    // ===================================
+    // CART FUNCTIONALITY
+    // ===================================
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const cartItems = [];
+        const cartItemsContainer = document.getElementById('cartItems');
+        const cartCount = document.querySelector('.cart-count');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        
+        if (!cartItemsContainer) return;
+        
+        // Load cart from localStorage
+        function loadCart() {
+            const saved = localStorage.getItem('dreamhouse-cart');
+            if (saved) {
+                cartItems.length = 0;
+                cartItems.push(...JSON.parse(saved));
+                updateCartUI();
+            }
+        }
+        
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('dreamhouse-cart', JSON.stringify(cartItems));
+        }
+        
+        // Update cart UI
+        function updateCartUI() {
+            const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = count;
+            
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-center text-muted py-4">السلة فارغة</p>';
+                return;
+            }
+            
+            const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            cartItemsContainer.innerHTML = cartItems.map(item => `
+                <div class="cart-item mb-3 pb-3 border-bottom" data-id="${item.id}">
+                    <div class="d-flex gap-2 align-items-center">
+                        <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                        <div class="flex-grow-1">
+                            <div class="fw-bold small">${item.name}</div>
+                            <div class="text-danger small">${item.price.toLocaleString('ar-EG')} ج.م</div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-danger remove-from-cart" data-id="${item.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 mt-2">
+                        <button class="btn btn-sm btn-outline-secondary decrease-qty" data-id="${item.id}">-</button>
+                        <span class="small">${item.quantity}</span>
+                        <button class="btn btn-sm btn-outline-secondary increase-qty" data-id="${item.id}">+</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.querySelector('.total-price').textContent = total.toLocaleString('ar-EG') + ' ج.م';
+            
+            // Add event listeners
+            document.querySelectorAll('.remove-from-cart').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    removeFromCart(this.dataset.id);
+                });
+            });
+            
+            document.querySelectorAll('.increase-qty').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    changeQuantity(this.dataset.id, 1);
+                });
+            });
+            
+            document.querySelectorAll('.decrease-qty').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    changeQuantity(this.dataset.id, -1);
+                });
+            });
+        }
+        
+        // Add to cart
+        window.addToCart = function(product) {
+            const existing = cartItems.find(item => item.id === product.id);
+            
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cartItems.push({ ...product, quantity: 1 });
+            }
+            
+            saveCart();
+            updateCartUI();
+        };
+        
+        // Remove from cart
+        function removeFromCart(id) {
+            const index = cartItems.findIndex(item => item.id === id);
+            if (index > -1) {
+                cartItems.splice(index, 1);
+                saveCart();
+                updateCartUI();
+            }
+        }
+        
+        // Change quantity
+        function changeQuantity(id, delta) {
+            const item = cartItems.find(item => item.id === id);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    saveCart();
+                    updateCartUI();
+                }
+            }
+        }
+        
+        // Checkout via WhatsApp
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', function() {
+                if (cartItems.length === 0) {
+                    alert('السلة فارغة!');
+                    return;
+                }
+                
+                const message = 'مرحباً! أريد طلب المنتجات التالية:\n\n' +
+                    cartItems.map(item => `• ${item.name} (${item.quantity}x) - ${item.price.toLocaleString('ar-EG')} ج.م`).join('\n') +
+                    '\n\nالإجمالي: ' + cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString('ar-EG') + ' ج.م';
+                
+                const whatsappNumber = '201091447744'; // Update with actual number
+                const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                
+                window.open(url, '_blank');
+            });
+        }
+        
+        loadCart();
+    });
+    
+    // ===================================
+    // PRODUCTS PAGE FILTERING
+    // ===================================
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.js-filter-btn');
+        const productItems = document.querySelectorAll('.product-item');
+        
+        if (filterButtons.length === 0) return;
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter products with animation
+                productItems.forEach((item, index) => {
+                    const category = item.dataset.category;
+                    
+                    if (filter === 'all' || category === filter) {
+                        setTimeout(() => {
+                            item.style.display = '';
+                            item.style.animation = 'fadeInUp 0.5s ease forwards';
+                        }, index * 50);
+                    } else {
+                        item.style.animation = 'fadeOut 0.3s ease forwards';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+        
+        // Handle add to cart buttons
+        const addToCartButtons = document.querySelectorAll('.js-add-to-cart');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const productId = this.dataset.id;
+                const productCard = this.closest('.product-card');
+                
+                if (productCard) {
+                    const product = {
+                        id: productId,
+                        name: productCard.querySelector('h3 a, h5 a').textContent.trim(),
+                        price: parseFloat(productCard.querySelector('.badge').textContent.replace(/[^\d.]/g, '')),
+                        image: productCard.querySelector('img').src
+                    };
+                    
+                    if (window.addToCart) {
+                        window.addToCart(product);
+                        
+                        // Visual feedback
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-check me-2"></i>تمت الإضافة';
+                        this.classList.add('btn-success');
+                        this.classList.remove('btn-primary');
+                        
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.classList.remove('btn-success');
+                            this.classList.add('btn-primary');
+                        }, 2000);
+                    }
+                }
+            });
+        });
+    });
+    
+})();

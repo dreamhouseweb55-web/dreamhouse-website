@@ -1,0 +1,63 @@
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-3 mt-5 border-top border-danger border-3" style="background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold mb-3 text-danger">عن {{ settings.siteName }}</h5>
+                    <p class="text-white-50 small" style="line-height: 1.8;">{{ settings.footer.aboutText }}</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="{{ settings.social.facebook }}" target="_blank" class="text-white text-decoration-none hover-lift"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{ settings.social.instagram }}" target="_blank" class="text-white text-decoration-none hover-lift"><i class="fab fa-instagram"></i></a>
+                        <a href="{{ settings.social.tiktok }}" target="_blank" class="text-white text-decoration-none hover-lift"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/{{ settings.contact.whatsapp }}" target="_blank" class="text-white text-decoration-none hover-lift"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-6">
+                    <h5 class="fw-bold mb-3 text-danger">روابط سريعة</h5>
+                    <ul class="list-unstyled text-white-50 small">
+                        <li class="mb-2"><a href="/" class="text-decoration-none text-white-50 hover-text-white transition-all">الرئيسية</a></li>
+                        <li class="mb-2"><a href="/#about" class="text-decoration-none text-white-50 hover-text-white transition-all">من نحن</a></li>
+                        <li class="mb-2"><a href="/products/" class="text-decoration-none text-white-50 hover-text-white transition-all">المنتجات</a></li>
+                        <li class="mb-2"><a href="/offers/" class="text-decoration-none text-white-50 hover-text-white transition-all">العروض الخاصة</a></li>
+                        <li class="mb-2"><a href="/branches/" class="text-decoration-none text-white-50 hover-text-white transition-all">الفروع</a></li>
+                        <li class="mb-2"><a href="/contact/" class="text-decoration-none text-white-50 hover-text-white transition-all">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-6">
+                    <h5 class="fw-bold mb-3 text-danger">منتجاتنا</h5>
+                    <ul class="list-unstyled text-white-50 small">
+                        <li class="mb-2"><a href="/products/#bedrooms" class="text-decoration-none text-white-50 hover-text-white transition-all">غرف نوم رئيسية</a></li>
+                        <li class="mb-2"><a href="/products/#kids-bedrooms" class="text-decoration-none text-white-50 hover-text-white transition-all">غرف نوم أطفال</a></li>
+                        <li class="mb-2"><a href="/products/#sofas" class="text-decoration-none text-white-50 hover-text-white transition-all">أنتريهات</a></li>
+                        <li class="mb-2"><a href="/products/#corners" class="text-decoration-none text-white-50 hover-text-white transition-all">ركنات</a></li>
+                        <li class="mb-2"><a href="/products/#dining" class="text-decoration-none text-white-50 hover-text-white transition-all">غرف سفرة</a></li>
+                        <li class="mb-2"><a href="/products/#kitchens" class="text-decoration-none text-white-50 hover-text-white transition-all">مطابخ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold mb-3 text-danger">تواصل معنا</h5>
+                    <ul class="list-unstyled text-white-50 small">
+                        <li class="mb-3 d-flex gap-2 align-items-center"><i class="fas fa-phone text-danger"></i> <span dir="ltr">{{ settings.contact.phone }}</span></li>
+                        <li class="mb-3 d-flex gap-2 align-items-center"><i class="fas fa-envelope text-danger"></i> {{ settings.contact.email }}</li>
+                        <li class="mb-3 d-flex gap-2 align-items-center"><i class="fas fa-map-marker-alt text-danger"></i> مدينة نصر، القاهرة</li>
+                        <li class="mb-3 d-flex gap-2 align-items-center"><i class="fas fa-map-marker-alt text-danger"></i> 6 أكتوبر، الجيزة</li>
+                        <li class="mb-3 d-flex gap-2 align-items-center"><i class="fas fa-clock text-danger"></i> السبت - الخميس: 10 ص - 10 م</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="border-secondary my-4">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-end mb-3 mb-md-0">
+                    <p class="mb-0 text-white-50 small">&copy; {{ settings.footer.copyright }}</p>
+                </div>
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-white-50 small">{{ settings.footer.credits }}</p>
+                </div>
+            </div>
+        </div>
+    </footer>

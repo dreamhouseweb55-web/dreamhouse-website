@@ -1,0 +1,129 @@
+---
+layout: base.njk
+title: {{ branches_page.hero.title }}
+---
+
+<!-- Hero Section -->
+<section class="d-flex align-items-center justify-content-center text-center text-white mb-5 position-relative" style="height: 350px; background-color: var(--primary-wood); overflow: hidden;">
+    <!-- Background Image -->
+  <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ branches_page.hero.image }}') no-repeat center center/cover;"></div>
+  
+  <div class="container position-relative z-2">
+    <h1 class="display-4 fw-bold mb-3">{{ branches_page.hero.title }}</h1>
+    <p class="lead fs-3">{{ branches_page.hero.subtitle }}</p>
+  </div>
+</section>
+
+<div class="container py-5">
+    
+    <!-- Branches List -->
+    <div class="row g-4 justify-content-center mb-5">
+        {% for branch in branches.branches %}
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden branch-card hover-lift">
+                <div class="row g-0 h-100">
+                    <div class="col-md-5 position-relative" style="min-height: 250px;">
+                        <!-- Map Embed or Static Map Image -->
+                         <div class="w-100 h-100 bg-light d-flex align-items-center justify-content-center">
+                            <iframe 
+                                src="{{ branch.mapEmbed if branch.mapEmbed else 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110502.60389552708!2d31.18842358514106!3d30.0596184702878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1705367809986!5m2!1sen!2seg' }}" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body p-4 d-flex flex-column h-100">
+                            <div class="mb-3">
+                                <h3 class="h4 fw-bold mb-2 text-primary">
+                                    <i class="fas fa-store-alt me-2"></i> {{ branch.name }}
+                                </h3>
+                                {% if branch.isNew %}
+                                <span class="badge bg-danger rounded-pill mb-2">فرع جديد</span>
+                                {% endif %}
+                            </div>
+
+                            <ul class="list-unstyled mb-4 flex-grow-1">
+                                <li class="mb-3 d-flex gap-2">
+                                    <span class="text-primary"><i class="fas fa-map-marker-alt fa-fw"></i></span>
+                                    <span class="text-muted">{{ branch.address }}</span>
+                                </li>
+                                <li class="mb-3 d-flex gap-2">
+                                    <span class="text-primary"><i class="fas fa-phone fa-fw"></i></span>
+                                    <a href="tel:{{ branch.phone }}" class="text-decoration-none text-dark fw-bold">{{ branch.phone }}</a>
+                                </li>
+                                <li class="mb-3 d-flex gap-2">
+                                    <span class="text-primary"><i class="fas fa-clock fa-fw"></i></span>
+                                    <span class="text-muted">{{ branch.hours }}</span>
+                                </li>
+                            </ul>
+
+                            <div class="mt-auto">
+                                <a href="{{ branch.mapLink }}" target="_blank" class="btn btn-outline-primary w-100 rounded-pill py-2">
+                                    <i class="fas fa-location-arrow me-2"></i> اتجاهات القيادة
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Reach Us Section -->
+    {% if branches_page.reach_us %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold section-title">
+                    <i class="fas fa-route text-danger me-2"></i>
+                    {{ branches_page.reach_us.title }}
+                </h2>
+            </div>
+            
+            <div class="row g-4">
+                {% for method in branches_page.reach_us.methods %}
+                <div class="col-md-4">
+                    <div class="text-center p-4 h-100 rounded-4 bg-light shadow-sm hover-lift transition-all">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm mb-3 text-primary" style="width: 70px; height: 70px; font-size: 1.5rem;">
+                            <i class="{{ method.icon }}"></i>
+                        </div>
+                        <h4 class="h5 fw-bold mb-3">{{ method.title }}</h4>
+                        <p class="text-muted small mb-3">{{ method.description }}</p>
+                        {% if method.note %}
+                        <div class="alert alert-warning py-1 px-2 small mb-0 rounded-pill d-inline-block">
+                            <i class="fas fa-info-circle me-1"></i> {{ method.note }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- CTA -->
+    <div class="text-center mt-5 pt-5 border-top">
+        <h3 class="h4 fw-bold mb-4">عندك استفسار عن موقعنا؟</h3>
+        <a href="/contact/" class="btn btn-primary btn-lg rounded-pill px-5 shadow-lg">
+            <i class="fas fa-headset me-2"></i> تواصل مع خدمة العملاء
+        </a>
+    </div>
+
+</div>
+
+<style>
+.branch-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.branch-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+}
+</style>
