@@ -2,60 +2,199 @@
 layout: null
 permalink: "/admin/index.html"
 ---
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لوحة التحكم - Dream House</title>
-  <style>
-    body { margin: 0; padding: 0; }
-    .loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-      direction: rtl;
-    }
-    .loading-text { font-size: 18px; color: #666; }
-  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوحة التحكم - Dream House</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f5f5f5; }
+        
+        /* Login Page Styles */
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        .login-logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+        .login-title {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        .login-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .login-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+        .login-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .login-error {
+            color: #dc3545;
+            margin-top: 15px;
+            display: none;
+            padding: 10px;
+            background: #f8d7da;
+            border-radius: 8px;
+        }
+        .login-error.show { display: block; }
+        
+        /* CMS Container */
+        #cms-container { display: none; }
+        #cms-container.show { display: block; }
+        
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-  <div class="loading" id="loading">
-    <p class="loading-text">جاري تحميل لوحة التحكم...</p>
-  </div>
-  
-  <!-- OAuth callback handler - MUST be before Decap CMS -->
-  <script>
-    // Listen for OAuth callback messages
-    window.addEventListener('message', function(event) {
-      console.log('[Admin] Received message:', event.data);
-      
-      // Check if it's an auth message
-      if (typeof event.data === 'string' && event.data.startsWith('authorization:')) {
-        console.log('[Admin] Auth message received!');
-        // The message will be handled by Decap CMS
-      }
-    });
-    
-    // Log for debugging
-    console.log('[Admin] OAuth message listener ready');
-  </script>
-  
-  <!-- Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  
-  <script>
-    // Hide loading after CMS loads
-    window.addEventListener('load', function() {
-      var loading = document.getElementById('loading');
-      if (loading) {
-        setTimeout(function() {
-          loading.style.display = 'none';
-        }, 1000);
-      }
-    });
-  </script>
+    <!-- Login Page -->
+    <div id="login-page" class="login-page">
+        <div class="login-box">
+            <img src="/images/logo-dark.webp" alt="Dream House" class="login-logo" onerror="this.style.display='none'">
+            <h1 class="login-title">لوحة التحكم</h1>
+            <p class="login-subtitle">أدخل كلمة المرور للوصول</p>
+            
+            <form id="login-form">
+                <input type="password" id="password" class="login-input" placeholder="كلمة المرور" autocomplete="current-password" required>
+                <button type="submit" class="login-btn">🔓 دخول</button>
+            </form>
+            
+            <div id="login-error" class="login-error">
+                ❌ كلمة المرور غير صحيحة
+            </div>
+        </div>
+    </div>
+
+    <!-- CMS Container (hidden until login) -->
+    <div id="cms-container">
+        <div class="loading" id="loading">جاري تحميل لوحة التحكم...</div>
+    </div>
+
+    <script>
+    (function() {
+        // Simple hash function for password verification
+        function simpleHash(str) {
+            var hash = 0;
+            for (var i = 0; i < str.length; i++) {
+                var char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return hash.toString();
+        }
+        
+        // Password hash (dreamhouse1452)
+        var VALID_HASH = simpleHash('dreamhouse1452');
+        var SESSION_KEY = 'dh_admin_session';
+        var SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+        
+        // Check if already logged in
+        function checkSession() {
+            var session = localStorage.getItem(SESSION_KEY);
+            if (session) {
+                try {
+                    var data = JSON.parse(session);
+                    if (data.hash === VALID_HASH && Date.now() < data.expires) {
+                        return true;
+                    }
+                } catch(e) {}
+            }
+            return false;
+        }
+        
+        // Save session
+        function saveSession() {
+            localStorage.setItem(SESSION_KEY, JSON.stringify({
+                hash: VALID_HASH,
+                expires: Date.now() + SESSION_DURATION
+            }));
+        }
+        
+        // Show CMS
+        function showCMS() {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('cms-container').className = 'show';
+            
+            // Load Decap CMS
+            var script = document.createElement('script');
+            script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+            script.onload = function() {
+                document.getElementById('loading').style.display = 'none';
+            };
+            document.body.appendChild(script);
+        }
+        
+        // Check session on load
+        if (checkSession()) {
+            showCMS();
+        }
+        
+        // Handle login form
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var password = document.getElementById('password').value;
+            var errorEl = document.getElementById('login-error');
+            
+            if (simpleHash(password) === VALID_HASH) {
+                saveSession();
+                showCMS();
+            } else {
+                errorEl.className = 'login-error show';
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        });
+    })();
+    </script>
 </body>
 </html>
