@@ -4,6 +4,7 @@ backend:
   branch: main
   base_url: https://dreamhouse-git-gateway.dreamhouseweb55.workers.dev
   auth_endpoint: auth
+  auth_type: implicit
 
 # Enable local backend only for local development (npm run cms)
 local_backend: true
