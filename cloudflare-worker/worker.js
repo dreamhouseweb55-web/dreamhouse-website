@@ -17,7 +17,7 @@ export default {
     if (url.pathname === "/auth") {
       const client_id = env.GITHUB_CLIENT_ID;
       if (!client_id) {
-        return new Response("Configuration Error: GITHUB_CLIENT_ID is missing.", { status: 500 });
+        return errorPage("خطأ في الإعدادات", "GITHUB_CLIENT_ID غير موجود في إعدادات الـ Worker. تأكد من إضافته باستخدام: wrangler secret put GITHUB_CLIENT_ID");
       }
       const redirectUrl = `https://github.com/login/oauth/authorize?client_id=${client_id}&scope=repo,user`;
       return Response.redirect(redirectUrl, 302);
@@ -26,16 +26,27 @@ export default {
     // 2. Handle Callback from GitHub
     if (url.pathname === "/callback") {
       const code = url.searchParams.get("code");
+      const error = url.searchParams.get("error");
+      const error_description = url.searchParams.get("error_description");
+
+      // Check for OAuth errors from GitHub
+      if (error) {
+        return errorPage("خطأ من GitHub", `${error}: ${error_description || 'لا يوجد تفاصيل'}`);
+      }
 
       if (!code) {
-        return new Response("Error: No code provided", { status: 400 });
+        return errorPage("خطأ في الطلب", "لم يتم استلام كود المصادقة من GitHub. حاول مرة أخرى.");
+      }
+
+      // Check for missing credentials
+      if (!env.GITHUB_CLIENT_ID) {
+        return errorPage("خطأ في الإعدادات", "GITHUB_CLIENT_ID غير موجود. شغل: wrangler secret put GITHUB_CLIENT_ID");
+      }
+      if (!env.GITHUB_CLIENT_SECRET) {
+        return errorPage("خطأ في الإعدادات", "GITHUB_CLIENT_SECRET غير موجود. شغل: wrangler secret put GITHUB_CLIENT_SECRET");
       }
 
       try {
-        if (!env.GITHUB_CLIENT_ID || !env.GITHUB_CLIENT_SECRET) {
-          return new Response("Configuration Error: GITHUB credentials missing.", { status: 500 });
-        }
-
         const response = await fetch("https://github.com/login/oauth/access_token", {
           method: "POST",
           headers: {
@@ -49,40 +60,171 @@ export default {
           }),
         });
 
+        if (!response.ok) {
+          return errorPage("خطأ في الاتصال", `فشل الاتصال بـ GitHub. Status: ${response.status} ${response.statusText}`);
+        }
+
         const result = await response.json();
 
         if (result.error) {
-          return new Response(`Error: ${result.error_description || result.error}`, { status: 400 });
+          return errorPage("خطأ في المصادقة", `${result.error}: ${result.error_description || 'لا يوجد تفاصيل'}`);
+        }
+
+        if (!result.access_token) {
+          return errorPage("خطأ غير متوقع", "لم يتم استلام access_token من GitHub. Response: " + JSON.stringify(result));
         }
 
         const token = result.access_token;
 
-        // This is the exact format Decap CMS expects
+        // Success page with detailed logging
         const script = `
 <!DOCTYPE html>
-<html>
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="utf-8">
-    <title>Authorization Complete</title>
+    <title>جاري المصادقة...</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 400px;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h1 { color: #333; margin-bottom: 10px; }
+        p { color: #666; }
+        .success { color: #28a745; }
+        .error { color: #dc3545; background: #f8d7da; padding: 10px; border-radius: 8px; }
+        .log { 
+            background: #f8f9fa; 
+            padding: 10px; 
+            border-radius: 8px; 
+            text-align: left; 
+            direction: ltr;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 150px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="spinner" id="spinner"></div>
+        <h1 id="title">جاري المصادقة...</h1>
+        <p id="message">يتم إرسال بيانات الدخول للوحة التحكم</p>
+        <div class="log" id="log"></div>
+    </div>
     <script>
     (function() {
-        const token = "${token}";
-        const provider = "github";
+        var log = document.getElementById('log');
+        var title = document.getElementById('title');
+        var message = document.getElementById('message');
+        var spinner = document.getElementById('spinner');
+        
+        function addLog(text) {
+            var time = new Date().toLocaleTimeString();
+            log.innerHTML += '[' + time + '] ' + text + '\\n';
+            log.scrollTop = log.scrollHeight;
+            console.log(text);
+        }
+        
+        function showError(errorText) {
+            spinner.style.display = 'none';
+            title.innerHTML = '❌ حدث خطأ';
+            title.style.color = '#dc3545';
+            message.innerHTML = '<div class="error">' + errorText + '</div>';
+        }
+        
+        function showSuccess() {
+            spinner.style.display = 'none';
+            title.innerHTML = '✅ تم تسجيل الدخول بنجاح!';
+            title.style.color = '#28a745';
+            message.textContent = 'جاري إغلاق النافذة...';
+        }
+        
+        addLog('Starting authentication...');
+        
+        var token = "${token}";
+        var provider = "github";
+        
+        if (!token) {
+            showError('Token is empty!');
+            return;
+        }
+        
+        addLog('Token received: ' + token.substring(0, 10) + '...');
         
         // Format expected by Decap CMS
-        const message = "authorization:" + provider + ":success:" + JSON.stringify({
-            token: token,
-            provider: provider
-        });
+        var data = { token: token, provider: provider };
+        var messageStr = "authorization:" + provider + ":success:" + JSON.stringify(data);
         
-        // Send to opener window
-        if (window.opener) {
-            window.opener.postMessage(message, "*");
-            window.close();
-        } else {
-            document.body.innerHTML = '<h1>تم تسجيل الدخول بنجاح!</h1><p>يمكنك إغلاق هذه النافذة والعودة للوحة التحكم.</p>';
+        addLog('Message prepared');
+        
+        if (!window.opener) {
+            showError('لا يوجد نافذة أصلية (opener). تأكد من فتح صفحة التسجيل من لوحة التحكم.');
+            addLog('ERROR: window.opener is null');
+            return;
+        }
+        
+        addLog('window.opener found');
+        
+        try {
+            // Send to opener window
+            window.opener.postMessage(messageStr, "*");
+            addLog('Message sent with wildcard origin');
+            
+            // Try specific origins
+            var origins = [
+                "https://dreamhouse-website.pages.dev",
+                "https://dreamhouseweb55-web.github.io",
+                "http://localhost:8080"
+            ];
+            
+            origins.forEach(function(origin) {
+                try {
+                    window.opener.postMessage(messageStr, origin);
+                    addLog('Message sent to: ' + origin);
+                } catch(e) {
+                    addLog('Failed to send to ' + origin + ': ' + e.message);
+                }
+            });
+            
+            showSuccess();
+            
+            // Close after delay
+            setTimeout(function() { 
+                addLog('Closing window...');
+                window.close(); 
+            }, 2000);
+            
+        } catch(e) {
+            showError('خطأ في إرسال البيانات: ' + e.message);
+            addLog('ERROR: ' + e.message);
         }
     })();
     </script>
@@ -96,18 +238,114 @@ export default {
         });
 
       } catch (error) {
-        return new Response(`Server Error: ${error.message}`, { status: 500 });
+        return errorPage("خطأ في الخادم", `حدث خطأ غير متوقع: ${error.message}`);
       }
     }
 
     // Health check endpoint
     if (url.pathname === "/") {
-      return new Response("Dream House OAuth Gateway is running! 🚀", {
+      return new Response(`
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8">
+    <title>Dream House OAuth Gateway</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h1 { color: #28a745; }
+        .status { background: #d4edda; padding: 15px; border-radius: 8px; margin: 20px 0; }
+        code { background: #f8f9fa; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Dream House OAuth Gateway</h1>
+        <div class="status">✅ الخادم يعمل بشكل صحيح</div>
+        <h3>Endpoints:</h3>
+        <ul>
+            <li><code>/auth</code> - بدء عملية المصادقة</li>
+            <li><code>/callback</code> - استلام الرد من GitHub</li>
+        </ul>
+        <h3>الإعدادات:</h3>
+        <ul>
+            <li>GITHUB_CLIENT_ID: ${env.GITHUB_CLIENT_ID ? '✅ موجود' : '❌ غير موجود'}</li>
+            <li>GITHUB_CLIENT_SECRET: ${env.GITHUB_CLIENT_SECRET ? '✅ موجود' : '❌ غير موجود'}</li>
+        </ul>
+    </div>
+</body>
+</html>`, {
         status: 200,
-        headers: { "Content-Type": "text/plain; charset=utf-8" }
+        headers: { "Content-Type": "text/html; charset=utf-8" }
       });
     }
 
-    return new Response("Not Found", { status: 404 });
+    return errorPage("صفحة غير موجودة", `المسار ${url.pathname} غير موجود. المسارات المتاحة: /, /auth, /callback`);
   },
 };
+
+// Error page helper function
+function errorPage(title, details) {
+  return new Response(`
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="utf-8">
+    <title>خطأ - ${title}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ff6b6b 0%, #c44569 100%);
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+        }
+        h1 { color: #dc3545; margin-bottom: 10px; }
+        .error-icon { font-size: 60px; margin-bottom: 20px; }
+        .details { 
+            background: #f8d7da; 
+            color: #721c24;
+            padding: 15px; 
+            border-radius: 8px; 
+            text-align: left;
+            direction: ltr;
+            font-family: monospace;
+            font-size: 13px;
+            word-break: break-all;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: #dc3545;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .back-btn:hover { background: #c82333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-icon">❌</div>
+        <h1>${title}</h1>
+        <div class="details">${details}</div>
+        <a href="https://dreamhouse-website.pages.dev/admin/" class="back-btn">العودة للوحة التحكم</a>
+    </div>
+</body>
+</html>`, {
+    status: 400,
+    headers: { "Content-Type": "text/html; charset=utf-8" }
+  });
+}
