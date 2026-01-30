@@ -52,22 +52,51 @@ export default {
                 }
 
                 const token = result.access_token;
-                const provider = "github"; // Matches backend name in config.yml
+                const provider = "github";
+
+                // Build the data object
+                const data = JSON.stringify({ token: token, provider: provider });
 
                 // Script to post message back to the CMS window
-                // The message format expected by Decap CMS is "authorization:provider:success:data"
                 const responseHTML = `
-          <script>
-            const receiveMessage = (message) => {
-              window.opener.postMessage(
-                'authorization:${provider}:success:${JSON.stringify({ token: token, provider: provider })}', 
-                '*'
-              );
-              window.close();
-            };
-            receiveMessage();
-          </script>
-        `;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Authorizing...</title>
+</head>
+<body>
+  <p>Authorizing, please wait...</p>
+  <script>
+    (function() {
+      function receiveMessage(e) {
+        console.log("Received message:", e.data);
+        if (e.data === "authorizing:github") {
+          sendAuth();
+        }
+      }
+      
+      function sendAuth() {
+        var data = ${data};
+        var message = "authorization:github:success:" + JSON.stringify(data);
+        console.log("Sending message:", message);
+        
+        if (window.opener) {
+          window.opener.postMessage(message, "*");
+          setTimeout(function() { window.close(); }, 500);
+        } else {
+          document.body.innerHTML = "<p>Authorization successful! You can close this window.</p>";
+        }
+      }
+      
+      window.addEventListener("message", receiveMessage, false);
+      
+      // Try sending immediately
+      sendAuth();
+    })();
+  </script>
+</body>
+</html>
+`;
 
                 return new Response(responseHTML, {
                     headers: {
