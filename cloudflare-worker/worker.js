@@ -17,7 +17,7 @@ export default {
     if (url.pathname === "/auth") {
       const client_id = env.GITHUB_CLIENT_ID;
       if (!client_id) {
-        return errorPage("خطأ في الإعدادات", "GITHUB_CLIENT_ID غير موجود في إعدادات الـ Worker. تأكد من إضافته باستخدام: wrangler secret put GITHUB_CLIENT_ID");
+        return errorPage("خطأ في الإعدادات", "GITHUB_CLIENT_ID غير موجود. شغل: wrangler secret put GITHUB_CLIENT_ID");
       }
       const redirectUrl = `https://github.com/login/oauth/authorize?client_id=${client_id}&scope=repo,user`;
       return Response.redirect(redirectUrl, 302);
@@ -29,21 +29,19 @@ export default {
       const error = url.searchParams.get("error");
       const error_description = url.searchParams.get("error_description");
 
-      // Check for OAuth errors from GitHub
       if (error) {
         return errorPage("خطأ من GitHub", `${error}: ${error_description || 'لا يوجد تفاصيل'}`);
       }
 
       if (!code) {
-        return errorPage("خطأ في الطلب", "لم يتم استلام كود المصادقة من GitHub. حاول مرة أخرى.");
+        return errorPage("خطأ في الطلب", "لم يتم استلام كود المصادقة من GitHub.");
       }
 
-      // Check for missing credentials
       if (!env.GITHUB_CLIENT_ID) {
-        return errorPage("خطأ في الإعدادات", "GITHUB_CLIENT_ID غير موجود. شغل: wrangler secret put GITHUB_CLIENT_ID");
+        return errorPage("خطأ في الإعدادات", "GITHUB_CLIENT_ID غير موجود.");
       }
       if (!env.GITHUB_CLIENT_SECRET) {
-        return errorPage("خطأ في الإعدادات", "GITHUB_CLIENT_SECRET غير موجود. شغل: wrangler secret put GITHUB_CLIENT_SECRET");
+        return errorPage("خطأ في الإعدادات", "GITHUB_CLIENT_SECRET غير موجود.");
       }
 
       try {
@@ -61,31 +59,31 @@ export default {
         });
 
         if (!response.ok) {
-          return errorPage("خطأ في الاتصال", `فشل الاتصال بـ GitHub. Status: ${response.status} ${response.statusText}`);
+          return errorPage("خطأ في الاتصال", `فشل الاتصال بـ GitHub. Status: ${response.status}`);
         }
 
         const result = await response.json();
 
         if (result.error) {
-          return errorPage("خطأ في المصادقة", `${result.error}: ${result.error_description || 'لا يوجد تفاصيل'}`);
+          return errorPage("خطأ في المصادقة", `${result.error}: ${result.error_description || ''}`);
         }
 
         if (!result.access_token) {
-          return errorPage("خطأ غير متوقع", "لم يتم استلام access_token من GitHub. Response: " + JSON.stringify(result));
+          return errorPage("خطأ غير متوقع", "لم يتم استلام access_token من GitHub.");
         }
 
         const token = result.access_token;
 
-        // Success page with detailed logging
-        const script = `
-<!DOCTYPE html>
+        // Success page with multiple auth methods
+        const html = `<!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="utf-8">
     <title>جاري المصادقة...</title>
     <style>
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -99,7 +97,8 @@ export default {
             border-radius: 16px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             text-align: center;
-            max-width: 400px;
+            max-width: 450px;
+            width: 90%;
         }
         .spinner {
             width: 50px;
@@ -114,22 +113,50 @@ export default {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        h1 { color: #333; margin-bottom: 10px; }
+        h1 { color: #333; margin-bottom: 10px; font-size: 1.5rem; }
         p { color: #666; }
         .success { color: #28a745; }
-        .error { color: #dc3545; background: #f8d7da; padding: 10px; border-radius: 8px; }
+        .warning { color: #ffc107; }
+        .manual-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: none;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn:hover { opacity: 0.9; }
+        .btn-back { background: #6c757d; }
         .log { 
-            background: #f8f9fa; 
-            padding: 10px; 
+            background: #1a1a2e; 
+            color: #0f0;
+            padding: 12px; 
             border-radius: 8px; 
             text-align: left; 
             direction: ltr;
-            font-family: monospace;
-            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
             max-height: 150px;
             overflow-y: auto;
-            margin-top: 15px;
+            margin-top: 20px;
         }
+        .log-line { margin: 2px 0; }
+        .log-success { color: #7fff7f; }
+        .log-error { color: #ff7f7f; }
+        .log-info { color: #7fbfff; }
     </style>
 </head>
 <body>
@@ -137,131 +164,134 @@ export default {
         <div class="spinner" id="spinner"></div>
         <h1 id="title">جاري المصادقة...</h1>
         <p id="message">يتم إرسال بيانات الدخول للوحة التحكم</p>
+        
+        <div class="manual-box" id="manualBox">
+            <p><strong>⚠️ لم تُغلق النافذة تلقائياً</strong></p>
+            <p style="font-size: 14px;">النافذة الأصلية قد تكون أُغلقت. اضغط الزر للعودة:</p>
+            <a href="https://dreamhouse-website.pages.dev/admin/" class="btn btn-back">↩️ العودة للوحة التحكم</a>
+        </div>
+        
         <div class="log" id="log"></div>
     </div>
     <script>
     (function() {
-        var log = document.getElementById('log');
+        var logEl = document.getElementById('log');
         var title = document.getElementById('title');
         var message = document.getElementById('message');
         var spinner = document.getElementById('spinner');
+        var manualBox = document.getElementById('manualBox');
         
-        function addLog(text) {
+        function log(text, type) {
+            var cls = 'log-line';
+            if (type === 'success') cls += ' log-success';
+            if (type === 'error') cls += ' log-error';
+            if (type === 'info') cls += ' log-info';
             var time = new Date().toLocaleTimeString();
-            log.innerHTML += '[' + time + '] ' + text + '\\n';
-            log.scrollTop = log.scrollHeight;
-            console.log(text);
-        }
-        
-        function showError(errorText) {
-            spinner.style.display = 'none';
-            title.innerHTML = '❌ حدث خطأ';
-            title.style.color = '#dc3545';
-            message.innerHTML = '<div class="error">' + errorText + '</div>';
+            logEl.innerHTML += '<div class="' + cls + '">[' + time + '] ' + text + '</div>';
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log('[OAuth]', text);
         }
         
         function showSuccess() {
             spinner.style.display = 'none';
-            title.innerHTML = '✅ تم تسجيل الدخول بنجاح!';
-            title.style.color = '#28a745';
+            title.innerHTML = '✅ تم تسجيل الدخول!';
+            title.className = 'success';
             message.textContent = 'جاري إغلاق النافذة...';
         }
         
-        addLog('Starting authentication...');
+        function showManual() {
+            manualBox.style.display = 'block';
+            message.textContent = 'يمكنك إغلاق هذه النافذة يدوياً';
+        }
         
+        // Auth data
         var token = "${token}";
         var provider = "github";
         
-        if (!token) {
-            showError('Token is empty!');
-            return;
-        }
+        log('OAuth callback started', 'info');
+        log('Token received: ' + token.substring(0, 10) + '...', 'success');
         
-        addLog('Token received: ' + token.substring(0, 10) + '...');
+        // Build message in Decap CMS format
+        var authData = JSON.stringify({ token: token, provider: provider });
+        var authMessage = "authorization:" + provider + ":success:" + authData;
         
-        // The EXACT format Decap CMS expects
-        // See: https://github.com/decaporg/decap-cms/blob/main/packages/netlify-cms-lib-auth/src/implicit-oauth.js
-        var content = {
-            token: token,
-            provider: provider
-        };
+        log('Message: authorization:github:success:{...}', 'info');
         
-        addLog('Message format: authorization:github:success:{token,provider}');
-        
+        // Check for opener
         if (!window.opener) {
-            showError('لا يوجد نافذة أصلية (opener). تأكد من فتح صفحة التسجيل من لوحة التحكم وليس مباشرة.');
-            addLog('ERROR: window.opener is null or undefined');
+            log('ERROR: window.opener is null', 'error');
+            log('The parent window may have been closed', 'error');
+            spinner.style.display = 'none';
+            title.innerHTML = '⚠️ النافذة الأصلية غير موجودة';
+            title.className = 'warning';
+            showManual();
             return;
         }
         
-        addLog('window.opener found: ' + (typeof window.opener));
+        log('window.opener found', 'success');
         
+        // Send message
         try {
-            // Method 1: Direct message format (what Decap CMS expects)
-            var msg = "authorization:" + provider + ":success:" + JSON.stringify(content);
-            addLog('Sending: ' + msg.substring(0, 50) + '...');
-            
-            window.opener.postMessage(msg, "*");
-            addLog('✓ Message sent to opener');
+            window.opener.postMessage(authMessage, "*");
+            log('postMessage sent to "*"', 'success');
             
             showSuccess();
             
-            // Give time for message to be received before closing
-            setTimeout(function() { 
-                addLog('Window will close now...');
-                window.close(); 
+            // Try to close
+            setTimeout(function() {
+                log('Attempting window.close()...', 'info');
+                window.close();
+                
+                // If still open after 1 second
+                setTimeout(function() {
+                    log('Window still open - showing manual options', 'info');
+                    showManual();
+                }, 1000);
             }, 1500);
             
         } catch(e) {
-            showError('خطأ في إرسال البيانات: ' + e.message);
-            addLog('ERROR: ' + e.stack);
+            log('ERROR: ' + e.message, 'error');
+            showManual();
         }
     })();
     </script>
 </body>
 </html>`;
 
-        return new Response(script, {
-          headers: {
-            "Content-Type": "text/html;charset=UTF-8",
-          },
+        return new Response(html, {
+          headers: { "Content-Type": "text/html;charset=UTF-8" },
         });
 
       } catch (error) {
-        return errorPage("خطأ في الخادم", `حدث خطأ غير متوقع: ${error.message}`);
+        return errorPage("خطأ في الخادم", error.message);
       }
     }
 
-    // Health check endpoint
+    // Health check
     if (url.pathname === "/") {
+      const hasClientId = !!env.GITHUB_CLIENT_ID;
+      const hasSecret = !!env.GITHUB_CLIENT_SECRET;
       return new Response(`
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="utf-8">
-    <title>Dream House OAuth Gateway</title>
+    <title>Dream House OAuth</title>
     <style>
         body { font-family: Arial, sans-serif; padding: 40px; background: #f5f5f5; }
         .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         h1 { color: #28a745; }
-        .status { background: #d4edda; padding: 15px; border-radius: 8px; margin: 20px 0; }
-        code { background: #f8f9fa; padding: 2px 6px; border-radius: 4px; }
+        .check { padding: 10px; margin: 5px 0; border-radius: 6px; }
+        .ok { background: #d4edda; color: #155724; }
+        .fail { background: #f8d7da; color: #721c24; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🚀 Dream House OAuth Gateway</h1>
-        <div class="status">✅ الخادم يعمل بشكل صحيح</div>
-        <h3>Endpoints:</h3>
-        <ul>
-            <li><code>/auth</code> - بدء عملية المصادقة</li>
-            <li><code>/callback</code> - استلام الرد من GitHub</li>
-        </ul>
-        <h3>الإعدادات:</h3>
-        <ul>
-            <li>GITHUB_CLIENT_ID: ${env.GITHUB_CLIENT_ID ? '✅ موجود' : '❌ غير موجود'}</li>
-            <li>GITHUB_CLIENT_SECRET: ${env.GITHUB_CLIENT_SECRET ? '✅ موجود' : '❌ غير موجود'}</li>
-        </ul>
+        <p>الخادم يعمل بشكل صحيح</p>
+        <div class="check ${hasClientId ? 'ok' : 'fail'}">${hasClientId ? '✅' : '❌'} GITHUB_CLIENT_ID</div>
+        <div class="check ${hasSecret ? 'ok' : 'fail'}">${hasSecret ? '✅' : '❌'} GITHUB_CLIENT_SECRET</div>
     </div>
 </body>
 </html>`, {
@@ -270,68 +300,30 @@ export default {
       });
     }
 
-    return errorPage("صفحة غير موجودة", `المسار ${url.pathname} غير موجود. المسارات المتاحة: /, /auth, /callback`);
+    return errorPage("404", "الصفحة غير موجودة");
   },
 };
 
-// Error page helper function
 function errorPage(title, details) {
   return new Response(`
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="utf-8">
-    <title>خطأ - ${title}</title>
+    <title>خطأ</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #ff6b6b 0%, #c44569 100%);
-        }
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 500px;
-        }
-        h1 { color: #dc3545; margin-bottom: 10px; }
-        .error-icon { font-size: 60px; margin-bottom: 20px; }
-        .details { 
-            background: #f8d7da; 
-            color: #721c24;
-            padding: 15px; 
-            border-radius: 8px; 
-            text-align: left;
-            direction: ltr;
-            font-family: monospace;
-            font-size: 13px;
-            word-break: break-all;
-        }
-        .back-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 24px;
-            background: #dc3545;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-        .back-btn:hover { background: #c82333; }
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f8d7da; }
+        .box { background: white; padding: 40px; border-radius: 16px; text-align: center; max-width: 500px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        h1 { color: #dc3545; }
+        .details { background: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace; word-break: break-all; text-align: left; direction: ltr; }
+        .btn { display: inline-block; margin-top: 20px; padding: 12px 24px; background: #dc3545; color: white; text-decoration: none; border-radius: 8px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="error-icon">❌</div>
-        <h1>${title}</h1>
+    <div class="box">
+        <h1>❌ ${title}</h1>
         <div class="details">${details}</div>
-        <a href="https://dreamhouse-website.pages.dev/admin/" class="back-btn">العودة للوحة التحكم</a>
+        <a href="https://dreamhouse-website.pages.dev/admin/" class="btn">العودة للوحة التحكم</a>
     </div>
 </body>
 </html>`, {
