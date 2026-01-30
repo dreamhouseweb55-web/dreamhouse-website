@@ -1,0 +1,25 @@
+:root {
+    /* Main Colors - Request: Match "Browse Products" button (#dc3545) */
+    --primary-wood: #dc3545;
+    --primary-wood-light: #b30012;
+    --primary-wood-dark: #b02a37;
+
+    /* Accents */
+    --gold-accent: #db332d;
+    --gold-light: #df5c3c;
+
+    /* Backgrounds */
+    --bg-light: #F9F9F9;
+    --bg-white: #FFFFFF;
+
+    /* Text */
+    --text-main: #212529;
+    --text-muted: #6c757d;
+
+    /* Bootstrap Defaults mapped */
+    --danger: #dc3545;
+    --success: #50da00;
+
+    /* Typography */
+    --font-primary: 'Cairo', sans-serif;
+}
