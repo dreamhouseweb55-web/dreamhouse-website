@@ -26,7 +26,14 @@ declare global {
     }
 }
 
-let cart: CartItem[] = JSON.parse(localStorage.getItem('dreamhouse_cart') || '[]');
+let cart: CartItem[] = [];
+try {
+    cart = JSON.parse(localStorage.getItem('dreamhouse_cart') || '[]');
+    if (!Array.isArray(cart)) cart = [];
+} catch (e) {
+    console.error('Error parsing cart from localStorage:', e);
+    cart = [];
+}
 
 // === Public Functions ===
 

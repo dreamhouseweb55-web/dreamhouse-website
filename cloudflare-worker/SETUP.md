@@ -1,105 +1,132 @@
-# 🚀 Setup Guide - Cloudflare Workers (Git Gateway)
+# ⚙️ إعداد مصادقة GitHub مع Decap CMS
 
-اتبع الخطوات دي بالترتيب عشان تخلص الإعداد في **10 دقائق**.
+هذا الـ Worker يعمل كخادم OAuth لربط Decap CMS مع GitHub.
 
----
-
-## **الخطوة 1: إنشاء حساب Cloudflare**
-
-1. افتح [https://dash.cloudflare.com/sign-up](https://dash.cloudflare.com/sign-up)
-2. سجل بأي إيميل (مجاني 100%)
-3. افتح الإيميل واعمل Verify
+## ✅ الخطوات المطلوبة:
 
 ---
 
-## **الخطوة 2: إنشاء GitHub Personal Access Token**
+### 📌 الخطوة 1: إنشاء تطبيق OAuth على GitHub
 
-1. افتح [https://github.com/settings/tokens](https://github.com/settings/tokens)
-2. اضغط **"Generate new token"** → **"Generate new token (classic)"**
-3. في **Note** اكتب: `Decap CMS Token`
-4. في **Expiration** اختار: `No expiration`
-5. في **Scopes** فعّل:
-   - ✅ `repo` (كل الصلاحيات تحتها)
-6. اضغط **"Generate token"**
-7. **انسخ الـ Token وحطه في مكان آمن** (مش هيظهر تاني!)
+1. اذهب إلى: **[GitHub Developer Settings](https://github.com/settings/developers)**
+2. اضغط **OAuth Apps** ثم **New OAuth App**
+3. املأ البيانات:
 
-مثال للـ Token:
-```
-ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
+| الحقل | القيمة |
+|-------|--------|
+| **Application Name** | `Dream House CMS` |
+| **Homepage URL** | `https://dreamhouseweb55-web.github.io/dreamhouse-website/` |
+| **Authorization callback URL** | `https://dreamhouse-git-gateway.dreamhouseweb55.workers.dev/callback` |
+
+4. اضغط **Register application**
+5. **احفظ القيم التالية:**
+   - ✅ **Client ID** (يظهر مباشرة)
+   - ✅ **Client Secret** (اضغط "Generate a new client secret")
+
+> ⚠️ **مهم:** احفظ الـ Client Secret فوراً لأنه لن يظهر مرة أخرى!
 
 ---
 
-## **الخطوة 3: نشر الـ Worker على Cloudflare**
+### 📌 الخطوة 2: تثبيت Wrangler CLI (مرة واحدة فقط)
 
-افتح **PowerShell** وشغل الأوامر دي:
-
-```powershell
-# 1. روح لمجلد الـ Worker
-cd "e:\DREAM HOUSE\cloudflare-worker"
-
-# 2. نزّل Wrangler (أداة Cloudflare)
+```bash
 npm install -g wrangler
+```
 
-# 3. سجل دخول Cloudflare
+---
+
+### 📌 الخطوة 3: تسجيل الدخول لـ Cloudflare
+
+```bash
 wrangler login
 ```
+سيفتح المتصفح لتسجيل الدخول لحسابك على Cloudflare.
 
-هيفتح متصفح، اعمل **Allow** للصلاحيات.
+---
 
-```powershell
-# 4. انشر الـ Worker
+### 📌 الخطوة 4: نشر الـ Worker
+
+افتح التيرمينال في مجلد `cloudflare-worker`:
+
+```bash
+cd cloudflare-worker
 wrangler deploy
 ```
 
-**النتيجة:** هتشوف رسالة فيها:
-```
-Published dreamhouse-git-gateway
-  https://dreamhouse-git-gateway.YOUR_SUBDOMAIN.workers.dev
-```
-
-**انسخ الـ URL ده!** 📋
+ستحصل على رابط مثل: `https://dreamhouse-git-gateway.dreamhouseweb55.workers.dev`
 
 ---
 
-## **الخطوة 4: إضافة الـ GitHub Token للـ Worker**
+### 📌 الخطوة 5: إضافة الـ Secrets
 
-```powershell
-wrangler secret put GITHUB_TOKEN
+```bash
+# أضف Client ID
+wrangler secret put GITHUB_CLIENT_ID
+# 👆 الصق الـ Client ID من GitHub ثم اضغط Enter
+
+# أضف Client Secret
+wrangler secret put GITHUB_CLIENT_SECRET
+# 👆 الصق الـ Client Secret من GitHub ثم اضغط Enter
 ```
 
-هيطلب منك تكتب الـ Token:
-- الصق الـ **GitHub Token** اللي نسخته من الخطوة 2
-- اضغط **Enter**
+---
+
+### 📌 الخطوة 6: التجربة
+
+1. افتح الموقع: `https://dreamhouseweb55-web.github.io/dreamhouse-website/admin/`
+2. اضغط **Login with GitHub**
+3. وافق على الصلاحيات في النافذة المنبثقة
+4. 🎉 أنت الآن في لوحة التحكم!
 
 ---
 
-## **الخطوة 5: تحديث config.yml**
+## 🔧 استكشاف الأخطاء:
 
-1. افتح ملف: `e:\DREAM HOUSE\admin\config.yml`
-2. في السطر 3، استبدل `YOUR_SUBDOMAIN` بـ subdomain بتاعك من الخطوة 3
-
-**مثال:**
-```yaml
-backend:
-  name: proxy
-  proxy_url: https://dreamhouse-git-gateway.abc123.workers.dev/api
+### ❌ ظهور خطأ "Configuration Error"
+- تأكد من إضافة الـ secrets بشكل صحيح:
+```bash
+wrangler secret list
 ```
 
-**احفظ الملف!**
+### ❌ النافذة لا تُغلق بعد تسجيل الدخول
+- تأكد من أن الـ callback URL في GitHub يطابق:
+  `https://dreamhouse-git-gateway.dreamhouseweb55.workers.dev/callback`
+
+### ❌ خطأ CORS
+- الـ Worker يتعامل مع CORS تلقائياً، تأكد من أن الموقع منشور على GitHub Pages.
 
 ---
 
-## **✅ الخطوة الأخيرة: اختبار**
+## 📁 الملفات في هذا المجلد:
 
-1. افتح الموقع المحلي: `http://localhost:8080/admin`
-2. اعمل Login بحساب جوجل (`dreamhouseweb55@gmail.com`)
-3. **المفروض CMS يفتح مباشرة بدون GitHub Login!**
-4. جرب تعدل منتج واحفظ
-5. روح على GitHub وشوف الـ commit
+| الملف | الوصف |
+|-------|-------|
+| `worker.js` | كود الـ OAuth Worker |
+| `wrangler.toml` | إعدادات Cloudflare Worker |
+| `SETUP.md` | هذا الملف (التعليمات) |
 
 ---
 
-## ✨ **تم بنجاح!**
+## ✅ ملخص سريع (للنسخ):
 
-دلوقتي أنت بتدخل **مرة واحدة بس** بجوجل ومفيش GitHub Login خالص! 🎉
+```bash
+# 1. تثبيت Wrangler (مرة واحدة)
+npm install -g wrangler
+
+# 2. تسجيل الدخول
+wrangler login
+
+# 3. الانتقال للمجلد
+cd cloudflare-worker
+
+# 4. نشر الـ Worker
+wrangler deploy
+
+# 5. إضافة Client ID
+wrangler secret put GITHUB_CLIENT_ID
+
+# 6. إضافة Client Secret
+wrangler secret put GITHUB_CLIENT_SECRET
+```
+
+بعد كده، اذهب لـ `/admin/` واضغط "Login with GitHub" 🚀

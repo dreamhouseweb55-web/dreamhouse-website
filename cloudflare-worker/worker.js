@@ -1,95 +1,85 @@
-/**
- * Cloudflare Worker - Git Gateway for Decap CMS
- * Proxies requests from Decap CMS to GitHub API
- */
-
 export default {
     async fetch(request, env) {
-        // Handle CORS preflight
-        if (request.method === 'OPTIONS') {
-            return handleCORS();
-        }
-
         const url = new URL(request.url);
 
-        // Handle settings request (Decap CMS checks this route)
-        if (url.pathname === '/settings' || url.pathname === '/api/settings') {
-            return new Response(JSON.stringify({
-                github_allowed_orgs: [],
-                github_enabled: true,
-                roles: null
-            }), {
+        // Handle CORS
+        if (request.method === "OPTIONS") {
+            return new Response(null, {
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type",
+                },
+            });
+        }
+
+        // 1. Redirect to GitHub OAuth
+        if (url.pathname === "/auth") {
+            const client_id = env.GITHUB_CLIENT_ID;
+            if (!client_id) {
+                return new Response("Configuration Error: GITHUB_CLIENT_ID is missing.", { status: 500 });
+            }
+            const redirectUrl = `https://github.com/login/oauth/authorize?client_id=${client_id}&scope=repo,user`;
+            return Response.redirect(redirectUrl, 302);
+        }
+
+        // 2. Handle Callback from GitHub
+        if (url.pathname === "/callback") {
+            const code = url.searchParams.get("code");
+
+            try {
+                if (!env.GITHUB_CLIENT_ID || !env.GITHUB_CLIENT_SECRET) {
+                    return new Response("Configuration Error: GITHUB credentials missing.", { status: 500 });
                 }
-            });
-        }
 
-        // Only allow requests to /api path for other attempts
-        if (!url.pathname.startsWith('/api')) {
-            return new Response('Not Found', { status: 404 });
-        }
+                const response = await fetch("https://github.com/login/oauth/access_token", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                    body: JSON.stringify({
+                        client_id: env.GITHUB_CLIENT_ID,
+                        client_secret: env.GITHUB_CLIENT_SECRET,
+                        code,
+                    }),
+                });
 
-        try {
-            // Extract GitHub API path
-            const githubPath = url.pathname.replace('/api', '');
-            const githubUrl = `https://api.github.com${githubPath}${url.search}`;
+                const result = await response.json();
 
-            // Clone request headers and add GitHub auth
-            const headers = new Headers(request.headers);
-            headers.set('Authorization', `token ${env.GITHUB_TOKEN}`);
-            headers.set('Accept', 'application/vnd.github.v3+json');
-            headers.delete('Host');
-
-            // Forward request to GitHub
-            const githubRequest = new Request(githubUrl, {
-                method: request.method,
-                headers: headers,
-                body: request.method !== 'GET' && request.method !== 'HEAD'
-                    ? await request.arrayBuffer()
-                    : null
-            });
-
-            const githubResponse = await fetch(githubRequest);
-
-            // Clone response and add CORS headers
-            const response = new Response(githubResponse.body, {
-                status: githubResponse.status,
-                statusText: githubResponse.statusText,
-                headers: githubResponse.headers
-            });
-
-            // Add CORS headers
-            response.headers.set('Access-Control-Allow-Origin', '*');
-            response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-            response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-            return response;
-
-        } catch (error) {
-            return new Response(JSON.stringify({
-                error: 'Proxy error',
-                message: error.message
-            }), {
-                status: 500,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                if (result.error) {
+                    return new Response(`Error: ${result.error_description}`, { status: 400 });
                 }
-            });
+
+                const token = result.access_token;
+                const provider = "github"; // Matches backend name in config.yml
+
+                // Script to post message back to the CMS window
+                // The message format expected by Decap CMS is "authorization:provider:success:data"
+                const responseHTML = `
+          <script>
+            const receiveMessage = (message) => {
+              window.opener.postMessage(
+                'authorization:${provider}:success:${JSON.stringify({ token: token, provider: provider })}', 
+                '*'
+              );
+              window.close();
+            };
+            receiveMessage();
+          </script>
+        `;
+
+                return new Response(responseHTML, {
+                    headers: {
+                        "Content-Type": "text/html;charset=UTF-8",
+                    },
+                });
+
+            } catch (error) {
+                return new Response(`Server Error: ${error.message}`, { status: 500 });
+            }
         }
-    }
+
+        return new Response("Not Found", { status: 404 });
+    },
 };
-
-function handleCORS() {
-    return new Response(null, {
-        status: 204,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-            'Access-Control-Max-Age': '86400'
-        }
-    });
-}

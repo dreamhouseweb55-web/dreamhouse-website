@@ -5,12 +5,12 @@ permalink: products-api.json
   "products": [
     {%- for product in products.products -%}
     {
-      "id": "{{ product.id }}",
-      "name": "{{ product.name }}",
-      "description": "{{ product.description | safe }}",
+      "id": {{ product.id | dump | safe }},
+      "name": {{ product.name | dump | safe }},
+      "description": {{ product.description | dump | safe }},
       "price": {{ product.price }},
-      "image": "{{ product.image }}",
-      "category": "{{ product.category }}"
+      "image": {{ product.image | dump | safe }},
+      "category": {{ product.category | dump | safe }}
     }{% if not loop.last %},{% endif %}
     {%- endfor -%}
   ]
